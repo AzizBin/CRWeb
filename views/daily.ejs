@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <title> Rental </title>
+    <link rel="stylesheet" href="/public/css/Style.css"  />
+    <link rel="stylesheet" href="/public/css/daily.css" />   
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class='bx bxl-redux icon'></i> 
+        <div class="logo_name">Rental</div>
+        <i class='bx bx-menu' id="btn" ></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <i class='bx bx-search' ></i>
+          <input type="text" placeholder="البحث...">
+          <span class="tooltip">البحث</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name" id="liNameTest"> لوحة التحكم </span>
+          </a>
+          <span class="tooltip">لوحة التحكم</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">اليومية</span>
+          </a>
+          <span class="tooltip">اليومية</span>
+        </li>
+        <li>
+        <a href="/index">
+          <i class='bx bx-add-to-queue' ></i>
+          <span class="links_name">التسجيل</span>
+        </a>
+        <span class="tooltip">التسجيل</span>
+        </li>
+        <li>
+          <a href="/Reports">
+            <i class='bx bxs-report' ></i>
+            <span class="links_name">التقارير</span>
+          </a>
+          <span class="tooltip">التقارير</span>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">الإعدادات</span>
+          </a>
+          <span class="tooltip">الإعدادات</span>
+        </li>
+        <li class="profile">
+            <div class="profile-details">
+              <img src="image/User.png" alt="profileImg">
+              <div class="name_job">
+                <div class="name">أبو اسامة</div>
+                <div class="job">Admin</div>
+              </div>
+            </div>
+            <i class='bx bx-log-out' id="log_out" ></i>
+        </li>
+      </ul>
+    </div>
+    
+    <section class="home-section">
+      <div class="text">اليومية 
+      
+        </div>
+  
+
+
+        <!--Botten-->
+        <div class="Registration_buttons">
+        </div>
+
+
+        
+          
+
+        <div class="row">
+          
+          <!--table tenants-->
+          <div class="column">
+
+            <div>
+            <!--  زر مصروفات المكتب -->
+            <button class="button_action" onclick="openPop('dailyTenPopForm') + dailySel('CarPlate_RenterName', 'CarPlate_RenterName')">أضافة</button>
+            <button class="button_action" onclick="allEditable(event, 'daily_ten_table')" id="editBTN">تعديل</button>
+            </div>
+
+
+            <!-- window for adding data-->
+            <div class="popupForm" id="dailyTenPopForm">
+              <button onclick="closePop('dailyTenPopForm')">إلغاء</button>
+              <div class="inputs_Cars" >
+                <form id="dailyTenForm">
+                  <br>
+                  <select class="newDailyTenData" id="CarName" name="CarName">
+                    <option disabled selected hidden value="">اسم السيارة</option>
+                  </select>
+                  <br>
+                  <label for="CarPlateNumber">اللوحة</label>
+                  <br>
+                  <select class="newDailyTenData" id="CarPlate" name="CarPlateNumber">
+                    <option disabled selected hidden value="">رقم اللوحة</option>
+                  </select>
+                  <br>
+                  <label for="RenterName">اسم المستأجر</label>
+                  <br>
+                  <select class="newDailyTenData" id="RenterName" name="RenterName">
+                    
+                  </select>
+                  <br>
+                  <label for="RentStartDate">تاريخ بدء الإيجار</label>
+                  <br>
+                  <input class="newDailyTenData" type="date"name="RentStartDate">
+                  <br>
+                  <label for="RentEndDate">تاريخ نهاية الإيجار</label>
+                  <br>
+                  <input class="newDailyTenData" type="date"name="RentEndDate">
+                  <br>
+                  <label for="PaymentMethod">طريقة الدفع</label>
+                  <br>
+                  <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod">
+                    <option value="">نقدي</option>
+                    <option value="">شبكة</option>
+                    <option value="">تحويل</option>
+                  </select>
+                  <br>
+                  <label for="RentPrice">القيمة</label>
+                  <br>
+                  <input class="newDailyTenData" placeholder=" القيمة " name="RentPrice">
+                  <br>
+                  <button type="submit" onclick="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">حفظ</button>
+                </form>
+              </div>
+            </div>
+            <br>
+            <label for="startDate">من</label>
+            <input type="date" name="startDate" id="dailyStartFilter">
+            <label for="endDate">الى</label>
+            <input type="date" name="endDate" id="dailyEndFilter">
+            <button onclick="filter('dailyStartFilter', 'dailyEndFilter')">بحث</button>
+            <table class="table_tenants">
+
+              
+              <tbody id="DailyRentInfo" ondblclick="editable(event)">
+                  <th>رقم</th>
+                  <th>رقم اللوحة</th>
+                  <th>اسم المستأجر</th>
+                  <th>بدء الإيجار</th>
+                  <th>نهاية الإيجار</th>
+                  <th>مدين</th>
+                  <th >القيمة</th>
+                  <th>حذف</th>
+
+                    
+              </tbody>
+            </table>
+          </div>
+
+          <!--table expenses -->         
+          <div class="column">
+            <div>
+              <!-- زر مصروفات المكتب -->
+              <button class="button_action" onclick="openPop('dailyExpPopForm') + dailySel('CarPlate_ExpenseName', 'ExpCarPlate_ExpenseName')">أضافة</button>
+              <button class="button_action" onclick="allEditable(event, 'daily_exp_table')" id="editBTN">تعديل</button>
+            </div>
+
+            <!-- window for adding data-->
+            <div class="popupForm" id="dailyExpPopForm">
+              <button onclick="closePop('dailyExpPopForm')">إلغاء</button>
+              <div class="inputs_Cars" >
+                <form id="dailyExpForm">
+                  <br>
+                  <label for="carPlateNumber">رقم اللوحة</label>
+                  <br>
+                  <select class="newDailyExpData" id="ExpCarPlate" name="CarPlateNumber">
+                    
+                  </select>
+                  <br>
+                  <label for="ExpenseSource"> مصدر الصرف </label>
+                  <br>
+                  <select class="newDailyExpData" id="ExpenseName" name="ExpenseSource">
+
+                  </select>
+                  <br>
+                  <input class="newDailyExpData" placeholder=" تاريخ الصرف " name="ExpenseDate">
+                  <br>
+                  <input class="newDailyExpData" placeholder=" مدين " name="PaymentMethod">
+                  <br>
+                  <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost">
+                  <button type="submit" onclick="submitForm(event, 'DailyExpInfo','DailyExpInfo') + closePop('dailyExpPopForm')">حفظ</button>
+                </form>
+              </div>
+            </div>
+
+            <table class="table_Expenses">
+              
+                
+              
+              <tbody id="DailyExpInfo" ondblclick="editable(event)">
+                  <th>رقم</th>
+                  <th>رقم اللوحة</th>
+                  <th>مصدر الصرف</th>
+                  <th>تاريخ الصرف</th>
+                  <th>مدين</th>
+                  <th >القيمة</th>
+                  <th>حذف</th>
+
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        
+
+
+
+          </div>
+    </section>
+    <script src="/public/js/Main.js" defer></script>
+    <script src="/public/js/daily.js" defer></script>
+    
+    
+
+  </body>
+</html>
