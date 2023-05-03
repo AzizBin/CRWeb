@@ -330,6 +330,32 @@ button:hover{
   padding-block: 10px;
 }
 
+input[type="date"]{
+  
+  top: 50%;
+  left: 50%;
+  font-family: "Roboto Mono",monospace;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color-scheme: light dark;
+  
+}
+input[type="date"]:before {
+  color: lightgrey;
+ 
+  margin-right: 0.5em;
+  
+}
+
+::-webkit-calendar-picker-indicator{
+  
+
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+  
+}
 .table-Car{
   
   

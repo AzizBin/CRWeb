@@ -96,6 +96,10 @@
             <!--  زر مصروفات المكتب -->
             <button class="button_action" onclick="openPop('dailyTenPopForm') + dailySel('CarPlate_RenterName', 'CarPlate_RenterName')">أضافة</button>
             <button class="button_action" onclick="allEditable(event, 'daily_ten_table')" id="editBTN">تعديل</button>
+            <label for="startDate">من</label>
+            <input type="date" name="startDate" id="dailyStartFilter">
+            <label for="dailyEndFilter">الى</label>
+            <input type="date" name="endDate" id="dailyEndFilter" placeholder="يوم-شهر-سنة">
             </div>
 
 
@@ -146,11 +150,6 @@
               </div>
             </div>
             <br>
-            <label for="startDate">من</label>
-            <input type="date" name="startDate" id="dailyStartFilter">
-            <label for="endDate">الى</label>
-            <input type="date" name="endDate" id="dailyEndFilter">
-            <button onclick="filter('dailyStartFilter', 'dailyEndFilter')">بحث</button>
             <table class="table_tenants">
 
               
