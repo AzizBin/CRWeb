@@ -75,13 +75,13 @@
     <section class="home-section">
       <div class="text">اليومية 
       
-        </div>
+      </div>
   
 
 
-        <!--Botten-->
-        <div class="Registration_buttons">
-        </div>
+      <!--Botten-->
+      <div class="Registration_buttons">
+      </div>
 
 
         
@@ -105,9 +105,9 @@
 
 
             <!-- window for adding data-->
-            <div class="popupForm" id="dailyTenPopForm">
+            <dialog id="dailyTenPopForm">
               <button onclick="closePop('dailyTenPopForm')">إلغاء</button>
-              <div class="inputs_Cars" >
+              <br>
                 <form id="dailyTenForm">
                   <br>
                   <select class="newDailyTenData" id="CarName" name="CarName">
@@ -155,8 +155,7 @@
                   <br>
                   <button type="submit" onclick="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">حفظ</button>
                 </form>
-              </div>
-            </div>
+            </dialog>
             <table class="table_tenants">
 
               
@@ -184,9 +183,9 @@
             </div>
 
             <!-- window for adding data-->
-            <div class="popupForm" id="dailyExpPopForm">
+            <dialog id="dailyExpPopForm">
               <button onclick="closePop('dailyExpPopForm')">إلغاء</button>
-              <div class="inputs_Cars" >
+              <br>
                 <form id="dailyExpForm">
                   <br>
                   <label for="carPlateNumber">رقم اللوحة</label>
@@ -206,10 +205,12 @@
                   <input class="newDailyExpData" placeholder=" مدين " name="PaymentMethod">
                   <br>
                   <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost">
+                  <br>
+                  <br>
                   <button type="submit" onclick="submitForm(event, 'DailyExpInfo','DailyExpInfo') + closePop('dailyExpPopForm')">حفظ</button>
                 </form>
-              </div>
-            </div>
+              
+            </dialog>
 
             <table class="table_Expenses">
               
@@ -234,8 +235,9 @@
 
 
 
-          </div>
     </section>
+      
+    
     <script src="/public/js/Main.js" defer></script>
     <script src="/public/js/daily.js" defer></script>
     

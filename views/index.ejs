@@ -100,11 +100,12 @@
           <box-icon type='solid' name='edit-alt'></box-icon>
 
           <!-- window for adding data-->
-          <div class="popupForm" id="carPopForm">           
+          <dialog id="carPopForm">       
             <button onclick="closePop('carPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
+            <br>
               
-              <form id="carForm">
+              <form id="carForm" method="dialog">
+                <br>
                 <label for="InvName">اسم المستثمر</label>
                 <br>
                 <select class="newCarData" id="InvName"  name="InvName">
@@ -145,8 +146,8 @@
                 <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyNo" value=" غير موجود ">
                 <button type="submit" onclick="closePop('carPopForm') + submitForm(event, 'CarsInfo','CarsInfo')">حفظ</button>
               </form>
-            </div>
-          </div>
+            
+          </dialog>
 
 
           <!--table-->
@@ -187,27 +188,29 @@
           <button class="button_action"  onclick="allEditable(event, 'inv_table')" id="editBTN">تعديل</button>
 
           <!-- window for adding data-->
-          <div class="popupForm" id="invPopForm">
+          <dialog id="invPopForm">
             <button onclick="closePop('invPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
-              <form id="invForm">
-                <input class="newInvData" placeholder="اسم المستثمر " value="" name="InvName">
-                <br>
-                <input class="newInvData" placeholder=" رقم الهوية " value="" name="InvIDNumber">
-                <br>
-                <label> ارفاق صورة الهوية </label>
-                <br>
-                <input class="newInvData" type="file" placeholder="ارفاق صورة الهوية" name="InvIDPic">
-                <br>
-                <input class="newInvData" title="text" placeholder="نسبة الفائدة" name="InvInterestRate">
-                <br>
-                <input class="newInvData" placeholder=" رقم الجوال " name="InvPhoneNumber">
-                <br> 
-                <input class="newInvData" type="file" placeholder="صورة العقد" name="InvContractPic">
-                <button type="submit" onclick="submitForm(event, 'InvInfo','InvInfo') + closePop('invPopForm')">حفظ</button>
-              </form>
-            </div>
-          </div>
+            <br>
+            
+            <form id="invForm">
+              <input class="newInvData" placeholder="اسم المستثمر " value="" name="InvName">
+              <br>
+              <input class="newInvData" placeholder=" رقم الهوية " value="" name="InvIDNumber">
+              <br>
+              <label> ارفاق صورة الهوية </label>
+              <br>
+              <input class="newInvData" type="file" placeholder="ارفاق صورة الهوية" name="InvIDPic">
+              <br>
+              <input class="newInvData" title="text" placeholder="نسبة الفائدة" name="InvInterestRate">
+              <br>
+              <input class="newInvData" placeholder=" رقم الجوال " name="InvPhoneNumber">
+              <br> 
+              <input class="newInvData" type="file" placeholder="صورة العقد" name="InvContractPic">
+              <br>
+              <button type="submit" onclick="submitForm(event, 'InvInfo','InvInfo') + closePop('invPopForm')">حفظ</button>
+            </form>
+            
+          </dialog>
 
           <!--table-->
           <div class="table-Car">
@@ -238,9 +241,9 @@
           <button class="button_action" onclick="allEditable(event, 'rent_table')" id="editBTN">تعديل</button>
 
           <!-- window for adding data-->
-          <div class="popupForm" id="rentPopForm">
+          <dialog id="rentPopForm">
             <button onclick="closePop('rentPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
+            <br>
               <form id="rentForm">
                 <input class="newRentData" placeholder="اسم المستأجر" value="" name="RenterName">
                 <br>
@@ -265,10 +268,12 @@
                 <label> صورة للتفويض </label>
                 <br>
                 <input class="newRentData" type="file" placeholder="صورة للتفويض" name="RentAuthPic">
+                <br>
+                <br>
                 <button type="submit" onclick="submitForm(event, 'RentInfo','RentInfo') + closePop('rentPopForm')">حفظ</button>
               </form>
-            </div>
-          </div>
+            
+          </dialog>
 
           <!--table-->
           <div class="table-Car">
@@ -302,10 +307,11 @@
           <button class="button_action" onclick="allEditable(event, 'owner_table')" id="editBTN">تعديل</button>
 
           <!-- window for adding data-->
-          <div class="popupForm" id="ownPopForm">
+          <dialog id="ownPopForm">
             <button onclick="closePop('ownPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
+            <br>
               <form id="ownForm">
+                <br>
                 <input class="newOwnData" placeholder=" اسم المالك " value="" name="OwnerName">
                 <br>
                 <input class="newOwnData" placeholder=" رقم الهوية " value="" name="OwnerIDNumber">
@@ -315,10 +321,11 @@
                 <input class="newOwnData" type="file" placeholder="صورة الهوية" name="OwnerIDPic">
                 <br>
                 <input class="newOwnData" placeholder=" نسبة الأرباح من المكتب " value="" name="OwnerPercent">
+                <br>
+                <br>
                 <button type="submit" onclick="submitForm(event, 'OwnerInfo','OwnerInfo') + closePop('ownPopForm')">حفظ</button>
               </form>
-            </div>
-          </div>
+          </dialog>
           
           <!--table-->
           <div class="table-Car">
@@ -349,9 +356,9 @@
 
 
           <!-- window for adding data-->
-          <div class="popupForm" id="empPopForm">
+          <dialog id="empPopForm">
             <button onclick="closePop('empPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
+            <br>
               <form id="empForm">
                 <input class="newEmpData" placeholder=" اسم الموظف " value="" name="EmpName">
                 <br>
@@ -372,10 +379,11 @@
                 <input class="newEmpData" placeholder=" عمولة التأجير " value="" name="EmpRentCom">
                 <br>
                 <input class="newEmpData" placeholder="  الراتب " value="" name="EmpSalary">
+                <br>
+                <br>
                 <button type="submit" onclick="submitForm(event, 'EmpInfo','EmpInfo') + closePop('empPopForm')">حفظ</button>
               </form>
-            </div>
-          </div>
+          </dialog>
           
 
           
@@ -414,10 +422,9 @@
   
   
             <!-- window for adding data-->
-            <div class="popupForm" id="officePopForm">
+            <dialog id="officePopForm">
               <button onclick="closePop('officePopForm')">إلغاء</button>
-              <div class="inputs_Cars" >
-                
+              <br>
                 <form id="officeForm">
                   <br>
                   <input class="newOfficeData" placeholder=" اسم المصروف " value="" name="ExpenseName">
@@ -426,10 +433,11 @@
                   <input class="newOfficeData" type="checkbox" id="Price" value="false" name="ExpensePriceReq">
                   <label for="Picture"> صورة </label>
                   <input class="newOfficeData" type="checkbox" id="Picture" name="ExpensePicReq">
+                  <br>
+                  <br>
                   <button type="submit" onclick="submitForm(event, 'ExpensesInfo','ExpensesInfo') + closePop('officePopForm')">حفظ</button>
                 </form>
-              </div>
-            </div>
+            </dialog>
             
   
             
