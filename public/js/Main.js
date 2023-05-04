@@ -159,7 +159,10 @@ async function submitForm(event, colName, tableID){
         newShowCell.appendChild(showImage)
         newRow.appendChild(newShowCell)
       }
-      if (key !== '_id' && !key.endsWith('Pic')) {
+      else if(key == 'VAT'){
+
+      }
+      else if (key !== '_id' && !key.endsWith('Pic')&& key != 'VAT') {
         var newCell = document.createElement('td')
         newCell.id = colName + '_' + key + '_' + newData._id
         newCell.textContent = newData[key]

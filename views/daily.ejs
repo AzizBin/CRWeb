@@ -96,6 +96,11 @@
             <!--  زر مصروفات المكتب -->
             <button class="button_action" onclick="openPop('dailyTenPopForm') + dailySel('CarPlate_RenterName', 'CarPlate_RenterName')">أضافة</button>
             <button class="button_action" onclick="allEditable(event, 'daily_ten_table')" id="editBTN">تعديل</button>
+            <label for="startDate">من</label>
+            <input type="date" name="startDate" id="dailyStartFilter">
+            <label for="dailyEndFilter">الى</label>
+            <input type="date" name="endDate" id="dailyEndFilter" placeholder="يوم-شهر-سنة">
+            <button onclick="filter('dailyStartFilter', 'dailyEndFilter')">بحث</button>
             </div>
 
 
@@ -141,16 +146,17 @@
                   <br>
                   <input class="newDailyTenData" placeholder=" القيمة " name="RentPrice">
                   <br>
+                  <select class="newDailyTenData" name="VAT">
+                    <option disabled selected hidden value="">الضريبة المضافة</option>
+                    <option value="15">يوجد</option>
+                    <option value="0">لا يوجد</option>
+                  </select>
+                  <br>
+                  <br>
                   <button type="submit" onclick="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">حفظ</button>
                 </form>
               </div>
             </div>
-            <br>
-            <label for="startDate">من</label>
-            <input type="date" name="startDate" id="dailyStartFilter">
-            <label for="endDate">الى</label>
-            <input type="date" name="endDate" id="dailyEndFilter">
-            <button onclick="filter('dailyStartFilter', 'dailyEndFilter')">بحث</button>
             <table class="table_tenants">
 
               
