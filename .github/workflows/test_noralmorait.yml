@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'noralmorait'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_372CE4BB672F412DB61C38A6C8AD1AA8 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_73A359C05B1D450F801E54E9BDEE375A }}
           package: .
