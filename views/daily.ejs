@@ -146,6 +146,13 @@
                   <br>
                   <input class="newDailyTenData" placeholder=" القيمة " name="RentPrice">
                   <br>
+                  <select class="newDailyTenData" name="VAT">
+                    <option disabled selected hidden value="">الضريبة المضافة</option>
+                    <option value="15">يوجد</option>
+                    <option value="0">لا يوجد</option>
+                  </select>
+                  <br>
+                  <br>
                   <button type="submit" onclick="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">حفظ</button>
                 </form>
               </div>
