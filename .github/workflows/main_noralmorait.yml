@@ -54,6 +54,3 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FD1AA38790BB4FCDBFAC88AC409AD2F1 }}
           package: .
-        env: # Or as an environment variable
-            MONGODB_URI: ${{ secrets.MONGODB_URI }}
-            BLOB_CONNECTION_STRING: ${{ secrets.BLOB_CONNECTION_STRING }}
