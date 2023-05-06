@@ -163,7 +163,31 @@ app.get('/dailySel', async (req, res) =>{
 
 app.get('/reports',async (req, res) => {
 	// const data = await getCarData()
-	  res.render('reports');
+	let VATDB = 15
+	let paidPrice = 1000
+	let finalWithout
+	let finalVAT
+	
+	if(VATDB==0){
+		finalWithout = paidPrice
+		finalVAT = 0
+	}
+	else{
+		let VAT = 1+ VATDB/100
+		let withoutVAT = paidPrice/VAT
+		let paidPriceVAT = paidPrice - (paidPrice / VAT)
+
+		let withoutVATFloor = Math.floor((withoutVAT + Number.EPSILON) * 100) / 100
+		let paidPriceVATCeil = Math.ceil((paidPriceVAT + Number.EPSILON) * 100) / 100
+		
+		finalWithout = withoutVATFloor
+		finalVAT = paidPriceVATCeil
+	}
+	
+	
+
+	console.log(finalWithout + "\n"+ finalVAT)
+	res.render('reports')
   })
 
 async function getCarData(){
