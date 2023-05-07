@@ -394,7 +394,7 @@ table th{
   padding-inline: 8px;
   border: 1px solid ;
   border-collapse: separate;
-  
+  border-radius: 4px;
 
 }
 th:first-child, th:last-child{
@@ -408,6 +408,7 @@ table td{
   text-align: center;
   border-collapse: separate;
   border: 1px solid black;
+  border-radius: 4px;
 }
 
 td:last-child{
@@ -439,6 +440,7 @@ label{
   color: #c0bcbc;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+  border-radius: 4px;
 }
 
 .delButton:nth-child(odd){
