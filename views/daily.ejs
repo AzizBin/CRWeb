@@ -202,7 +202,11 @@
                   <br>
                   <input class="newDailyExpData" placeholder=" تاريخ الصرف " name="ExpenseDate">
                   <br>
-                  <input class="newDailyExpData" placeholder=" مدين " name="PaymentMethod">
+                  <select class="newDailyExpData" placeholder=" مدين " name="PaymentMethod">
+                    <option value="نقدي">نقدي</option>
+                    <option value="شبكة">شبكة</option>
+                    <option value="تحويل">تحويل</option>
+                  </select>
                   <br>
                   <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost">
                   <br>
@@ -235,30 +239,30 @@
 
 
 
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th colspan="2">دائن</th>
-                <th colspan="2">مدين</th>
-                <th colspan="2">الخزنة</th>
-              </tr>
-              <tr>
-                <th>كاش</th>
-                <th>شبكة</th>
+          
+        <table style="padding-inline: 5px;">
+          <thead>
+            <tr>
+              <th colspan="2">دائن</th>
+              <th colspan="2">مدين</th>
+              <th colspan="2">الخزنة</th>
+            </tr>
+            <tr>
+              <th>نقدي</th>
+              <th>شبكة</th>
 
-                <th>كاش</th>
-                <th>شبكة</th>
+              <th>نقدي</th>
+              <th>شبكة</th>
 
-                <th>كاش</th>
-                <th>شبكة</th>
+              <th>نقدي</th>
+              <th>شبكة</th>
 
-              </tr>
-            </thead>
-            <tbody id="dailyTotal">
+            </tr>
+          </thead>
+          <tbody id="dailyTotal">
               
-            </tbody>
-          </table>
+          </tbody>
+        </table>
     </section>
       
     

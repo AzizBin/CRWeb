@@ -146,7 +146,7 @@ async function getDailyData(startDate, endDate){
   const dailyRentTable = await colDailyRent.find({_id: {$gte: new ObjectId(startDate / 1000 - 10799), $lte: new ObjectId(endDate / 1000 + 75599) } }).project({}).toArray()
 
   const colDailyExp = await run('CRWebDB','DailyExpInfo')
-  const dailyExpTable = await colDailyExp.find({_id: {$gte: new ObjectId(startDate / 1000), $lte: new ObjectId(endDate / 1000) }}).project({}).toArray()
+  const dailyExpTable = await colDailyExp.find({_id: {$gte: new ObjectId(startDate / 1000 - 10799), $lte: new ObjectId(endDate / 1000 + 75599) } }).project({}).toArray()
 
   return({ 
     DailyExpInfo: dailyExpTable, 

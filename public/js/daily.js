@@ -121,27 +121,39 @@ function setData(newData){
       }
         
     }
-
+    let row = document.createElement('tr')
     let totalTable = document.getElementById('dailyTotal')
-    let creditorCell = document.getElementById('creditorAmountColumn')
-    let creditorAmountCash=0
-    let creditorAmountPOS=0
-    let methodCells = document.querySelectorAll(`table td:nth-child(${creditorCell.cellIndex})`)
-    let cells = document.querySelectorAll(`table td:nth-child(${creditorCell.cellIndex+1})`)
-    
+    total("creditorAmountColumn")
+    total("debtorAmountColumn")
+    function total(thID){
+      let cell = document.getElementById(thID)
+      let amountCash=0
+      let amountPOS=0
+      let methodCells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex})`)
+      let cells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex+1})`)
+      console.log(methodCells)
+      for(key in methodCells){
 
-    for(i=0; i<methodCells.length; i++){
-
-      if(methodCells[i].innerText == 'نقدي'){
-        creditorAmountCash += +cells[i].innerText
-
-        console.log(cells[i].innerText)
-      }
-      else{
-        creditorAmountPOS += +cells[i].innerText
-      }
-      
+        if(methodCells[key].innerText == 'نقدي'){
+          amountCash += +cells[key].innerText
+        }
+        else if (methodCells[key].innerText == 'شبكة'){
+          amountPOS += +cells[key].innerText
+        }
+      }  
+      const totalTableArray = [amountCash, amountPOS]
+      addToTotalTable(totalTableArray)
     }
-    console.log(creditorAmountCash)
-    console.log(creditorAmountPOS)
+
+    function addToTotalTable(totalTableArray){
+      console.log(totalTableArray);
+      for(key in totalTableArray){
+        let newCell = document.createElement('td')
+        newCell.textContent = totalTableArray[key]
+        row.appendChild(newCell)
+        totalTable.appendChild(row)
+      }
+    }
+
+    
   }
