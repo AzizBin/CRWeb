@@ -45,14 +45,14 @@ function content(evt, selectedTab){
 /* Display a window on top to add new data */
 function openPop(popID){
 
-  document.getElementById(popID).style.display = "block";
+  document.getElementById(popID).showModal()
   
 }
 
 /* remove the add new data window */
 function closePop(popID){
 
-  document.getElementById(popID).style.display = "none";
+  document.getElementById(popID).close()
 }
 
 

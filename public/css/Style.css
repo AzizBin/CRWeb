@@ -8,17 +8,6 @@
  
 }
 
-
-.hide { 
-  position:absolute; 
-  top:-1px; 
-  left:-1px; 
-  width:1px; 
-  height:1px; 
-  background-color: #726f6f;
-
-}
-
 input{
   background-color:#726f6f;
   color: #FFF;
@@ -382,6 +371,21 @@ table {
   background-color: #333;
   display: none;
     
+}
+dialog{
+
+  inset-block: 14%;
+  inset-inline: 34%;
+  border-radius: 21px;
+  box-shadow: 0px 0px 10px 5px #161515;
+  width: auto;
+  height: auto;
+  padding-inline-start: 0.5%;
+  padding-block-start: 0.5%;
+
+
+  background-color: #333;
+  z-index: 10;
 }
 
 table th{
