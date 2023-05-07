@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "install": "npm install multer pg mongodb ejs @azure/storage-blob dotenv"
+    "install": "npm install multer pg mongodb ejs @azure/storage-blob dotenv",
+    "s": "npx nodemon server.js"
   },
   "author": "",
   "license": "ISC",
