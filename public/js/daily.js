@@ -121,4 +121,27 @@ function setData(newData){
       }
         
     }
+
+    let totalTable = document.getElementById('dailyTotal')
+    let creditorCell = document.getElementById('creditorAmountColumn')
+    let creditorAmountCash=0
+    let creditorAmountPOS=0
+    let methodCells = document.querySelectorAll(`table td:nth-child(${creditorCell.cellIndex})`)
+    let cells = document.querySelectorAll(`table td:nth-child(${creditorCell.cellIndex+1})`)
+    
+
+    for(i=0; i<methodCells.length; i++){
+
+      if(methodCells[i].innerText == 'نقدي'){
+        creditorAmountCash += +cells[i].innerText
+
+        console.log(cells[i].innerText)
+      }
+      else{
+        creditorAmountPOS += +cells[i].innerText
+      }
+      
+    }
+    console.log(creditorAmountCash)
+    console.log(creditorAmountPOS)
   }

@@ -137,9 +137,9 @@
                   <label for="PaymentMethod">طريقة الدفع</label>
                   <br>
                   <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod">
-                    <option value="">نقدي</option>
-                    <option value="">شبكة</option>
-                    <option value="">تحويل</option>
+                    <option value="نقدي">نقدي</option>
+                    <option value="شبكة">شبكة</option>
+                    <option value="تحويل">تحويل</option>
                   </select>
                   <br>
                   <label for="RentPrice">القيمة</label>
@@ -166,8 +166,8 @@
                   <th>اسم المستأجر</th>
                   <th>بدء الإيجار</th>
                   <th>نهاية الإيجار</th>
-                  <th>مدين</th>
-                  <th >القيمة</th>
+                  <th id="creditorPaymentType">مدين</th>
+                  <th id="creditorAmountColumn">القيمة</th>
                   <th>حذف</th>
 
                     
@@ -220,8 +220,8 @@
                   <th>رقم اللوحة</th>
                   <th>مصدر الصرف</th>
                   <th>تاريخ الصرف</th>
-                  <th>مدين</th>
-                  <th >القيمة</th>
+                  <th id="debtorPaymentType">مدين</th>
+                  <th id="debtorAmountColumn">القيمة</th>
                   <th>حذف</th>
 
                 
@@ -235,6 +235,29 @@
 
 
           </div>
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">دائن</th>
+                <th colspan="2">مدين</th>
+                <th colspan="2">الخزنة</th>
+              </tr>
+              <tr>
+                <th>كاش</th>
+                <th>شبكة</th>
+
+                <th>كاش</th>
+                <th>شبكة</th>
+
+                <th>كاش</th>
+                <th>شبكة</th>
+
+              </tr>
+            </thead>
+            <tbody id="dailyTotal">
+              
+            </tbody>
+          </table>
     </section>
     <script src="/public/js/Main.js" defer></script>
     <script src="/public/js/daily.js" defer></script>

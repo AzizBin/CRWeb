@@ -364,8 +364,8 @@ input[type="date"]:before {
 table { 
   font-size:medium;
   margin-top: 2%;
-  border-collapse: collapse;
   overflow-x: auto;
+  width: max-content;
   
 }
 
@@ -386,24 +386,31 @@ table {
 
 table th{
   white-space: nowrap;
-  text-align: start;
-  padding-inline: 5px;
+  text-align: center;
+  padding-inline: 8px;
+  border: 1px solid ;
+  border-collapse: separate;
+  
+
 }
 th:first-child, th:last-child{
-  
+
 }
 
 table td{
   white-space: nowrap;
-  padding-inline-end: 10px;
   color: #fff;
-  padding-inline-start: 0.4%;
-  
+  padding-inline: 8px;
+  text-align: center;
+  border-collapse: separate;
+  border: 1px solid black;
 }
 
-td:first-child, td:last-child{
+td:last-child{
 
-  padding-inline-end: 1px;
+  padding-inline: 1px;
+  padding-block-end: 2px;
+  
 }
 
 select { 
