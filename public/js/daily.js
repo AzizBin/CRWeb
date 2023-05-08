@@ -70,6 +70,7 @@ function setData(newData){
         newRow.appendChild(newCellNumber)
         
         for ( var key in newData[dataKey][i]){
+          console.log(key)
           
           if (key.endsWith('Pic')){
             let newShowCell = document.createElement('td')
@@ -101,12 +102,14 @@ function setData(newData){
           else if(key == 'VAT'){
 
           }
-          else if (key !== '_id' && !key.endsWith('Pic') && key != 'VAT') {
+          
+          else if (key !== '_id') {
             var newCell = document.createElement('td')
             newCell.id = colName + '_' + key + '_' + newData[dataKey][i]._id
             newCell.textContent = newData[dataKey][i][key]
             newRow.appendChild(newCell)
           }
+          
           
         }
         var newCell = document.createElement('td')
@@ -185,6 +188,10 @@ function setData(newData){
     console.log(totalDebt)
     const finalData = [totalCred, totalDebt, account]
     let finalRow = document.createElement('tr')
+    let length = totalTable.rows.length
+    for(i = length -1; i>=0; i--){
+      totalTable.deleteRow(i)
+    }
     for(key in finalData){
       let finalCell = document.createElement('td')
       finalCell.textContent = finalData[key]

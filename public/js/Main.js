@@ -162,7 +162,7 @@ async function submitForm(event, colName, tableID){
       else if(key == 'VAT'){
 
       }
-      else if (key !== '_id' && !key.endsWith('Pic')&& key != 'VAT') {
+      else if (key !== '_id') {
         var newCell = document.createElement('td')
         newCell.id = colName + '_' + key + '_' + newData._id
         newCell.textContent = newData[key]
@@ -179,17 +179,18 @@ async function submitForm(event, colName, tableID){
     newCell.appendChild(button)
     newRow.appendChild(newCell)
     table.appendChild(newRow)
-    moneyTable()
+    
   })
 	.catch(error => console.error(error + '/upload/${colName} catch Error'))
   
-  
+  moneyTable()
     
 }
 function moneyTable(){
   let row = document.createElement('tr')
   let totalTable = document.getElementById('dailyTotal')
-  for(i = length - 1; i>0; i--){
+  let length = totalTable.rows.length
+  for(i = length -1; i>=0; i--){
     totalTable.deleteRow(i)
   }
   let totalCash = 0
@@ -359,7 +360,6 @@ function selectorData(newData, dataName, selID) {
     let dataSplit = dataNameSplit[i];
     for (let ii = 0; ii < newData[dataSplit].length; ii++) { 
       for (let key in newData[dataSplit][ii]) {
-        console.log(newData[dataSplit][ii]);
         let selOpt = document.createElement("option");
         selOpt.value = newData[dataSplit][ii][key];
         selOpt.innerText = newData[dataSplit][ii][key];
