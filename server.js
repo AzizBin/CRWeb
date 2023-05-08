@@ -110,14 +110,14 @@ app.get('/daily',async (req, res) => {
 function daily (){
 	app.get('/dailyJ',async (req, res) =>{
 		var date = new Date(); // UTC date
-		var options = { timeZone: "Asia/Riyadh" }; // target time zone
-		var dateString = date.toLocaleString("en-GB", options); // get a string in Riyadh time using en-GB locale
-		let localToday = new Date(dateString)
-		let todayString = localToday.toLocaleString("en-GB", {timeZone: "UTC"})
-		let today = new Date(todayString)
-  		let startDate = new Date(today.toISOString().slice(0, 10))
+		let localToday = new Date(date.toISOString().slice(0, 23) + '+03:00')
+		let start = new Date(localToday.toISOString().slice(0, 10))
+		let startString = start.toLocaleString("en-US", {timeZone: "UTC"})
+	
+  		let startDate = new Date(startString)
+		let endDate = new Date(start.toISOString().slice(0, 10) + "T20:59:59.000Z" )
 		console.log(startDate)
-		const data = await getDailyData(startDate, startDate)
+		const data = await getDailyData(startDate, endDate)
 		res.json(data)
 		console.log('data sent')
 	})
@@ -146,13 +146,13 @@ app.post('/dailyFilter', async (req, res) => {
 	let start = new Date (req.body.startDate)
 	let startString = start.toLocaleString("en-US", {timeZone: "UTC"})
 	let convertStart = new Date(startString)
-	let startDate = new Date(convertStart.toISOString().slice(0, 10))
-
-	let end = new Date (req.body.endDate)
+	let startDate = new Date(convertStart.toISOString())
+	console.log(startDate);
+	let end = new Date (req.body.endDate + "T23:59:59.000Z")
 	let endString = end.toLocaleString("en-US", {timeZone: "UTC"})
 	let convertEnd = new Date(endString)
-	let endDate = new Date(convertEnd.toISOString().slice(0, 10))
-
+	let endDate = new Date(convertEnd.toISOString())
+	console.log(convertEnd);
 	let data = await getDailyData(startDate, endDate)
 
 	res.json(data)
@@ -161,10 +161,10 @@ app.post('/dailyFilter', async (req, res) => {
 async function getDailyData(startDate, endDate){
 
   const colDailyRent = await run('CRWebDB','DailyRentInfo')
-  const dailyRentTable = await colDailyRent.find({_id: {$gte: new ObjectId(startDate / 1000), $lte: new ObjectId(endDate / 1000 + 86399) } }).project({}).toArray()
+  const dailyRentTable = await colDailyRent.find({_id: {$gte: new ObjectId(startDate / 1000), $lte: new ObjectId(endDate / 1000) } }).project({}).toArray()
 
   const colDailyExp = await run('CRWebDB','DailyExpInfo')
-  const dailyExpTable = await colDailyExp.find({_id: {$gte: new ObjectId(startDate / 1000), $lte: new ObjectId(endDate / 1000 + 86399) } }).project({}).toArray()
+  const dailyExpTable = await colDailyExp.find({_id: {$gte: new ObjectId(startDate / 1000), $lte: new ObjectId(endDate / 1000) } }).project({}).toArray()
 
   return({ 
     DailyExpInfo: dailyExpTable, 
@@ -234,11 +234,11 @@ app.post('/upload/:colName', upload.any(), async (req, res) => {
 
 					let VATDB = combinedData['VAT']
 					let paidPrice = combinedData['RentPrice']
-					let finalWithout
-					let finalVAT
+					let finalWithout = 0
+					let finalVAT = 0
 					
 					if(VATDB==0){
-						finalWithout = paidPrice
+						finalWithout = Number.paidPrice
 						finalVAT = 0
 					}
 					else{

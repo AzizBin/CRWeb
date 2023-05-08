@@ -126,6 +126,10 @@ function setData(newData){
     }
     let row = document.createElement('tr')
     let totalTable = document.getElementById('dailyTotal')
+    let length = totalTable.rows.length
+    for(i = length -1; i>=0; i--){
+      totalTable.deleteRow(i)
+    }
     let totalCash = 0
     let totalPOS = 0
     let amountCash = 0, amountCashCred = 0, amountCashDebt = 0
@@ -188,10 +192,7 @@ function setData(newData){
     console.log(totalDebt)
     const finalData = [totalCred, totalDebt, account]
     let finalRow = document.createElement('tr')
-    let length = totalTable.rows.length
-    for(i = length -1; i>=0; i--){
-      totalTable.deleteRow(i)
-    }
+    
     for(key in finalData){
       let finalCell = document.createElement('td')
       finalCell.textContent = finalData[key]
