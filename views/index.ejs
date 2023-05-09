@@ -77,7 +77,6 @@
     <section class="home-section">
       <div class="text">التسجيل 
         
-
         <!--Botten-->
         <div class="Registration_buttons">
           <button class="tabLink" onclick="content(event, 'carsContent');" id="defaultCont">السيارات</button>
@@ -87,39 +86,36 @@
           <button class="tabLink" onclick="content(event, 'employeesContent')">الموظفين</button>
           <button class="tabLink" onclick="content(event, 'officeExpensesContent')">مصروفات المكتب</button>
         </div>
-
-
-        <!-- Tab content -->
-
-
-
-                  <!-- زر السيارات-->
+        
+        <!-- زر السيارات-->
         <div id="carsContent" class="tabContent">
           <button class="button_action" onclick="openPop('carPopForm') + indexSel('InvName', 'InvName')">أضافة</button>
           <button class="button_action" onclick="allEditable(event, 'car_table')" id="editBTN">تعديل</button>
-          <box-icon type='solid' name='edit-alt'></box-icon>
 
           <!-- window for adding data-->
           <dialog id="carPopForm">       
             <button onclick="closePop('carPopForm')">إلغاء</button>
-            <br>
-              
               <form id="carForm" method="dialog">
-                <br>
                 <label for="InvName">اسم المستثمر</label>
                 <br>
                 <select class="newCarData" id="InvName"  name="InvName">
-                  
+                  <option disabled selected hidden value="">اسم المستثمر</option>
                   
                 </select>
                 <br>
+                <label>اسم السيارة</label>
+                <br>
                 <input class="newCarData" placeholder=" اسم السيارة " value="" name="CarName">
+                <br>
+                <label>لوحة السيارة</label>
                 <br>
                 <input class="newCarData" placeholder=" لوحة السيارة " value="" name="CarPlate">
                 <br>
                 <label for="dateOfPurchase"> تاريخ الشراء </label>
                 <br>
                 <input class="newCarData" type="date" id="dateOfPurchase" name="CarDateOfPurchase" >
+                <br>
+                <label>سعر الشراء</label>
                 <br>
                 <input class="newCarData" placeholder=" سعر الشراء " name="CarPurchasePrice">
                 <br>
@@ -139,11 +135,13 @@
                 <br>
                 <input class="newCarData" type="date" id="trackingExpiry" name="CarTrackExpDate">
                 <br>
-                <p> مفتاح الاسبير </p>
+                <label>مفتاح الاسبير</label>
+                <br>
                 <label for="extraKeyYes"> موجود </label>
                 <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyYes" value="موجود">
                 <label for="extraKeyNo"> غير موجود </label>
                 <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyNo" value=" غير موجود ">
+                <br>
                 <button type="submit" onclick="closePop('carPopForm') + submitForm(event, 'CarsInfo','CarsInfo')">حفظ</button>
               </form>
             

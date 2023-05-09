@@ -33,7 +33,7 @@ function content(evt, selectedTab){
   for(i = 0; i < tabContent.length; i++){
     tabContent[i].style.display = "none"
   }
-/* I think this one is useless */
+/* Remove active Class Name from all tabs */
   tabLink = document.getElementsByClassName("tabLink")
   for(i = 0; i< tabLink.length; i++){
     tabLink[i].className = tabLink[i].className.replace(" active", "")
@@ -55,48 +55,6 @@ function closePop(popID){
   document.getElementById(popID).close()
 }
 
-
-const invArray = []
-let invArrayLength = 0
-
-const officeArray = []
-let officeArrayLength = 0
-
-
-// function testRecData(colName,tableID){
-//   console.log("testRec called")
-//   fetch(`/jsFormData/${colName}`)
-//   .then(response => response.json())
-//   .then(newData => {
-//   console.log(newData)
-
-//   let table = document.getElementById(tableID)
-//   let newRow = document.createElement('tr')
-//   for (var key in newData){
-    
-//     if (newData.hasOwnProperty(key) && key !== '_id') {
-//       var newCell = document.createElement('td')
-//       newCell.id = colName + '_' + key + '_' + newData._id
-//       newCell.textContent = newData[key]
-//       newRow.appendChild(newCell)
-//     }
-    
-//   }
-//   var newCell = document.createElement('td')
-//     const button = document.createElement('button')
-//     button.id = colName + '_' + newData._id
-//     button.textContent = 'حذف'
-//     button.className = 'delButton'
-//     button.onclick = delButtonFun
-//     newCell.appendChild(button)
-//     newRow.appendChild(newCell)
-//     table.appendChild(newRow)
-
-//   })
-//   .catch(error => console.error(error))
-
-  
-// }
 
 async function submitForm(event, colName, tableID){
   event.preventDefault()
@@ -356,7 +314,10 @@ function selectorData(newData, dataName, selID) {
   let selIDSplit = selID.split('_');
   for (let i = 0; i < selIDSplit.length; i++) {
     let sel = document.getElementById(selIDSplit[i]);
+    
+    let selectedOption = sel.options[0]
     sel.innerHTML = ""
+    sel.appendChild(selectedOption)
     let dataSplit = dataNameSplit[i];
     for (let ii = 0; ii < newData[dataSplit].length; ii++) { 
       for (let key in newData[dataSplit][ii]) {

@@ -1,13 +1,19 @@
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
-  margin: 0;
-  padding: 0;
+
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
  
 }
-
+body{
+  padding: 0;
+  margin: 0;
+}
+ul{
+  padding: 0;
+  margin: 0;
+}
 input{
   background-color:#726f6f;
   color: #FFF;
@@ -25,8 +31,6 @@ input{
   width: 78px;
   inset-inline-start: 0px;
   background: #11101D;
-  padding-inline: 14px;
-  padding-block: 6px;
   margin: 0px;
   transition: all 0.5s ease;
 }
@@ -81,13 +85,15 @@ input{
   line-height: 60px;
 }
 .sidebar .nav-list{
-  margin-top: 20px;
-  
+
 }
 .sidebar li{
+  display: flex;
   position: relative;
   margin-block: 8px;
   list-style: none;
+  align-items: center;
+  justify-content: center;
 }
 .sidebar li .tooltip{
   position: absolute;
@@ -116,6 +122,7 @@ input{
   display: none;
 }
 .sidebar input{
+  display: none;
   font-size: 15px;
   color: #FFF;
   font-weight: 400;
@@ -128,18 +135,23 @@ input{
   background-color: #1d1b31;
 }
 .sidebar.open input{
+  display: flex;
   padding-inline: 40px;
   margin-inline-start: 14px;
   width: 95%;
 }
 .sidebar .bx-search{
-  position: absolute;
+  
   top: 50%;
   inset-inline-start: 0;
-  transform: translateY(-50%);
+  
   font-size: 22px;
   background-color: #1d1b31;
   color: #FFF;
+}
+.sidebar.open .bx-search{
+  position: absolute;
+  transform: translateY(-50%);
 }
 .sidebar.open .bx-search:hover{
   background-color: #1d1b31;
@@ -155,6 +167,7 @@ input{
   width: 100%;
   border-radius: 12px;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
   transition: all 0.4s ease;
   background-color: #11101D;
@@ -167,12 +180,12 @@ input{
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
-  opacity: 0;
+  display: none;
   pointer-events: none;
   transition: 0.4s;
 }
 .sidebar.open li a .links_name{
-  opacity: 1;
+  display: flex;
   pointer-events: auto;
 }
 .sidebar li a:hover .links_name,
@@ -256,7 +269,6 @@ input{
 .home-section .text{
   display: block;
   color: #11101d;
-  font-size: 25px;
   font-weight: 500;
   margin-inline: 18px;
   padding-block: 18px;
@@ -379,20 +391,18 @@ table {
     
 }
 dialog{
-
-  inset-block: 14%;
-  inset-inline: 34%;
   border-radius: 21px;
   box-shadow: 0px 0px 10px 5px #161515;
-  width: auto;
+  width: max-content;
   height: max-content;
+  min-width: 30rem;
   min-height: 30rem;
   padding-inline: 0.5%;
   padding-block: 0.5%;
 
 
   background-color: #333;
-  z-index: 10;
+
 }
 
 table th{
