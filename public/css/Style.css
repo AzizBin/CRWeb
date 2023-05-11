@@ -389,16 +389,23 @@ dialog{
 }
 
 table th{
+
   white-space: nowrap;
   text-align: center;
   padding-inline: 8px;
-  border: 1px solid ;
+
   border-collapse: separate;
-  
+  border-radius: 4px;
 
 }
 th:first-child, th:last-child{
 
+}
+td:last-child{
+
+  padding-inline: 1px;
+  padding-block-end: 2px;
+  
 }
 
 table td{
@@ -407,7 +414,8 @@ table td{
   padding-inline: 8px;
   text-align: center;
   border-collapse: separate;
-  border: 1px solid black;
+  
+  border-radius: 4px;
 }
 
 td:last-child{
