@@ -109,14 +109,10 @@ app.get('/daily',async (req, res) => {
 })
 function daily (){
 	app.get('/dailyJ',async (req, res) =>{
-		var date = new Date(); // UTC date
-		let localToday = new Date(date.toISOString().slice(0, 23) + '+03:00')
-		let start = new Date(localToday.toISOString().slice(0, 10))
-		let startString = start.toLocaleString("en-US", {timeZone: "UTC"})
-	
-  		let startDate = new Date(startString)
-		let endDate = new Date(start.toISOString().slice(0, 10) + "T20:59:59.000Z" )
-		console.log(startDate)
+		let date = new Date(); // UTC date
+		let localToday = date.toLocaleString('en-ZA', {timeZone: "Asia/Riyadh"})
+		let startDate = new Date(localToday.slice(0, 10))
+		let endDate = new Date(localToday)
 		const data = await getDailyData(startDate, endDate)
 		res.json(data)
 		console.log('data sent')
@@ -147,7 +143,7 @@ app.post('/dailyFilter', async (req, res) => {
 	let startString = start.toLocaleString("en-US", {timeZone: "UTC"})
 	let convertStart = new Date(startString)
 	let startDate = new Date(convertStart.toISOString())
-	console.log(startDate);
+	console.log(req.body.startDate);
 	let end = new Date (req.body.endDate + "T23:59:59.000Z")
 	let endString = end.toLocaleString("en-US", {timeZone: "UTC"})
 	let convertEnd = new Date(endString)
