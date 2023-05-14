@@ -13,13 +13,13 @@
   <body>
     <div class="sidebar">
       <div class="logo-details">
-        <i class='bx bxl-redux icon'></i> 
+        <i class='bx bxl-redux icon'></i>
         <div class="logo_name">Rental</div>
-        <i class='bx bx-menu' id="btn" ></i>
+        <i class='bx bx-menu' id="btn"></i>
       </div>
       <ul class="nav-list">
-        <li>
-          <i class='bx bx-search' ></i>
+        <li class="side-search">
+          <i class='bx bx-search'></i>
           <input type="text" placeholder="البحث...">
           <span class="tooltip">البحث</span>
         </li>
@@ -29,53 +29,59 @@
             <span class="links_name" id="liNameTest"> لوحة التحكم </span>
           </a>
           <span class="tooltip">لوحة التحكم</span>
+          
         </li>
         <li>
-          <a href="#">
-            <i class='bx bx-user' ></i>
+          <a href="/daily">
+            <i class='bx bx-user'></i>
             <span class="links_name">اليومية</span>
           </a>
           <span class="tooltip">اليومية</span>
+          
         </li>
         <li>
-        <a href="/index">
-          <i class='bx bx-add-to-queue' ></i>
-          <span class="links_name">التسجيل</span>
-        </a>
-        <span class="tooltip">التسجيل</span>
+          <a href="/index">
+            <i class='bx bx-add-to-queue'></i>
+            <span class="links_name">التسجيل</span>
+          </a>
+          <span class="tooltip">التسجيل</span>
+          
         </li>
         <li>
           <a href="/Reports">
-            <i class='bx bxs-report' ></i>
+            <i class='bx bxs-report'></i>
             <span class="links_name">التقارير</span>
           </a>
           <span class="tooltip">التقارير</span>
+          
         </li>
-
+  
         <li>
           <a href="#">
-            <i class='bx bx-cog' ></i>
+            <i class='bx bx-cog'></i>
             <span class="links_name">الإعدادات</span>
           </a>
           <span class="tooltip">الإعدادات</span>
+          
         </li>
-        <li class="profile">
-            <div class="profile-details">
-              <img src="image/User.png" alt="profileImg">
-              <div class="name_job">
-                <div class="name">أبو اسامة</div>
-                <div class="job">Admin</div>
-              </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
+        
       </ul>
+      <li class="profile">
+          <div class="profile-details">
+            <img src="image/User.png" alt="profileImg">
+            <div class="name_job">
+              <div class="name">أبو اسامة</div>
+              <div class="job">Admin</div>
+            </div>
+          </div>
+          <i class='bx bx-log-out' id="log_out"></i>
+        </li>
     </div>
     
     <section class="home-section">
       <div class="text">اليومية 
-      
       </div>
+      
   
 
 
@@ -90,7 +96,7 @@
         <div class="row">
           
           <!--table tenants-->
-          <div class="column">
+          <div class="dailyTenants">
 
             <div>
             <!--  زر مصروفات المكتب -->
@@ -185,7 +191,7 @@
           </div>
 
           <!--table expenses -->         
-          <div class="column">
+          <div class="dailyExpenses">
             <div>
               <!-- زر مصروفات المكتب -->
               <button class="button_action" onclick="openPop('dailyExpPopForm') + dailySel('CarPlate_ExpenseName', 'ExpCarPlate_ExpenseName')">أضافة</button>
@@ -257,7 +263,7 @@
 
 
           
-        <table style="padding-inline: 5px;">
+        <table style="padding-inline: 5px; margin-top: 6rem;">
           <thead>
             <tr>
               <th colspan="2">دائن</th>
@@ -280,6 +286,7 @@
               
           </tbody>
         </table>
+      
     </section>
       
     

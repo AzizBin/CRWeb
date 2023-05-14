@@ -13,6 +13,7 @@ body{
   padding: 0;
   margin: 0;
   height: 100svh;
+
 }
 ul{
   padding: 0;
@@ -234,7 +235,7 @@ input{
 .sidebar .profile{
   margin-block-end: 0;
   margin-block-start: auto;
-  height: 60px;
+  
   
   background-color: #1d1b31;
   transition: all 0.5s ease;
@@ -298,7 +299,8 @@ input{
 }
 .home-section{
   display: flex;
-  
+  flex-direction: column;
+  flex: 1;
   transition: all 0.5s ease;
   z-index: 1;
 }
@@ -317,7 +319,11 @@ input{
     display: none;
   }
 }
-
+.check{
+  position: absolute;
+  z-index: 2;
+  right: -2rem;
+}
 .Registration_buttons  {
   
   text-align:start;
@@ -403,11 +409,7 @@ input[type="date"]:before {
   border-radius: 3px;
   
 }
-.table-Car{
-  
-  padding: 0;
-  margin: 0;
-}
+
 
 table { 
   font-size:medium;
@@ -459,12 +461,12 @@ th:first-child, th:last-child{
 }
 
 table td{
+  position: relative;
   white-space: nowrap;
   color: #fff;
   padding-inline: 8px;
   text-align: center;
   border-collapse: separate;
-  
   border-radius: 4px;
 }
 

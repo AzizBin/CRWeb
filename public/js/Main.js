@@ -386,16 +386,25 @@ function editable(e){
       s.innerHTML = ''
       s.innerText = newValue
     })
+
   }
 
-  else if (cellIDSplit == 'CarsInfo' && cellIDSplit[1] !== 'InvName'){
+  else if (cellIDSplit[1] !== 'InvName'){
     s.contentEditable = "true"
-    s.focus()
-    s.addEventListener("keypress", enterKey)
-  }
-
-  else{
-    s.contentEditable = "true"
+    let checkIcon = document.createElement("button")
+    checkIcon.className = "bx bx-check check"
+    
+    s.insertAdjacentElement("afterbegin", checkIcon)
+    checkIcon.addEventListener("click", function(e){
+      let cellIDSplit = e.target.parentElement.id.split("_")
+      let cellNewValue = e.target.parentElement.textContent
+      const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:cellNewValue}
+      let cell = document.getElementById(e.target.parentElement.id)
+      cell.contentEditable = "false"
+      cell.removeChild(checkIcon)
+  
+      sendNewData(newData)
+    })
     s.focus()
     s.addEventListener("keypress", enterKey)
   }
