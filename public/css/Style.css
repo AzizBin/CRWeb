@@ -8,7 +8,7 @@
 }
 body{
   display: flex;
-  justify-content: right;
+  justify-content: start;
   background-color: #828385;
   padding: 0;
   margin: 0;
@@ -235,7 +235,7 @@ input{
   margin-block-end: 0;
   margin-block-start: auto;
   height: 60px;
-  inset-inline-start: 0;
+  
   background-color: #1d1b31;
   transition: all 0.5s ease;
 }
@@ -297,16 +297,14 @@ input{
   transition: all 0.5s ease;
 }
 .home-section{
-  
+  display: flex;
   
   transition: all 0.5s ease;
-  
   z-index: 1;
 }
 .sidebar.open ~ .home-section{
-  inset-inline-start: 250px;
-  width: calc(100% - 250px);
-    
+  
+  width: calc(100% - 250px); 
 }
 .home-section .text{
   display: block;
@@ -321,8 +319,8 @@ input{
 }
 
 .Registration_buttons  {
-  width: max-content;
-  text-align:right; /*i'will go back that line code later*/
+  
+  text-align:start;
   margin-bottom: 2%;
 
 }
@@ -415,7 +413,6 @@ table {
   font-size:medium;
   margin-top: 2%;
   overflow-x: auto;
-  width: max-content;
   
 }
 
