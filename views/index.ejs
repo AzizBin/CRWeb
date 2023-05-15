@@ -13,71 +13,76 @@
 
   <body>
     <!--sidebar-->
-    <div class="sidebar">
-      <div class="logo-details">
-        <i class='bx bxl-redux icon'></i> 
-        <div class="logo_name">Rental</div>
-        <i class='bx bx-menu' id="btn" ></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <i class='bx bx-search' ></i>
-          <input type="text" placeholder="البحث...">
-          <span class="tooltip">البحث</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-grid-alt'></i>
-            <span class="links_name" id="liNameTest" > لوحة التحكم </span>
-          </a>
-          <span class="tooltip">لوحة التحكم</span>
-        </li>
-        <li>
-          <a href="/daily">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">اليومية</span>
-          </a>
-          <span class="tooltip">اليومية</span>
-        </li>
-        <li>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-redux icon'></i>
+      <div class="logo_name">Rental</div>
+      <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li class="side-search">
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="البحث...">
+        <span class="tooltip">البحث</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" id="liNameTest"> لوحة التحكم </span>
+        </a>
+        <span class="tooltip">لوحة التحكم</span>
+        
+      </li>
+      <li>
+        <a href="/daily">
+          <i class='bx bx-user'></i>
+          <span class="links_name">اليومية</span>
+        </a>
+        <span class="tooltip">اليومية</span>
+        
+      </li>
+      <li>
         <a href="/index">
-          <i class='bx bx-add-to-queue' ></i>
+          <i class='bx bx-add-to-queue'></i>
           <span class="links_name">التسجيل</span>
         </a>
         <span class="tooltip">التسجيل</span>
-        </li>
-        <li>
-          <a href="/Reports">
-            <i class='bx bxs-report' ></i>
-            <span class="links_name">التقارير</span>
-          </a>
-          <span class="tooltip">التقارير</span>
-        </li>
+        
+      </li>
+      <li>
+        <a href="/Reports">
+          <i class='bx bxs-report'></i>
+          <span class="links_name">التقارير</span>
+        </a>
+        <span class="tooltip">التقارير</span>
+        
+      </li>
 
-        <li>
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">الإعدادات</span>
-          </a>
-          <span class="tooltip">الإعدادات</span>
-        </li>
-        <li class="profile">
-            <div class="profile-details">
-              <img src="image/User.png" alt="profileImg">
-              <div class="name_job">
-                <div class="name">أبو اسامة</div>
-                <div class="job">Admin</div>
-              </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
-      </ul>
-    </div>
+      <li>
+        <a href="#">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">الإعدادات</span>
+        </a>
+        <span class="tooltip">الإعدادات</span>
+        
+      </li>
+      
+    </ul>
+    <li class="profile">
+        <div class="profile-details">
+          <img src="image/User.png" alt="profileImg">
+          <div class="name_job">
+            <div class="name">أبو اسامة</div>
+            <div class="job">Admin</div>
+          </div>
+        </div>
+        <i class='bx bx-log-out' id="log_out"></i>
+      </li>
+  </div>
     
     <section class="home-section">
       <div class="text">التسجيل 
         
-
         <!--Botten-->
         <div class="Registration_buttons">
           <button class="tabLink" onclick="content(event, 'carsContent');" id="defaultCont">السيارات</button>
@@ -87,39 +92,36 @@
           <button class="tabLink" onclick="content(event, 'employeesContent')">الموظفين</button>
           <button class="tabLink" onclick="content(event, 'officeExpensesContent')">مصروفات المكتب</button>
         </div>
-
-
-        <!-- Tab content -->
-
-
-
-                  <!-- زر السيارات-->
+        
+        <!-- زر السيارات-->
         <div id="carsContent" class="tabContent">
           <button class="button_action" onclick="openPop('carPopForm') + indexSel('InvName', 'InvName')">أضافة</button>
           <button class="button_action" onclick="allEditable(event, 'car_table')" id="editBTN">تعديل</button>
-          <box-icon type='solid' name='edit-alt'></box-icon>
 
           <!-- window for adding data-->
           <dialog id="carPopForm">       
             <button onclick="closePop('carPopForm')">إلغاء</button>
-            <br>
-              
               <form id="carForm" method="dialog">
-                <br>
                 <label for="InvName">اسم المستثمر</label>
                 <br>
                 <select class="newCarData" id="InvName"  name="InvName">
-                  
+                  <option disabled selected hidden value="">اسم المستثمر</option>
                   
                 </select>
                 <br>
+                <label>اسم السيارة</label>
+                <br>
                 <input class="newCarData" placeholder=" اسم السيارة " value="" name="CarName">
+                <br>
+                <label>لوحة السيارة</label>
                 <br>
                 <input class="newCarData" placeholder=" لوحة السيارة " value="" name="CarPlate">
                 <br>
                 <label for="dateOfPurchase"> تاريخ الشراء </label>
                 <br>
                 <input class="newCarData" type="date" id="dateOfPurchase" name="CarDateOfPurchase" >
+                <br>
+                <label>سعر الشراء</label>
                 <br>
                 <input class="newCarData" placeholder=" سعر الشراء " name="CarPurchasePrice">
                 <br>
@@ -139,11 +141,13 @@
                 <br>
                 <input class="newCarData" type="date" id="trackingExpiry" name="CarTrackExpDate">
                 <br>
-                <p> مفتاح الاسبير </p>
+                <label>مفتاح الاسبير</label>
+                <br>
                 <label for="extraKeyYes"> موجود </label>
                 <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyYes" value="موجود">
                 <label for="extraKeyNo"> غير موجود </label>
                 <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyNo" value=" غير موجود ">
+                <br>
                 <button type="submit" onclick="closePop('carPopForm') + submitForm(event, 'CarsInfo','CarsInfo')">حفظ</button>
               </form>
             
@@ -151,7 +155,7 @@
 
 
           <!--table-->
-          <div class="table-Car">
+          
             <table >
               
                 
@@ -173,7 +177,7 @@
                 
               </tbody>
             </table>
-          </div>
+          
         </div>
 
         <div class="show-image" id="show-image">

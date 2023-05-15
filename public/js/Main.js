@@ -33,7 +33,7 @@ function content(evt, selectedTab){
   for(i = 0; i < tabContent.length; i++){
     tabContent[i].style.display = "none"
   }
-/* I think this one is useless */
+/* Remove active Class Name from all tabs */
   tabLink = document.getElementsByClassName("tabLink")
   for(i = 0; i< tabLink.length; i++){
     tabLink[i].className = tabLink[i].className.replace(" active", "")
@@ -55,48 +55,6 @@ function closePop(popID){
   document.getElementById(popID).close()
 }
 
-
-const invArray = []
-let invArrayLength = 0
-
-const officeArray = []
-let officeArrayLength = 0
-
-
-// function testRecData(colName,tableID){
-//   console.log("testRec called")
-//   fetch(`/jsFormData/${colName}`)
-//   .then(response => response.json())
-//   .then(newData => {
-//   console.log(newData)
-
-//   let table = document.getElementById(tableID)
-//   let newRow = document.createElement('tr')
-//   for (var key in newData){
-    
-//     if (newData.hasOwnProperty(key) && key !== '_id') {
-//       var newCell = document.createElement('td')
-//       newCell.id = colName + '_' + key + '_' + newData._id
-//       newCell.textContent = newData[key]
-//       newRow.appendChild(newCell)
-//     }
-    
-//   }
-//   var newCell = document.createElement('td')
-//     const button = document.createElement('button')
-//     button.id = colName + '_' + newData._id
-//     button.textContent = 'حذف'
-//     button.className = 'delButton'
-//     button.onclick = delButtonFun
-//     newCell.appendChild(button)
-//     newRow.appendChild(newCell)
-//     table.appendChild(newRow)
-
-//   })
-//   .catch(error => console.error(error))
-
-  
-// }
 
 async function submitForm(event, colName, tableID){
   event.preventDefault()
@@ -162,7 +120,7 @@ async function submitForm(event, colName, tableID){
       else if(key == 'VAT'){
 
       }
-      else if (key !== '_id' && !key.endsWith('Pic')&& key != 'VAT') {
+      else if (key !== '_id') {
         var newCell = document.createElement('td')
         newCell.id = colName + '_' + key + '_' + newData._id
         newCell.textContent = newData[key]
@@ -170,21 +128,98 @@ async function submitForm(event, colName, tableID){
       }
       
     }
-      var newCell = document.createElement('td')
-      const button = document.createElement('button')
-      button.id = colName + '_' + newData._id
-      button.textContent = 'حذف'
-      button.className = 'delButton'
-      button.onclick = delButtonFun
-      newCell.appendChild(button)
-      newRow.appendChild(newCell)
-      table.appendChild(newRow)
-  
-    })
+    var newCell = document.createElement('td')
+    const button = document.createElement('button')
+    button.id = colName + '_' + newData._id
+    button.textContent = 'حذف'
+    button.className = 'delButton'
+    button.onclick = delButtonFun
+    newCell.appendChild(button)
+    newRow.appendChild(newCell)
+    table.appendChild(newRow)
+    
+  })
 	.catch(error => console.error(error + '/upload/${colName} catch Error'))
   
-  
+  moneyTable()
     
+}
+function moneyTable(){
+  let row = document.createElement('tr')
+  let totalTable = document.getElementById('dailyTotal')
+  let length = totalTable.rows.length
+  for(i = length -1; i>=0; i--){
+    totalTable.deleteRow(i)
+  }
+  let totalCash = 0
+  let totalPOS = 0
+  let amountCash = 0, amountCashCred = 0, amountCashDebt = 0
+  let amountPOS = 0, amountPOSCred = 0, amountPOSDebt = 0
+  total("creditorAmountColumn", 'cred')
+  total("debtorAmountColumn", 'debt')
+  
+  function total(thID, type){
+    let cell = document.getElementById(thID)
+    amountCash = 0
+    amountPOS = 0
+    let methodCells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex})`)
+    let cells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex+1})`)
+    console.log(methodCells)
+    for(key in methodCells){
+
+      if(methodCells[key].innerText == 'نقدي' && type == 'cred'){
+        amountCash += +cells[key].innerText
+        amountCashCred += +cells[key].innerText
+      }
+      else if(methodCells[key].innerText == 'نقدي' && type == 'debt'){
+        amountCash += +cells[key].innerText
+        amountCashDebt += +cells[key].innerText
+      }
+      else if (['شبكة', 'تحويل'].includes(methodCells[key].innerText) && type == 'cred'){
+        amountPOS += +cells[key].innerText
+        amountPOSCred += +cells[key].innerText
+      }
+      else if(['شبكة', 'تحويل'].includes(methodCells[key].innerText) && type == 'debt'){
+        amountPOS += +cells[key].innerText
+        amountPOSDebt += +cells[key].innerText
+      }
+      
+    }
+    const totalTableArray = [amountCash, amountPOS]
+    for(key in totalTableArray){
+      let newCell = document.createElement('td')
+      newCell.textContent = totalTableArray[key]
+      row.appendChild(newCell)
+      totalTable.appendChild(row)
+    }
+    
+  }
+  totalCash = amountCashCred - amountCashDebt
+  totalPOS = amountPOSCred - amountPOSDebt
+  const totalData = [totalCash, totalPOS]
+
+  for(key in totalData){
+    let newCell1 = document.createElement('td')
+    newCell1.textContent = totalData[key]
+    row.appendChild(newCell1)
+    totalTable.appendChild(row)
+  }
+  let totalCred = 0
+  totalCred = amountCashCred += +amountPOSCred
+  let totalDebt = 0
+  totalDebt = amountCashDebt += +amountPOSDebt
+  let account = 0
+  account = totalCash += +totalPOS
+  console.log(totalDebt)
+  const finalData = [totalCred, totalDebt, account]
+  let finalRow = document.createElement('tr')
+  for(key in finalData){
+    let finalCell = document.createElement('td')
+    finalCell.textContent = finalData[key]
+    finalCell.colSpan = 2
+    finalRow.appendChild(finalCell)
+    totalTable.appendChild(finalRow)
+  }
 }
 let isClicked = false
 function showImagePopup(imageUrl, id, clicked = false){
@@ -279,11 +314,13 @@ function selectorData(newData, dataName, selID) {
   let selIDSplit = selID.split('_');
   for (let i = 0; i < selIDSplit.length; i++) {
     let sel = document.getElementById(selIDSplit[i]);
+    
+    let selectedOption = sel.options[0]
     sel.innerHTML = ""
+    sel.appendChild(selectedOption)
     let dataSplit = dataNameSplit[i];
     for (let ii = 0; ii < newData[dataSplit].length; ii++) { 
       for (let key in newData[dataSplit][ii]) {
-        console.log(newData[dataSplit][ii]);
         let selOpt = document.createElement("option");
         selOpt.value = newData[dataSplit][ii][key];
         selOpt.innerText = newData[dataSplit][ii][key];
@@ -349,16 +386,25 @@ function editable(e){
       s.innerHTML = ''
       s.innerText = newValue
     })
+
   }
 
-  else if (cellIDSplit == 'CarsInfo' && cellIDSplit[1] !== 'InvName'){
+  else if (cellIDSplit[1] !== 'InvName'){
     s.contentEditable = "true"
-    s.focus()
-    s.addEventListener("keypress", enterKey)
-  }
-
-  else{
-    s.contentEditable = "true"
+    let checkIcon = document.createElement("button")
+    checkIcon.className = "bx bx-check check"
+    
+    s.insertAdjacentElement("afterbegin", checkIcon)
+    checkIcon.addEventListener("click", function(e){
+      let cellIDSplit = e.target.parentElement.id.split("_")
+      let cellNewValue = e.target.parentElement.textContent
+      const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:cellNewValue}
+      let cell = document.getElementById(e.target.parentElement.id)
+      cell.contentEditable = "false"
+      cell.removeChild(checkIcon)
+  
+      sendNewData(newData)
+    })
     s.focus()
     s.addEventListener("keypress", enterKey)
   }
