@@ -125,13 +125,34 @@ function setData(newData){
         }
       }
       else if(dataKey.startsWith('Month')){
-        console.log(newData[dataKey]);
-        for(keyCol in newData[dataKey]){
-          console.log(newData[dataKey][keyCol]);
-          for(i=0; i<newData[dataKey][keyCol].length; i++);
-            console.log(newData[dataKey][keyCol][i]);
+        let data = dataKey
+        let expCash = 0
+        let expPOS = 0
+        let rentCash = 0
+        let rentPOS = 0
+        if(data == "MonthExpInfo"){
+          for(let keyCol of newData[data]){
+            if(keyCol.PaymentMethod =="نقدي"){
+              expCash += Number(keyCol.ExpenseCost)
+            }
+            else if(["شبكة", "تحويل"].includes(keyCol.PaymentMethod)){
+              expPOS += Number(keyCol.ExpenseCost)
+            }
+          }
+        }
+
+        if(data == "MonthRentInfo"){
+          for(let keyCol of newData[data]){
+            if(keyCol.PaymentMethod =="نقدي"){
+              rentCash += Number(keyCol.RentPrice)
+            }
+            else if (["شبكة", "تحويل"].includes(keyCol.PaymentMethod)){
+              rentPOS += Number(keyCol.RentPrice)
+            }
+          }
         }
         
+        console.log(expCash + "\n" + expPOS + '\n' + rentCash + "\n" + rentPOS);
       }
     }
     let row = document.createElement('tr')
