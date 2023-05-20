@@ -164,13 +164,81 @@ function setDailyData(newData){
   }
     
   let dailyTotalRow = document.createElement('tr')
+  let totalCash = rentCash - Number(expCash)
+  let totalPOS = rentPOS - Number(expPOS)
+  let totalRent = rentCash + Number(rentPOS)
+  let totalExp = expCash + Number(expPOS)
+  let finalTotal = totalCash + Number(totalPOS)
 
-
-  const totalTableArray = [rentCash, rentPOS, expCash, expPOS, rentCash -= Number(expCash), rentPOS -= Number(expPOS)]
+  const totalTableArray = {rentCash, rentPOS, expCash, expPOS, totalCash, totalPOS}
   for(key in totalTableArray){
     let newCell = document.createElement('td')
     newCell.textContent = totalTableArray[key]
+    newCell.id = key
     dailyTotalRow.appendChild(newCell)
     dailyTotalTable.appendChild(dailyTotalRow)
   }
+
+  let subTotalRow = document.createElement('tr')
+
+  const subTotalTable = {totalRent, totalExp, finalTotal}
+  for(key in subTotalTable){
+    let newCell = document.createElement('td')
+    newCell.textContent = subTotalTable[key]
+    newCell.id = key
+    newCell.colSpan = 2
+    subTotalRow.appendChild(newCell)
+    dailyTotalTable.appendChild(subTotalRow)
+  }
+}
+
+function moneyTable(newData){
+  let IDrentCash = document.getElementById('rentCash')
+  let IDrentPOS = document.getElementById('rentPOS')
+  let IDexpCash = document.getElementById('expCash')
+  let IDexpPOS = document.getElementById('expPOS')
+  let IDtotalCash = document.getElementById('totalCash')
+  let IDtotalPOS = document.getElementById('totalPOS')
+  let IDtotalRent = document.getElementById('totalRent')
+  let IDtotalExp = document.getElementById('totalExp')
+  let IDfinalTotal = document.getElementById('finalTotal')
+
+  let rentCash = IDrentCash.innerText
+  let rentPOS = IDrentPOS.innerText
+  let expCash = IDexpCash.innerText
+  let expPOS = IDexpPOS.innerText
+  let totalCash = IDtotalCash.innerText
+  let totalPOS = IDtotalPOS.innerText
+  let totalRent = IDtotalRent.innerText
+  let totalExp = IDtotalExp.innerText    
+
+  if(newData.RentPrice){
+    if(newData.PaymentMethod == 'نقدي'){
+      rentCash = Number(rentCash) + Number(newData.RentPrice)
+      IDrentCash.textContent = rentCash
+      totalCash = Number(totalCash) + Number(newData.RentPrice)
+      IDtotalCash.textContent = totalCash
+    }
+    else if(['شبكة', 'تحويل'].includes(newData.PaymentMethod)){
+      IDrentPOS.textContent = Number(rentPOS) + Number(newData.RentPrice)
+      IDtotalPOS.textContent = Number(totalPOS) + Number(newData.RentPrice)
+    }
+  }
+
+  else if(newData.ExpenseCost){
+    if(newData.PaymentMethod == 'نقدي'){
+      IDexpCash.textContent = Number(expCash) + Number(newData.ExpenseCost)
+      IDtotalCash.textContent = Number(totalCash) - Number(newData.ExpenseCost)
+    }
+    else if(['شبكة', 'تحويل'].includes(newData.PaymentMethod)){
+      IDexpPOS.textContent = Number(expPOS) + Number(newData.ExpenseCost)
+      IDtotalPOS.textContent = Number(totalPOS) - Number(newData.ExpenseCost)
+    }
+  }
+  totalRent = Number(rentCash) + Number(rentPOS)
+  IDtotalRent.textContent = totalRent
+  totalExp = Number(expCash) + Number(expPOS)
+  IDtotalExp.textContent = totalExp
+  IDfinalTotal.textContent = Number(totalCash) + Number(totalPOS)
+
 }

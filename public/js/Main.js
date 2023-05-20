@@ -137,90 +137,14 @@ async function submitForm(event, colName, tableID){
     newCell.appendChild(button)
     newRow.appendChild(newCell)
     table.appendChild(newRow)
-    
+    moneyTable(newData)
   })
 	.catch(error => console.error(error + '/upload/${colName} catch Error'))
   
-  moneyTable()
-    
-}
-function moneyTable(){
-  let row = document.createElement('tr')
-  let totalTable = document.getElementById('dailyTotal')
-  let length = totalTable.rows.length
-  for(i = length -1; i>=0; i--){
-    totalTable.deleteRow(i)
-  }
-  let totalCash = 0
-  let totalPOS = 0
-  let amountCash = 0, amountCashCred = 0, amountCashDebt = 0
-  let amountPOS = 0, amountPOSCred = 0, amountPOSDebt = 0
-  total("creditorAmountColumn", 'cred')
-  total("debtorAmountColumn", 'debt')
   
-  function total(thID, type){
-    let cell = document.getElementById(thID)
-    amountCash = 0
-    amountPOS = 0
-    let methodCells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex})`)
-    let cells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex+1})`)
-    console.log(methodCells)
-    for(key in methodCells){
-
-      if(methodCells[key].innerText == 'نقدي' && type == 'cred'){
-        amountCash += +cells[key].innerText
-        amountCashCred += +cells[key].innerText
-      }
-      else if(methodCells[key].innerText == 'نقدي' && type == 'debt'){
-        amountCash += +cells[key].innerText
-        amountCashDebt += +cells[key].innerText
-      }
-      else if (['شبكة', 'تحويل'].includes(methodCells[key].innerText) && type == 'cred'){
-        amountPOS += +cells[key].innerText
-        amountPOSCred += +cells[key].innerText
-      }
-      else if(['شبكة', 'تحويل'].includes(methodCells[key].innerText) && type == 'debt'){
-        amountPOS += +cells[key].innerText
-        amountPOSDebt += +cells[key].innerText
-      }
-      
-    }
-    const totalTableArray = [amountCash, amountPOS]
-    for(key in totalTableArray){
-      let newCell = document.createElement('td')
-      newCell.textContent = totalTableArray[key]
-      row.appendChild(newCell)
-      totalTable.appendChild(row)
-    }
     
-  }
-  totalCash = amountCashCred - amountCashDebt
-  totalPOS = amountPOSCred - amountPOSDebt
-  const totalData = [totalCash, totalPOS]
-
-  for(key in totalData){
-    let newCell1 = document.createElement('td')
-    newCell1.textContent = totalData[key]
-    row.appendChild(newCell1)
-    totalTable.appendChild(row)
-  }
-  let totalCred = 0
-  totalCred = amountCashCred += +amountPOSCred
-  let totalDebt = 0
-  totalDebt = amountCashDebt += +amountPOSDebt
-  let account = 0
-  account = totalCash += +totalPOS
-  console.log(totalDebt)
-  const finalData = [totalCred, totalDebt, account]
-  let finalRow = document.createElement('tr')
-  for(key in finalData){
-    let finalCell = document.createElement('td')
-    finalCell.textContent = finalData[key]
-    finalCell.colSpan = 2
-    finalRow.appendChild(finalCell)
-    totalTable.appendChild(finalRow)
-  }
 }
+
 let isClicked = false
 function showImagePopup(imageUrl, id, clicked = false){
   const imagePopup = document.getElementById('show-image');
