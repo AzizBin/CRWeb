@@ -11,7 +11,7 @@ fetch('/dailyJ')
 })
 .then((newData) => {
   console.log(newData)
-  setData(newData)
+  setDailyData(newData)
 
 })
 .catch((error) => {
@@ -43,162 +43,202 @@ function filter(startDateID, endDateID){
     }
   })
   .then(newData => {
-    setData(newData)
+    setDailyData(newData)
   })
   .catch(err => console.error(err));
 
 }
 
-function setData(newData){
-    for(let dataKey in newData){
-      console.log(`Processing array: ${dataKey}`)
-      let colName = `${dataKey}`
-      let table = document.getElementById(colName)
-      let length = table.rows.length
-      for(i = length - 1; i>0; i--){
-        table.deleteRow(i)
-      }
-      let id 
-      
-      for (let i = 0; i<newData[dataKey].length; i++){
-        id = newData[dataKey][i]._id
-        let newRow = document.createElement('tr')
+function setDailyData(newData){
+  let dailyTotalTable = document.getElementById("dailyTotal")
+  let expCash = 0
+  let expPOS = 0
+  let rentCash = 0
+  let rentPOS = 0
+  for(let dataKey in newData){
 
-        let newCellNumber = document.createElement('td')
-        newCellNumber.id = colName + ': Index: ' + i + 1
-        newCellNumber.textContent = i + 1
-        newRow.appendChild(newCellNumber)
-        
-        for ( var key in newData[dataKey][i]){
-          console.log(key)
-          
-          if (key.endsWith('Pic')){
-            let newShowCell = document.createElement('td')
-            let showImage = document.createElement('img')
-            showImage.className = 'showImg'
-            showImage.id = 'BTN' + colName + '_' + key + '_' + newData[dataKey][i]._id
-            showImage.src = newData[dataKey][i][key]
-            //use .bind so the function doesn't get called right away
-            showImage.onclick = showImagePopup.bind(null, newData[dataKey][i][key], 'BTN' + colName + '_' + key + '_' + newData[dataKey][i]._id, true)
-            showImage.onmouseenter = showImagePopup.bind(null, newData[dataKey][i][key], 'BTN' + colName + '_' + key + '_' + newData[dataKey][i]._id, false)
-            let fileUploader = document.createElement('input')
-            fileUploader.setAttribute('type', 'file')
-            fileUploader.id = colName + '_' + key + '_' + newData[dataKey][i]._id
-            fileUploader.className = 'changeFile'
-            fileUploader.onclick = editableFile.bind(null,)
-            
-  
-            let changeFileLabel = document.createElement('label')
-            changeFileLabel.setAttribute('for', colName + '_' + key + '_' + newData[dataKey][i]._id)
-            changeFileLabel.className = 'button-4'
-            changeFileLabel.textContent = 'تعديل'
-            
-  
-            newShowCell.appendChild(changeFileLabel)
-            newShowCell.appendChild(fileUploader)
-            newShowCell.appendChild(showImage)
-            newRow.appendChild(newShowCell)
-          }
-          else if(key == 'VAT'){
-
-          }
-          
-          else if (key !== '_id') {
-            var newCell = document.createElement('td')
-            newCell.id = colName + '_' + key + '_' + newData[dataKey][i]._id
-            newCell.textContent = newData[dataKey][i][key]
-            newRow.appendChild(newCell)
-          }
-          
-          
+    if(dataKey.startsWith('Daily')){
+        console.log(`Processing array: ${dataKey}`)
+        let colName = `${dataKey}`
+        let table = document.getElementById(colName)
+        let length = table.rows.length
+        for(i = length - 1; i>0; i--){
+          table.deleteRow(i)
         }
-        var newCell = document.createElement('td')
-        const button = document.createElement('button')
-        button.id = colName + '_' + id
-        button.textContent = 'حذف'
-        button.className = 'delButton'
-        button.onclick = delButtonFun
-        newCell.appendChild(button)
-        newRow.appendChild(newCell)
-        table.appendChild(newRow)
-      }
+        let id 
         
-    }
-    let row = document.createElement('tr')
-    let totalTable = document.getElementById('dailyTotal')
-    let length = totalTable.rows.length
-    for(i = length -1; i>=0; i--){
-      totalTable.deleteRow(i)
-    }
-    let totalCash = 0
-    let totalPOS = 0
-    let amountCash = 0, amountCashCred = 0, amountCashDebt = 0
-    let amountPOS = 0, amountPOSCred = 0, amountPOSDebt = 0
-    total("creditorAmountColumn", 'cred')
-    total("debtorAmountColumn", 'debt')
+        for (let i = 0; i<newData[dataKey].length; i++){
+          id = newData[dataKey][i]._id
+          let newRow = document.createElement('tr')
+
+          let newCellNumber = document.createElement('td')
+          newCellNumber.id = colName + ': Index: ' + i + 1
+          newCellNumber.textContent = i + 1
+          newRow.appendChild(newCellNumber)
+          
+          for ( var key in newData[dataKey][i]){
+            console.log(key)
+            
+            if (key.endsWith('Pic')){
+              let newShowCell = document.createElement('td')
+              let showImage = document.createElement('img')
+              showImage.className = 'showImg'
+              showImage.id = 'BTN' + colName + '_' + key + '_' + newData[dataKey][i]._id
+              showImage.src = newData[dataKey][i][key]
+              //use .bind so the function doesn't get called right away
+              showImage.onclick = showImagePopup.bind(null, newData[dataKey][i][key], 'BTN' + colName + '_' + key + '_' + newData[dataKey][i]._id, true)
+              showImage.onmouseenter = showImagePopup.bind(null, newData[dataKey][i][key], 'BTN' + colName + '_' + key + '_' + newData[dataKey][i]._id, false)
+              let fileUploader = document.createElement('input')
+              fileUploader.setAttribute('type', 'file')
+              fileUploader.id = colName + '_' + key + '_' + newData[dataKey][i]._id
+              fileUploader.className = 'changeFile'
+              fileUploader.onclick = editableFile.bind(null,)
+              
     
-    function total(thID, type){
-      let cell = document.getElementById(thID)
-      amountCash = 0
-      amountPOS = 0
-      let methodCells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex})`)
-      let cells = document.querySelectorAll(`table td:nth-child(${cell.cellIndex+1})`)
-      console.log(methodCells)
-      for(key in methodCells){
+              let changeFileLabel = document.createElement('label')
+              changeFileLabel.setAttribute('for', colName + '_' + key + '_' + newData[dataKey][i]._id)
+              changeFileLabel.className = 'button-4'
+              changeFileLabel.textContent = 'تعديل'
+              
+    
+              newShowCell.appendChild(changeFileLabel)
+              newShowCell.appendChild(fileUploader)
+              newShowCell.appendChild(showImage)
+              newRow.appendChild(newShowCell)
+            }
+            else if(key == 'VAT'){
 
-        if(methodCells[key].innerText == 'نقدي' && type == 'cred'){
-          amountCash += +cells[key].innerText
-          amountCashCred += +cells[key].innerText
+            }
+            
+            else if (key !== '_id') {
+              let newCell = document.createElement('td')
+              newCell.id = colName + '_' + key + '_' + newData[dataKey][i]._id
+              newCell.textContent = newData[dataKey][i][key]
+              newRow.appendChild(newCell)
+            }
+            
+            
+          }
+          let newCell = document.createElement('td')
+          const button = document.createElement('button')
+          button.id = colName + '_' + id
+          button.textContent = 'حذف'
+          button.className = 'delButton'
+          button.addEventListener('click', delButtonFun)
+          
+          newCell.appendChild(button)
+          newRow.appendChild(newCell)
+          table.appendChild(newRow)
         }
-        else if(methodCells[key].innerText == 'نقدي' && type == 'debt'){
-          amountCash += +cells[key].innerText
-          amountCashDebt += +cells[key].innerText
-        }
-        else if (['شبكة', 'تحويل'].includes(methodCells[key].innerText) && type == 'cred'){
-          amountPOS += +cells[key].innerText
-          amountPOSCred += +cells[key].innerText
-        }
-        else if(['شبكة', 'تحويل'].includes(methodCells[key].innerText) && type == 'debt'){
-          amountPOS += +cells[key].innerText
-          amountPOSDebt += +cells[key].innerText
-        }
+    }
+
+    else if(dataKey.startsWith('Month')){
         
+        
+      let data = dataKey
+
+      if(data == "MonthExpInfo"){
+        for(let keyCol of newData[data]){
+          if(keyCol.PaymentMethod =="نقدي"){
+            expCash += Number(keyCol.ExpenseCost)
+          }
+          else if(["شبكة", "تحويل"].includes(keyCol.PaymentMethod)){
+            expPOS += Number(keyCol.ExpenseCost)
+          }
+        }
       }
-      const totalTableArray = [amountCash, amountPOS]
-      for(key in totalTableArray){
-        let newCell = document.createElement('td')
-        newCell.textContent = totalTableArray[key]
-        row.appendChild(newCell)
-        totalTable.appendChild(row)
+
+      if(data == "MonthRentInfo"){
+        for(let keyCol of newData[data]){
+          if(keyCol.PaymentMethod =="نقدي"){
+            rentCash += Number(keyCol.RentPrice)
+          }
+          else if (["شبكة", "تحويل"].includes(keyCol.PaymentMethod)){
+            rentPOS += Number(keyCol.RentPrice)
+          }
+        }
       }
+
       
     }
-    totalCash = amountCashCred - amountCashDebt
-    totalPOS = amountPOSCred - amountPOSDebt
-    const totalData = [totalCash, totalPOS]
-
-    for(key in totalData){
-      let newCell1 = document.createElement('td')
-      newCell1.textContent = totalData[key]
-      row.appendChild(newCell1)
-      totalTable.appendChild(row)
-    }
-    let totalCred = 0
-    totalCred = amountCashCred += +amountPOSCred
-    let totalDebt = 0
-    totalDebt = amountCashDebt += +amountPOSDebt
-    let account = 0
-    account = totalCash += +totalPOS
-    console.log(totalDebt)
-    const finalData = [totalCred, totalDebt, account]
-    let finalRow = document.createElement('tr')
-    
-    for(key in finalData){
-      let finalCell = document.createElement('td')
-      finalCell.textContent = finalData[key]
-      finalCell.colSpan = 2
-      finalRow.appendChild(finalCell)
-      totalTable.appendChild(finalRow)
-    }
-    
   }
+    
+  let dailyTotalRow = document.createElement('tr')
+  let totalCash = rentCash - Number(expCash)
+  let totalPOS = rentPOS - Number(expPOS)
+  let totalRent = rentCash + Number(rentPOS)
+  let totalExp = expCash + Number(expPOS)
+  let finalTotal = totalCash + Number(totalPOS)
+
+  const totalTableArray = {rentCash, rentPOS, expCash, expPOS, totalCash, totalPOS}
+  for(key in totalTableArray){
+    let newCell = document.createElement('td')
+    newCell.textContent = totalTableArray[key]
+    newCell.id = key
+    dailyTotalRow.appendChild(newCell)
+    dailyTotalTable.appendChild(dailyTotalRow)
+  }
+
+  let subTotalRow = document.createElement('tr')
+
+  const subTotalTable = {totalRent, totalExp, finalTotal}
+  for(key in subTotalTable){
+    let newCell = document.createElement('td')
+    newCell.textContent = subTotalTable[key]
+    newCell.id = key
+    newCell.colSpan = 2
+    subTotalRow.appendChild(newCell)
+    dailyTotalTable.appendChild(subTotalRow)
+  }
+}
+
+function moneyTable(newData){
+  let IDrentCash = document.getElementById('rentCash')
+  let IDrentPOS = document.getElementById('rentPOS')
+  let IDexpCash = document.getElementById('expCash')
+  let IDexpPOS = document.getElementById('expPOS')
+  let IDtotalCash = document.getElementById('totalCash')
+  let IDtotalPOS = document.getElementById('totalPOS')
+  let IDtotalRent = document.getElementById('totalRent')
+  let IDtotalExp = document.getElementById('totalExp')
+  let IDfinalTotal = document.getElementById('finalTotal')
+
+  let rentCash = IDrentCash.innerText
+  let rentPOS = IDrentPOS.innerText
+  let expCash = IDexpCash.innerText
+  let expPOS = IDexpPOS.innerText
+  let totalCash = IDtotalCash.innerText
+  let totalPOS = IDtotalPOS.innerText
+  let totalRent = IDtotalRent.innerText
+  let totalExp = IDtotalExp.innerText    
+
+  if(newData.RentPrice){
+    if(newData.PaymentMethod == 'نقدي'){
+      rentCash = Number(rentCash) + Number(newData.RentPrice)
+      IDrentCash.textContent = rentCash
+      totalCash = Number(totalCash) + Number(newData.RentPrice)
+      IDtotalCash.textContent = totalCash
+    }
+    else if(['شبكة', 'تحويل'].includes(newData.PaymentMethod)){
+      IDrentPOS.textContent = Number(rentPOS) + Number(newData.RentPrice)
+      IDtotalPOS.textContent = Number(totalPOS) + Number(newData.RentPrice)
+    }
+  }
+
+  else if(newData.ExpenseCost){
+    if(newData.PaymentMethod == 'نقدي'){
+      IDexpCash.textContent = Number(expCash) + Number(newData.ExpenseCost)
+      IDtotalCash.textContent = Number(totalCash) - Number(newData.ExpenseCost)
+    }
+    else if(['شبكة', 'تحويل'].includes(newData.PaymentMethod)){
+      IDexpPOS.textContent = Number(expPOS) + Number(newData.ExpenseCost)
+      IDtotalPOS.textContent = Number(totalPOS) - Number(newData.ExpenseCost)
+    }
+  }
+  totalRent = Number(rentCash) + Number(rentPOS)
+  IDtotalRent.textContent = totalRent
+  totalExp = Number(expCash) + Number(expPOS)
+  IDtotalExp.textContent = totalExp
+  IDfinalTotal.textContent = Number(totalCash) + Number(totalPOS)
+
+}
