@@ -118,37 +118,37 @@
                   <br>
                   <label for="CarName">اسم السيارة</label>
                   <br>
-                  <select class="newDailyTenData" id="CarName" name="CarName">
+                  <select class="newDailyTenData" id="CarName" name="CarName" required>
                     <option disabled selected hidden value="">اسم السيارة</option>
                   </select>
                   <br>
                   <label for="CarPlate">اللوحة</label>
                   <br>
-                  <select class="newDailyTenData" id="CarPlate" name="CarPlateNumber">
+                  <select class="newDailyTenData" id="CarPlate" name="CarPlateNumber" required>
                     <option disabled selected hidden value="">رقم اللوحة</option>
                   </select>
                   <br>
                   <label for="RenterName">اسم المستأجر</label>
                   <br>
-                  <select class="newDailyTenData" id="RenterName" name="RenterName">
+                  <select class="newDailyTenData" id="RenterName" name="RenterName" required>
                     <option disabled selected hidden value="">اسم المستأجر</option>
                   </select>
                   <br>
                   <label>تاريخ دفع الإيجار</label>
                   <br>
-                  <input class="newDailyTenDate" type="date" name="RentPaymentDate">
+                  <input class="newDailyTenDate" type="date" name="RentPaymentDate" required>
                   <br>
                   <label for="RentStartDate">تاريخ بدء الإيجار</label>
                   <br>
-                  <input class="newDailyTenData" type="date"name="RentStartDate">
+                  <input class="newDailyTenData" type="date"name="RentStartDate" required>
                   <br>
                   <label for="RentEndDate">تاريخ نهاية الإيجار</label>
                   <br>
-                  <input class="newDailyTenData" type="date"name="RentEndDate">
+                  <input class="newDailyTenData" type="date"name="RentEndDate" required>
                   <br>
                   <label for="PaymentMethod">طريقة الدفع</label>
                   <br>
-                  <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod">
+                  <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod" required>
                     <option disabled selected hidden value="">طريقة الدفع</option>
                     <option value="نقدي">نقدي</option>
                     <option value="شبكة">شبكة</option>
@@ -157,11 +157,11 @@
                   <br>
                   <label for="RentPrice">القيمة</label>
                   <br>
-                  <input class="newDailyTenData" placeholder=" القيمة " name="RentPrice">
+                  <input class="newDailyTenData" placeholder=" القيمة " name="RentPrice" required>
                   <br>
                   <label>الضريبة المضافة</label>
                   <br>
-                  <select class="newDailyTenData" name="VAT">
+                  <select class="newDailyTenData" name="VAT" required>
                     <option disabled selected hidden value="">الضريبة المضافة</option>
                     <option value="15">يوجد</option>
                     <option value="0">لا يوجد</option>
@@ -206,23 +206,23 @@
                   <br>
                   <label for="carPlateNumber">رقم اللوحة</label>
                   <br>
-                  <select class="newDailyExpData" id="ExpCarPlate" name="CarPlateNumber">
+                  <select class="newDailyExpData" id="ExpCarPlate" name="CarPlateNumber" required>
                     <option disabled selected hidden value="">رقم اللوحة</option>
                   </select>
                   <br>
                   <label for="ExpenseSource"> مصدر الصرف </label>
                   <br>
-                  <select class="newDailyExpData" id="ExpenseName" name="ExpenseSource">
+                  <select class="newDailyExpData" id="ExpenseName" name="ExpenseSource" required>
                     <option disabled selected hidden value="">مصدر الصرف</option>
                   </select>
                   <br>
                   <label> تاريخ الصرف </label>
                   <br>
-                  <input type="date" class="newDailyExpData" placeholder=" تاريخ الصرف " name="ExpenseDate">
+                  <input type="date" class="newDailyExpData" placeholder=" تاريخ الصرف " name="ExpenseDate" required>
                   <br>
                   <label>طريقة الدفع</label>
                   <br>
-                  <select class="newDailyExpData" placeholder=" مدين " name="PaymentMethod">
+                  <select class="newDailyExpData" placeholder=" مدين " name="PaymentMethod" required>
                     <option disabled selected hidden value="">طريقة الدفع</option>
                     <option value="نقدي">نقدي</option>
                     <option value="شبكة">شبكة</option>
@@ -231,7 +231,7 @@
                   <br>
                   <label>القيمة</label>
                   <br>
-                  <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost">
+                  <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost" required>
                   <br>
                   <br>
                   <button type="submit" onclick="submitForm(event, 'DailyExpInfo','DailyExpInfo') + closePop('dailyExpPopForm')">حفظ</button>
