@@ -101,11 +101,11 @@
           <!-- window for adding data-->
           <dialog id="carPopForm">       
             <button onclick="closePop('carPopForm')">إلغاء</button>
-              <form id="carForm" method="dialog">
+              <form id="carForm" onsubmit="submitForm(event, 'CarsInfo','CarsInfo') + closePop('carPopForm')">
                 <label for="InvName">اسم المستثمر</label>
                 <br>
                 <select class="newCarData" id="InvName"  name="InvName">
-                  <option disabled selected hidden value="">اسم المستثمر</option>
+                  <option selected hidden>اسم المستثمر</option>
                   
                 </select>
                 <br>
@@ -144,11 +144,11 @@
                 <label>مفتاح الاسبير</label>
                 <br>
                 <label for="extraKeyYes"> موجود </label>
-                <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyYes" value="موجود">
+                <input checked class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyYes" value="موجود">
                 <label for="extraKeyNo"> غير موجود </label>
                 <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyNo" value=" غير موجود ">
                 <br>
-                <button type="submit" onclick="closePop('carPopForm') + submitForm(event, 'CarsInfo','CarsInfo')">حفظ</button>
+                <button type="submit">حفظ</button>
               </form>
             
           </dialog>
@@ -196,7 +196,7 @@
             <button onclick="closePop('invPopForm')">إلغاء</button>
             <br>
             
-            <form id="invForm">
+            <form id="invForm" onsubmit="submitForm(event, 'InvInfo','InvInfo') + closePop('invPopForm')">
               <input class="newInvData" placeholder="اسم المستثمر " value="" name="InvName">
               <br>
               <input class="newInvData" placeholder=" رقم الهوية " value="" name="InvIDNumber">
@@ -211,7 +211,7 @@
               <br> 
               <input class="newInvData" type="file" placeholder="صورة العقد" name="InvContractPic">
               <br>
-              <button type="submit" onclick="submitForm(event, 'InvInfo','InvInfo') + closePop('invPopForm')">حفظ</button>
+              <button type="submit">حفظ</button>
             </form>
             
           </dialog>
@@ -248,7 +248,7 @@
           <dialog id="rentPopForm">
             <button onclick="closePop('rentPopForm')">إلغاء</button>
             <br>
-              <form id="rentForm">
+              <form id="rentForm" onsubmit="submitForm(event, 'RentInfo','RentInfo') + closePop('rentPopForm')">
                 <input class="newRentData" placeholder="اسم المستأجر" value="" name="RenterName">
                 <br>
                 <input class="newRentData" placeholder="رقم الهوية" value="" name="RentIDNumber">
@@ -274,7 +274,7 @@
                 <input class="newRentData" type="file" placeholder="صورة للتفويض" name="RentAuthPic">
                 <br>
                 <br>
-                <button type="submit" onclick="submitForm(event, 'RentInfo','RentInfo') + closePop('rentPopForm')">حفظ</button>
+                <button type="submit">حفظ</button>
               </form>
             
           </dialog>
@@ -314,7 +314,7 @@
           <dialog id="ownPopForm">
             <button onclick="closePop('ownPopForm')">إلغاء</button>
             <br>
-              <form id="ownForm">
+              <form id="ownForm" onsubmit="submitForm(event, 'OwnerInfo','OwnerInfo') + closePop('ownPopForm')">
                 <br>
                 <input class="newOwnData" placeholder=" اسم المالك " value="" name="OwnerName">
                 <br>
@@ -327,7 +327,7 @@
                 <input class="newOwnData" placeholder=" نسبة الأرباح من المكتب " value="" name="OwnerPercent">
                 <br>
                 <br>
-                <button type="submit" onclick="submitForm(event, 'OwnerInfo','OwnerInfo') + closePop('ownPopForm')">حفظ</button>
+                <button type="submit">حفظ</button>
               </form>
           </dialog>
           
@@ -363,7 +363,7 @@
           <dialog id="empPopForm">
             <button onclick="closePop('empPopForm')">إلغاء</button>
             <br>
-              <form id="empForm">
+              <form id="empForm" onsubmit="submitForm(event, 'EmpInfo','EmpInfo') + closePop('empPopForm')">
                 <input class="newEmpData" placeholder=" اسم الموظف " value="" name="EmpName">
                 <br>
                 <input class="newEmpData" placeholder=" رقم الهوية " value="" name="EmpIDNumber">
@@ -385,7 +385,7 @@
                 <input class="newEmpData" placeholder="  الراتب " value="" name="EmpSalary">
                 <br>
                 <br>
-                <button type="submit" onclick="submitForm(event, 'EmpInfo','EmpInfo') + closePop('empPopForm')">حفظ</button>
+                <button type="submit">حفظ</button>
               </form>
           </dialog>
           
@@ -429,7 +429,7 @@
             <dialog id="officePopForm">
               <button onclick="closePop('officePopForm')">إلغاء</button>
               <br>
-                <form id="officeForm">
+                <form id="officeForm" onsubmit="submitForm(event, 'ExpensesInfo','ExpensesInfo') + closePop('officePopForm')">
                   <br>
                   <input class="newOfficeData" placeholder=" اسم المصروف " value="" name="ExpenseName">
                   <br>
@@ -439,7 +439,7 @@
                   <input class="newOfficeData" type="checkbox" id="Picture" name="ExpensePicReq">
                   <br>
                   <br>
-                  <button type="submit" onclick="submitForm(event, 'ExpensesInfo','ExpensesInfo') + closePop('officePopForm')">حفظ</button>
+                  <button type="submit">حفظ</button>
                 </form>
             </dialog>
             
