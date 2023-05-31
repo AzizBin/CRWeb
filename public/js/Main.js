@@ -1,4 +1,3 @@
-
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
   let searchBtn = document.querySelector(".bx-search");
@@ -265,14 +264,34 @@ function delButtonFun (evt){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(docID)
+  }).then((response) =>{
+    if(response.ok){
+      fetch('/dailyJ')
+      .then((response) => {
+        // Check if the request was successful
+        if (response.ok) {
+          // Parse the response body as JSON
+          return response.json();
+        } else {
+          // Throw an error with the status text
+          throw new Error(response.statusText);
+        }
+      })
+      .then((newData) => {
+        
+        setDailyData(newData)
+
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error(error);
+      });
+    }
   })
-    .then(response => response.text())
-    .then(data => console.log(data))
-    .catch(err => console.error(err + '/deleteRow catch Error'));
+    .catch(err => console.error(err));
 
   
-  evt.target.parentElement.parentElement.remove()
-  console.log("Yes?")
+    
 }
 
 
