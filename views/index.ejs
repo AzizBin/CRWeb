@@ -197,7 +197,11 @@
             <br>
             
             <form id="invForm" onsubmit="submitForm(event, 'InvInfo','InvInfo') + closePop('invPopForm')">
-              <input class="newInvData" placeholder="اسم المستثمر " value="" name="InvName">
+              <label for="InvName">اسم المستثمر</label>
+              <br>
+              <input class="newInvData" placeholder="اسم المستثمر" value="" name="InvName">
+              <br>
+              <label for="InvIDNumber">رقم الهوية</label>
               <br>
               <input class="newInvData" placeholder=" رقم الهوية " value="" name="InvIDNumber">
               <br>
@@ -205,10 +209,16 @@
               <br>
               <input class="newInvData" type="file" placeholder="ارفاق صورة الهوية" name="InvIDPic">
               <br>
+              <label for="InvInterestRate">نسبة الفائدة</label>
+              <br>
               <input class="newInvData" title="text" placeholder="نسبة الفائدة" name="InvInterestRate">
               <br>
+              <label for="InvPhoneNumber">رقم الجوال</label>
+              <br>
               <input class="newInvData" placeholder=" رقم الجوال " name="InvPhoneNumber">
-              <br> 
+              <br>
+              <label for="InvContractPic">صورة العقد</label> 
+              <br>
               <input class="newInvData" type="file" placeholder="صورة العقد" name="InvContractPic">
               <br>
               <button type="submit">حفظ</button>
@@ -249,7 +259,11 @@
             <button onclick="closePop('rentPopForm')">إلغاء</button>
             <br>
               <form id="rentForm" onsubmit="submitForm(event, 'RentInfo','RentInfo') + closePop('rentPopForm')">
+                <label for="RentName">اسم المستأجر</label>
+                <br>
                 <input class="newRentData" placeholder="اسم المستأجر" value="" name="RenterName">
+                <br>
+                <label for="RentIDNumber">رقم الهوية</label>
                 <br>
                 <input class="newRentData" placeholder="رقم الهوية" value="" name="RentIDNumber">
                 <br>
@@ -257,9 +271,15 @@
                 <br>
                 <input class="newRentData" type="file" placeholder="ارفاق صورة الهوية" name="RentIDPic">
                 <br>
+                <label for="RentContactNumber">جوال التواصل</label>
+                <br>
                 <input class="newRentData" title="text" placeholder="جوال التواصل" name="RentContactNumber">
                 <br>
+                <label for="RentAbsherNumber">جوال ابشر</label>
+                <br>
                 <input class="newRentData" placeholder="جوال ابشر" name="RentAbsherNumber">
+                <br>
+                <label for="DriverIDNumber">هوية السائق</label>
                 <br>
                 <input class="newRentData" placeholder="هوية السائق" name="DriverIDNumber">
                 <br>
@@ -267,12 +287,13 @@
                 <br>
                 <input class="newRentData" type="file" placeholder="صورة هوية السائق" name="DriverIDPic">
                 <br>
+                <label for="RentContractPic">عقد الإيجار</label>
+                <br>
                 <input class="newRentData" placeholder="عقد الإيجار" name="RentContractPic">
                 <br>
                 <label> صورة للتفويض </label>
                 <br>
                 <input class="newRentData" type="file" placeholder="صورة للتفويض" name="RentAuthPic">
-                <br>
                 <br>
                 <button type="submit">حفظ</button>
               </form>
@@ -315,8 +336,11 @@
             <button onclick="closePop('ownPopForm')">إلغاء</button>
             <br>
               <form id="ownForm" onsubmit="submitForm(event, 'OwnerInfo','OwnerInfo') + closePop('ownPopForm')">
+                <label for="OwnerName">اسم المالك</label>
                 <br>
                 <input class="newOwnData" placeholder=" اسم المالك " value="" name="OwnerName">
+                <br>
+                <label for="OwnerIDNumber">رقم الهوية</label>
                 <br>
                 <input class="newOwnData" placeholder=" رقم الهوية " value="" name="OwnerIDNumber">
                 <br>
@@ -324,8 +348,9 @@
                 <br>
                 <input class="newOwnData" type="file" placeholder="صورة الهوية" name="OwnerIDPic">
                 <br>
-                <input class="newOwnData" placeholder=" نسبة الأرباح من المكتب " value="" name="OwnerPercent">
+                <label for="OwnerPercent">نسبة الأرباح من المكتب</label>
                 <br>
+                <input class="newOwnData" placeholder=" نسبة الأرباح من المكتب " value="" name="OwnerPercent">
                 <br>
                 <button type="submit">حفظ</button>
               </form>
@@ -364,7 +389,11 @@
             <button onclick="closePop('empPopForm')">إلغاء</button>
             <br>
               <form id="empForm" onsubmit="submitForm(event, 'EmpInfo','EmpInfo') + closePop('empPopForm')">
+                <label for="EmpName">اسم الموظف</label>
+                <br>
                 <input class="newEmpData" placeholder=" اسم الموظف " value="" name="EmpName">
+                <br>
+                <label for="EmpIDNumber">رقم الهوية</label>
                 <br>
                 <input class="newEmpData" placeholder=" رقم الهوية " value="" name="EmpIDNumber">
                 <br>
@@ -372,18 +401,29 @@
                 <br>
                 <input class="newEmpData" type="file" placeholder=" صورة الهوية " name="EmpIDPic">
                 <br>
+                <label for="EmpPercent">نسبة الأرباح من المكتب</label>
+                <br>
                 <input class="newEmpData" placeholder=" نسبة الأرباح من المكتب " value="" name="EmpPercent">
+                <br>
+                <label for="EmpComRate">نسبة العمولة من الإيرادات</label>
                 <br>
                 <input class="newEmpData" placeholder=" نسبة العمولة من الإيرادات " value="" name="EmpComRate">
                 <br>
+                <label for="EmpSaleCom">عمولة البيع</label>
+                <br>
                 <input class="newEmpData" placeholder=" عمولة البيع " value="" name="EmpSaleCom">
+                <br>
+                <label for="EmpBuyCom">عمولة الشراء</label>
                 <br>
                 <input class="newEmpData" placeholder=" عمولة الشراء " value="" name="EmpBuyCom">
                 <br>
+                <label for="EmpRentCom">عمولة التأجير</label>
+                <br>
                 <input class="newEmpData" placeholder=" عمولة التأجير " value="" name="EmpRentCom">
                 <br>
-                <input class="newEmpData" placeholder="  الراتب " value="" name="EmpSalary">
+                <label for="EmpSalary">الراتب</label>
                 <br>
+                <input class="newEmpData" placeholder="  الراتب " value="" name="EmpSalary">
                 <br>
                 <button type="submit">حفظ</button>
               </form>
@@ -416,8 +456,6 @@
         </div>
 
 
-
-
           <!--  زر مصروفات المكتب -->
           <div id="officeExpensesContent" class="tabContent">
             <button class="button_action" onclick="openPop('officePopForm')">أضافة</button>
@@ -430,14 +468,15 @@
               <button onclick="closePop('officePopForm')">إلغاء</button>
               <br>
                 <form id="officeForm" onsubmit="submitForm(event, 'ExpensesInfo','ExpensesInfo') + closePop('officePopForm')">
+                  <label for="ExpenseName">اسم المصروف</label>
                   <br>
                   <input class="newOfficeData" placeholder=" اسم المصروف " value="" name="ExpenseName">
                   <br>
                   <label for="Price"> القيمة </label>
+                  <br>
                   <input class="newOfficeData" type="checkbox" id="Price" value="false" name="ExpensePriceReq">
                   <label for="Picture"> صورة </label>
                   <input class="newOfficeData" type="checkbox" id="Picture" name="ExpensePicReq">
-                  <br>
                   <br>
                   <button type="submit">حفظ</button>
                 </form>
