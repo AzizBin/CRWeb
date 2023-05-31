@@ -1,7 +1,7 @@
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
-
+  /* color-scheme: light dark; */
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
  
@@ -116,7 +116,7 @@ input{
 .sidebar li .tooltip{
   display: flex;
   position: absolute;
-  inset-inline-start: calc(100%);
+  inset-inline-start: 100%;
   background-color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding-inline: 12px;
@@ -365,7 +365,7 @@ button[type="submit"]:hover{
 /* style the content inside the tab */
 
 .tabContent {
-  
+  display: none;
 }
 
 

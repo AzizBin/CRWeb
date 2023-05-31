@@ -1,4 +1,3 @@
-
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
   let searchBtn = document.querySelector(".bx-search");
@@ -59,11 +58,16 @@ function closePop(popID){
 async function submitForm(event, colName, tableID){
   event.preventDefault()
   
-  let formID = event.target.form.id
-  let formData = new FormData(document.getElementById(formID))
+  let formData = new FormData(event.target)
   var formObject = {};
-  formData.forEach((value, key) => formObject[key] = value);
-  console.log(formObject);
+  for (const key of formData.keys()) {
+    console.log(key);
+  }
+  formData.forEach((value, key) => {
+    console.log(value);
+    formObject[key] = value
+  });
+  
 
   let order = Object.keys(formObject)
   formData.append('order', JSON.stringify(order))
@@ -75,7 +79,7 @@ async function submitForm(event, colName, tableID){
   .then(response => response.json())
 	.then(newData => {
     
-  
+    console.log(newData);
     let table = document.getElementById(tableID)
     let i = table.rows.length
     let newRow = document.createElement('tr')
@@ -137,7 +141,10 @@ async function submitForm(event, colName, tableID){
     newCell.appendChild(button)
     newRow.appendChild(newCell)
     table.appendChild(newRow)
-    moneyTable(newData)
+    if(newData.rentPrice || newData.expenseCost){
+      moneyTable(newData)
+    }
+    
   })
 	.catch(error => console.error(error + '/upload/${colName} catch Error'))
   
@@ -265,14 +272,44 @@ function delButtonFun (evt){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(docID)
+  }).then((response) =>{
+    if(response.ok){
+
+      if(splitID[0].startsWith('Daily')){
+
+        fetch('/dailyJ')
+        .then((response) => {
+          // Check if the request was successful
+          if (response.ok) {
+            // Parse the response body as JSON
+            return response.json();
+          } else {
+            // Throw an error with the status text
+            throw new Error(response.statusText);
+          }
+        })
+        .then((newData) => {
+          
+          setDailyData(newData)
+  
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error(error);
+        });
+      }
+
+      else{
+        evt.target.parentElement.parentElement.remove()
+      }
+      
+    }
+
   })
-    .then(response => response.text())
-    .then(data => console.log(data))
-    .catch(err => console.error(err + '/deleteRow catch Error'));
+    .catch(err => console.error(err));
 
   
-  evt.target.parentElement.parentElement.remove()
-  console.log("Yes?")
+    
 }
 
 

@@ -114,24 +114,24 @@
             <dialog id="dailyTenPopForm">
               <button type="submit" onclick="closePop('dailyTenPopForm')">إلغاء</button>
               <br>
-                <form id="dailyTenForm">
+                <form id="dailyTenForm" onsubmit="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">
                   <br>
                   <label for="CarName">اسم السيارة</label>
                   <br>
-                  <select class="newDailyTenData" id="CarName" name="CarName" required>
-                    <option disabled selected hidden value="">اسم السيارة</option>
+                  <select class="newDailyTenData" id="CarName" name="CarName">
+                    <option disabled selected hidden>اسم السيارة</option>
                   </select>
                   <br>
                   <label for="CarPlate">اللوحة</label>
                   <br>
-                  <select class="newDailyTenData" id="CarPlate" name="CarPlateNumber" required>
-                    <option disabled selected hidden value="">رقم اللوحة</option>
+                  <select class="newDailyTenData" id="CarPlate" name="CarPlateNumber">
+                    <option selected hidden>رقم اللوحة</option>
                   </select>
                   <br>
                   <label for="RenterName">اسم المستأجر</label>
                   <br>
-                  <select class="newDailyTenData" id="RenterName" name="RenterName" required>
-                    <option disabled selected hidden value="">اسم المستأجر</option>
+                  <select class="newDailyTenData" id="RenterName" name="RenterName">
+                    <option selected hidden>اسم المستأجر</option>
                   </select>
                   <br>
                   <label>تاريخ دفع الإيجار</label>
@@ -148,8 +148,8 @@
                   <br>
                   <label for="PaymentMethod">طريقة الدفع</label>
                   <br>
-                  <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod" required>
-                    <option disabled selected hidden value="">طريقة الدفع</option>
+                  <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod">
+                    <option selected hidden>طريقة الدفع</option>
                     <option value="نقدي">نقدي</option>
                     <option value="شبكة">شبكة</option>
                     <option value="تحويل">تحويل</option>
@@ -161,14 +161,14 @@
                   <br>
                   <label>الضريبة المضافة</label>
                   <br>
-                  <select class="newDailyTenData" name="VAT" required>
-                    <option disabled selected hidden value="">الضريبة المضافة</option>
+                  <select class="newDailyTenData" name="VAT">
+                    <option selected hidden>الضريبة المضافة</option>
                     <option value="15">يوجد</option>
                     <option value="0">لا يوجد</option>
                   </select>
                   <br>
                   <br>
-                  <button type="submit" onclick="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">حفظ</button>
+                  <button type="submit">حفظ</button>
                 </form>
             </dialog>
             <table class="table_tenants">
@@ -202,18 +202,18 @@
             <dialog id="dailyExpPopForm">
               <button onclick="closePop('dailyExpPopForm')">إلغاء</button>
               <br>
-                <form id="dailyExpForm">
+                <form id="dailyExpForm" onsubmit="submitForm(event, 'DailyExpInfo','DailyExpInfo') + closePop('dailyExpPopForm')">
                   <br>
                   <label for="carPlateNumber">رقم اللوحة</label>
                   <br>
-                  <select class="newDailyExpData" id="ExpCarPlate" name="CarPlateNumber" required>
-                    <option disabled selected hidden value="">رقم اللوحة</option>
+                  <select class="newDailyExpData" id="ExpCarPlate" name="CarPlateNumber">
+                    <option selected hidden>رقم اللوحة</option>
                   </select>
                   <br>
                   <label for="ExpenseSource"> مصدر الصرف </label>
                   <br>
-                  <select class="newDailyExpData" id="ExpenseName" name="ExpenseSource" required>
-                    <option disabled selected hidden value="">مصدر الصرف</option>
+                  <select class="newDailyExpData" id="ExpenseName" name="ExpenseSource">
+                    <option selected hidden>مصدر الصرف</option>
                   </select>
                   <br>
                   <label> تاريخ الصرف </label>
@@ -222,8 +222,8 @@
                   <br>
                   <label>طريقة الدفع</label>
                   <br>
-                  <select class="newDailyExpData" placeholder=" مدين " name="PaymentMethod" required>
-                    <option disabled selected hidden value="">طريقة الدفع</option>
+                  <select class="newDailyExpData" placeholder=" مدين " name="PaymentMethod">
+                    <option selected hidden>طريقة الدفع</option>
                     <option value="نقدي">نقدي</option>
                     <option value="شبكة">شبكة</option>
                     <option value="تحويل">تحويل</option>
@@ -234,7 +234,7 @@
                   <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost" required>
                   <br>
                   <br>
-                  <button type="submit" onclick="submitForm(event, 'DailyExpInfo','DailyExpInfo') + closePop('dailyExpPopForm')">حفظ</button>
+                  <button type="submit">حفظ</button>
                 </form>
               
             </dialog>

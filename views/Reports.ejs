@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title> Rental </title>
   <link rel="stylesheet" href="/public/css/Style.css" />
+  <link rel="stylesheet" href="/public/css/reports.css" />
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,11 +83,45 @@
   </div>
 
     <!--table-->
-    <section class="home-section" style="margin-inline: 18px;
-    padding-block: 18px;">
-      <div>
+    <section class="home-section">
+      <!--Botten-->
+      <div class="Registration_buttons">
+        <button class="tabLink" onclick="content(event, 'reports-daily');" id="defaultCont">التقارير اليومية</button>
+        <button class="tabLink" onclick="content(event, 'reports-investors')">تقارير المستثمرين</button>
+        <button class="tabLink" onclick="content(event, 'reports-all')">التقارير الإجمالية</button>
+      </div>
 
-      
+
+      <div id="reports-daily" class="tabContent">
+
+        <select class="reports-daily-selector" name="reports-daily-first" id="reports_daily_first">
+          <option disabled selected hidden value="">اختر</option>
+          <option value="reports_daily_second">اليومية</option>
+          <option value="">القيمة المضافة</option>
+        </select>
+
+        <select class="reports-daily-selector" name="reports-daily-second" id="reports_daily_second">
+          <option disabled selected hidden value="">اختر</option>
+        </select>
+
+        <table>
+          <tbody id="emp_table" ondblclick="editable(event)">
+            <th>التاريخ</th>
+            <th>رقم اللوحة</th>
+            <th>اسم المستثمر</th>
+            <th>الأرباح</th>
+            <th>المتبقي من رأس المال </th>
+            <th>عمولة البيع</th>
+            <th>عمولة الشراء</th>
+            <th>عمولة التأجير</th>
+            <th>الراتب </th>
+            <th>حذف</th>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div id="reports-investors" class="tabContent">
         <label>من</label>
         <input type="date" id="start" name="trip-start" min="2022-01-01" max="2025-12-31">
         <label>إلى</label>
@@ -109,9 +144,29 @@
         </table>
       </div>
 
+      <div id="reports-all" class="tabContent">
+        <label>من</label>
+        <input type="date" id="start" name="trip-start" min="2022-01-01" max="2025-12-31">
+        <label>إلى</label>
+        <input type="date" id="start" name="trip-start" value="2023-04-16" min="2022-01-01" max="2025-12-31">
 
+        <table>
+          <tbody id="emp_table" ondblclick="editable(event)">
+            <th>التاريخ</th>
+            <th>رقم اللوحة</th>
+            <th>اسم المستثمر</th>
+            <th>الأرباح</th>
+            <th>المتبقي من رأس المال </th>
+            <th>عمولة البيع</th>
+            <th>عمولة الشراء</th>
+            <th>عمولة التأجير</th>
+            <th>الراتب </th>
+            <th>حذف</th>
 
-    </div>
+          </tbody>
+        </table>
+      </div>
+    
   </section>
 
 

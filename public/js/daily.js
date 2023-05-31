@@ -51,6 +51,7 @@ function filter(startDateID, endDateID){
 
 function setDailyData(newData){
   let dailyTotalTable = document.getElementById("dailyTotal")
+  dailyTotalTable.innerHTML = ""
   let expCash = 0
   let expPOS = 0
   let rentCash = 0
@@ -76,7 +77,7 @@ function setDailyData(newData){
           newCellNumber.textContent = i + 1
           newRow.appendChild(newCellNumber)
           
-          for ( var key in newData[dataKey][i]){
+          for ( let key in newData[dataKey][i]){
             console.log(key)
             
             if (key.endsWith('Pic')){
@@ -220,19 +221,25 @@ function moneyTable(newData){
       IDtotalCash.textContent = totalCash
     }
     else if(['شبكة', 'تحويل'].includes(newData.PaymentMethod)){
-      IDrentPOS.textContent = Number(rentPOS) + Number(newData.RentPrice)
-      IDtotalPOS.textContent = Number(totalPOS) + Number(newData.RentPrice)
+      rentPOS = Number(rentPOS) + Number(newData.RentPrice)
+      IDrentPOS.textContent = rentPOS
+      totalPOS = Number(totalPOS) + Number(newData.RentPrice)
+      IDtotalPOS.textContent = totalPOS
     }
   }
 
   else if(newData.ExpenseCost){
     if(newData.PaymentMethod == 'نقدي'){
-      IDexpCash.textContent = Number(expCash) + Number(newData.ExpenseCost)
-      IDtotalCash.textContent = Number(totalCash) - Number(newData.ExpenseCost)
+      expCash = Number(expCash) + Number(newData.ExpenseCost)
+      IDexpCash.textContent = expCash
+      totalCash = Number(totalCash) - Number(newData.ExpenseCost)
+      IDtotalCash.textContent = totalCash
     }
     else if(['شبكة', 'تحويل'].includes(newData.PaymentMethod)){
-      IDexpPOS.textContent = Number(expPOS) + Number(newData.ExpenseCost)
-      IDtotalPOS.textContent = Number(totalPOS) - Number(newData.ExpenseCost)
+      expPOS = Number(expPOS) + Number(newData.ExpenseCost)
+      IDexpPOS.textContent = expPOS
+      totalPOS = Number(totalPOS) - Number(newData.ExpenseCost)
+      IDtotalPOS.textContent = totalPOS
     }
   }
   totalRent = Number(rentCash) + Number(rentPOS)
