@@ -521,12 +521,14 @@ label{
 .delButton:nth-child(even){
   background-color: #726f6f;
 }
-
-tr:nth-child(odd){
+thead tr{
+  background-color:#726f6f;
+}
+tbody tr:nth-child(even){
   background-color:#726f6f;
 }
 
-tr:nth-child(even){
+tbody tr:nth-child(odd){
   background-color:#928c8c;
 }
 .show-image{

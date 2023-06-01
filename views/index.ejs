@@ -105,7 +105,7 @@
                 <label for="InvName">اسم المستثمر</label>
                 <br>
                 <select class="newCarData" id="InvName"  name="InvName">
-                  <option selected hidden>اسم المستثمر</option>
+                  <option selected hidden value="">اسم المستثمر</option>
                   
                 </select>
                 <br>
@@ -158,9 +158,8 @@
           
             <table >
               
-                
-              
-              <tbody id="CarsInfo" ondblclick="editable(event)">
+              <thead>
+
                 <th>رقم</th>
                 <th>اسم المستثمر</th>
                 <th>اسم السيارة</th>
@@ -173,7 +172,10 @@
                 <th> انتهاء التتبع </th>
                 <th> مفتاح الاسبير </th>
                 <th>حذف</th>
-                  
+
+              </thead>
+              
+              <tbody id="CarsInfo" ondblclick="editable(event)">
                 
               </tbody>
             </table>
@@ -231,9 +233,8 @@
             
             <table >
               
-                
-              
-              <tbody id="InvInfo" ondblclick="editable(event)">
+              <thead>
+
                 <th>رقم</th>
                 <th>اسم المستثمر</th>
                 <th> رقم الهوية </th>
@@ -242,6 +243,10 @@
                 <th> رقم الجوال </th>
                 <th> صورة العقد </th>
                 <th> حذف </th>
+
+              </thead>
+              
+              <tbody id="InvInfo" ondblclick="editable(event)">
                   
               </tbody>
             </table>
@@ -287,10 +292,6 @@
                 <br>
                 <input class="newRentData" type="file" placeholder="صورة هوية السائق" name="DriverIDPic">
                 <br>
-                <label for="RentContractPic">عقد الإيجار</label>
-                <br>
-                <input class="newRentData" type="file" placeholder="عقد الإيجار" name="RentContractPic">
-                <br>
                 <label> صورة للتفويض </label>
                 <br>
                 <input class="newRentData" type="file" placeholder="صورة للتفويض" name="RentAuthPic">
@@ -304,9 +305,8 @@
           <div class="table-Car">
             <table>
               
-                
-              
-              <tbody id="RentInfo" ondblclick="editable(event)">
+              <thead>
+
                 <th>رقم</th>
                 <th> اسم المستأجر </th>
                 <th> رقم الهوية </th>
@@ -315,10 +315,12 @@
                 <th> جوال ابشر </th>
                 <th> هوية السائق </th>
                 <th> صورة هوية السائق </th>
-                <th> عقد الإيجار </th>
                 <th> صورة للتفويض </th>
                 <th> حذف </th>
 
+              </thead>
+              
+              <tbody id="RentInfo" ondblclick="editable(event)">
 
               </tbody>
             </table>
@@ -359,8 +361,8 @@
           <!--table-->
           <div class="table-Car">
             <table>
-                
-              <tbody id="OwnerInfo" ondblclick="editable(event)">
+              <thead>
+
                 <th>رقم</th>
                 <th>اسم المالك</th>
                 <th>رقم الهوية</th>
@@ -368,7 +370,9 @@
                 <th>نسبة الأرباح من المكتب</th>
                 <th>حذف</th>
 
-
+              </thead>
+              <tbody id="OwnerInfo" ondblclick="editable(event)">
+                
               </tbody>
             </table>
           </div>
@@ -434,8 +438,9 @@
           <!--table-->
           <div class="table-Car">
             <table>
-                
-              <tbody id="EmpInfo" ondblclick="editable(event)">
+              
+              <thead>
+
                 <th>رقم</th>
                 <th>اسم الموظف</th>
                 <th>رقم الهوية</th>
@@ -448,6 +453,8 @@
                 <th>الراتب </th>
                 <th>حذف</th>
 
+              </thead>
+              <tbody id="EmpInfo" ondblclick="editable(event)">
 
               </tbody>
             </table>
@@ -487,13 +494,18 @@
             <!--table-->
             <div class="table-Car">
               <table>
-                  
-                <tbody id="ExpensesInfo" ondblclick="editable(event)">
+                
+                <thead>
+
                   <th>رقم</th>
                   <th> اسم المصروف </th>
                   <th> القيمة </th>
                   <th> صورة </th>
                   <th> حذف </th>
+
+                </thead>
+
+                <tbody id="ExpensesInfo" ondblclick="editable(event)">
 
 
                 </tbody>

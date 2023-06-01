@@ -79,214 +79,246 @@
     </div>
     
     <section class="home-section">
-      <div class="text">اليومية 
-      </div>
+      <div class="text">      
       
-  
-
-
-      <!--Botten-->
-      <div class="Registration_buttons">
-      </div>
-
-
-        
+        <!--Botten-->
+        <div class="Registration_buttons">
+          <button class="tabLink" onclick="content(event, 'daily-first-tab')" id="defaultCont">اليومية</button>
+          <button class="tabLink" onclick="content(event, 'daily-second-tab')">تمام السيارات</button>
+        </div>
           
+        <div id="daily-first-tab" class="tabContent">
 
-        <div class="row">
-          
-          <!--table tenants-->
-          <div class="dailyTenants">
+          <div class="row">
+            
+            <!--table tenants-->
+            <div class="dailyTenants">
 
-            <div>
-            <!--  زر مصروفات المكتب -->
-            <button class="button_action" onclick="openPop('dailyTenPopForm') + dailySel('CarPlate_RenterName', 'CarPlate_RenterName')">أضافة</button>
-            <button class="button_action" onclick="allEditable(event, 'daily_ten_table')" id="editBTN">تعديل</button>
-            <label for="startDate">من</label>
-            <input type="date" name="startDate" id="dailyStartFilter">
-            <label for="dailyEndFilter">الى</label>
-            <input type="date" name="endDate" id="dailyEndFilter" placeholder="يوم-شهر-سنة">
-            <button onclick="filter('dailyStartFilter', 'dailyEndFilter')">بحث</button>
-            </div>
+              <div>
+              <!--  زر مصروفات المكتب -->
+              <button class="button_action" onclick="openPop('dailyTenPopForm') + dailySel('CarPlate_RenterName', 'CarPlate_RenterName')">أضافة</button>
+              <button class="button_action" onclick="allEditable(event, 'daily_ten_table')" id="editBTN">تعديل</button>
+              <label for="startDate">من</label>
+              <input type="date" name="startDate" id="dailyStartFilter">
+              <label for="dailyEndFilter">الى</label>
+              <input type="date" name="endDate" id="dailyEndFilter" placeholder="يوم-شهر-سنة">
+              <button onclick="filter('dailyStartFilter', 'dailyEndFilter')">بحث</button>
+              </div>
 
 
-            <!-- window for adding data-->
-            <dialog id="dailyTenPopForm">
-              <button type="submit" onclick="closePop('dailyTenPopForm')">إلغاء</button>
-              <br>
-                <form id="dailyTenForm" onsubmit="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">
-                  <br>
-                  <label for="CarName">اسم السيارة</label>
-                  <br>
-                  <select class="newDailyTenData" id="CarName" name="CarName">
-                    <option disabled selected hidden>اسم السيارة</option>
-                  </select>
-                  <br>
-                  <label for="CarPlate">اللوحة</label>
-                  <br>
-                  <select class="newDailyTenData" id="CarPlate" name="CarPlateNumber">
-                    <option selected hidden>رقم اللوحة</option>
-                  </select>
-                  <br>
-                  <label for="RenterName">اسم المستأجر</label>
-                  <br>
-                  <select class="newDailyTenData" id="RenterName" name="RenterName">
-                    <option selected hidden>اسم المستأجر</option>
-                  </select>
-                  <br>
-                  <label>تاريخ دفع الإيجار</label>
-                  <br>
-                  <input class="newDailyTenDate" type="date" name="RentPaymentDate" required>
-                  <br>
-                  <label for="RentStartDate">تاريخ بدء الإيجار</label>
-                  <br>
-                  <input class="newDailyTenData" type="date"name="RentStartDate" required>
-                  <br>
-                  <label for="RentEndDate">تاريخ نهاية الإيجار</label>
-                  <br>
-                  <input class="newDailyTenData" type="date"name="RentEndDate" required>
-                  <br>
-                  <label for="PaymentMethod">طريقة الدفع</label>
-                  <br>
-                  <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod">
-                    <option selected hidden>طريقة الدفع</option>
-                    <option value="نقدي">نقدي</option>
-                    <option value="شبكة">شبكة</option>
-                    <option value="تحويل">تحويل</option>
-                  </select>
-                  <br>
-                  <label for="RentPrice">القيمة</label>
-                  <br>
-                  <input class="newDailyTenData" placeholder=" القيمة " name="RentPrice" required>
-                  <br>
-                  <label>الضريبة المضافة</label>
-                  <br>
-                  <select class="newDailyTenData" name="VAT">
-                    <option selected hidden>الضريبة المضافة</option>
-                    <option value="15">يوجد</option>
-                    <option value="0">لا يوجد</option>
-                  </select>
-                  <br>
-                  <br>
-                  <button type="submit">حفظ</button>
-                </form>
-            </dialog>
-            <table class="table_tenants">
+              <!-- window for adding data-->
+              <dialog id="dailyTenPopForm">
+                <button type="submit" onclick="closePop('dailyTenPopForm')">إلغاء</button>
+                <br>
+                  <form id="dailyTenForm" onsubmit="submitForm(event, 'DailyRentInfo','DailyRentInfo') + closePop('dailyTenPopForm')">
+                    <br>
+                    <label for="CarName">اسم السيارة</label>
+                    <br>
+                    <select class="newDailyTenData" id="CarName" name="CarName">
+                      <option disabled selected hidden>اسم السيارة</option>
+                    </select>
+                    <br>
+                    <label for="CarPlate">اللوحة</label>
+                    <br>
+                    <select class="newDailyTenData" id="CarPlate" name="CarPlateNumber">
+                      <option selected hidden value="">رقم اللوحة</option>
+                    </select>
+                    <br>
+                    <label for="RenterName">اسم المستأجر</label>
+                    <br>
+                    <select class="newDailyTenData" id="RenterName" name="RenterName">
+                      <option selected hidden value="">اسم المستأجر</option>
+                    </select>
+                    <br>
+                    <label>تاريخ دفع الإيجار</label>
+                    <br>
+                    <input class="newDailyTenDate" type="date" name="RentPaymentDate">
+                    <br>
+                    <label for="RentStartDate">تاريخ بدء الإيجار</label>
+                    <br>
+                    <input class="newDailyTenData" type="date"name="RentStartDate">
+                    <br>
+                    <label for="RentEndDate">تاريخ نهاية الإيجار</label>
+                    <br>
+                    <input class="newDailyTenData" type="date"name="RentEndDate">
+                    <br>
+                    <label for="PaymentMethod">طريقة الدفع</label>
+                    <br>
+                    <select class="newDailyTenData" placeholder=" مدين " name="PaymentMethod">
+                      <option selected hidden value="">طريقة الدفع</option>
+                      <option value="نقدي">نقدي</option>
+                      <option value="شبكة">شبكة</option>
+                      <option value="تحويل">تحويل</option>
+                    </select>
+                    <br>
+                    <label for="RentPrice">القيمة</label>
+                    <br>
+                    <input class="newDailyTenData" placeholder=" القيمة " name="RentPrice">
+                    <br>
+                    <label for="RentPaid">المدفوع</label>
+                    <br>
+                    <input class="newDailyTenData" placeholder="المدفوع" name="RentPaid">
+                    <br>
+                    <label>الضريبة المضافة</label>
+                    <br>
+                    <select class="newDailyTenData" name="VAT">
+                      <option selected hidden value="">الضريبة المضافة</option>
+                      <option value="15">يوجد</option>
+                      <option value="0">لا يوجد</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button type="submit">حفظ</button>
+                  </form>
+              </dialog>
+              <table class="table_tenants">
 
-              
-              <tbody id="DailyRentInfo" ondblclick="editable(event)">
+                <thead>
+
                   <th>رقم</th>
                   <th>رقم اللوحة</th>
                   <th>اسم المستأجر</th>
                   <th>تارخ الدفع</th>
                   <th>بدء الإيجار</th>
                   <th>نهاية الإيجار</th>
-                  <th id="creditorPaymentType">مدين</th>
-                  <th id="creditorAmountColumn">القيمة</th>
+                  <th>مدين</th>
+                  <th>القيمة</th>
+                  <th>المدفوع</th>
                   <th>حذف</th>
 
-                    
-              </tbody>
-            </table>
-          </div>
-
-          <!--table expenses -->         
-          <div class="dailyExpenses">
-            <div>
-              <!-- زر مصروفات المكتب -->
-              <button class="button_action" onclick="openPop('dailyExpPopForm') + dailySel('CarPlate_ExpenseName', 'ExpCarPlate_ExpenseName')">أضافة</button>
-              <button class="button_action" onclick="allEditable(event, 'daily_exp_table')" id="editBTN">تعديل</button>
+                </thead>
+                
+                <tbody id="DailyRentInfo" ondblclick="editable(event)">
+                  
+                </tbody>
+              </table>
             </div>
 
-            <!-- window for adding data-->
-            <dialog id="dailyExpPopForm">
-              <button onclick="closePop('dailyExpPopForm')">إلغاء</button>
-              <br>
-                <form id="dailyExpForm" onsubmit="submitForm(event, 'DailyExpInfo','DailyExpInfo') + closePop('dailyExpPopForm')">
-                  <br>
-                  <label for="carPlateNumber">رقم اللوحة</label>
-                  <br>
-                  <select class="newDailyExpData" id="ExpCarPlate" name="CarPlateNumber">
-                    <option selected hidden>رقم اللوحة</option>
-                  </select>
-                  <br>
-                  <label for="ExpenseSource"> مصدر الصرف </label>
-                  <br>
-                  <select class="newDailyExpData" id="ExpenseName" name="ExpenseSource">
-                    <option selected hidden>مصدر الصرف</option>
-                  </select>
-                  <br>
-                  <label> تاريخ الصرف </label>
-                  <br>
-                  <input type="date" class="newDailyExpData" placeholder=" تاريخ الصرف " name="ExpenseDate" required>
-                  <br>
-                  <label>طريقة الدفع</label>
-                  <br>
-                  <select class="newDailyExpData" placeholder=" مدين " name="PaymentMethod">
-                    <option selected hidden>طريقة الدفع</option>
-                    <option value="نقدي">نقدي</option>
-                    <option value="شبكة">شبكة</option>
-                    <option value="تحويل">تحويل</option>
-                  </select>
-                  <br>
-                  <label>القيمة</label>
-                  <br>
-                  <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost" required>
-                  <br>
-                  <br>
-                  <button type="submit">حفظ</button>
-                </form>
-              
-            </dialog>
+            <!--table expenses -->         
+            <div class="dailyExpenses">
+              <div>
+                <!-- زر مصروفات المكتب -->
+                <button class="button_action" onclick="openPop('dailyExpPopForm') + dailySel('CarPlate_ExpenseName', 'ExpCarPlate_ExpenseName')">أضافة</button>
+                <button class="button_action" onclick="allEditable(event, 'daily_exp_table')" id="editBTN">تعديل</button>
+              </div>
 
-            <table class="table_Expenses">
-              
+              <!-- window for adding data-->
+              <dialog id="dailyExpPopForm">
+                <button onclick="closePop('dailyExpPopForm')">إلغاء</button>
+                <br>
+                  <form id="dailyExpForm" onsubmit="submitForm(event, 'DailyExpInfo','DailyExpInfo') + closePop('dailyExpPopForm')">
+                    <br>
+                    <label for="carPlateNumber">رقم اللوحة</label>
+                    <br>
+                    <select class="newDailyExpData" id="ExpCarPlate" name="CarPlateNumber">
+                      <option selected hidden value="">رقم اللوحة</option>
+                    </select>
+                    <br>
+                    <label for="ExpenseSource"> مصدر الصرف </label>
+                    <br>
+                    <select class="newDailyExpData" id="ExpenseName" name="ExpenseSource">
+                      <option selected hidden value="">مصدر الصرف</option>
+                    </select>
+                    <br>
+                    <label> تاريخ الصرف </label>
+                    <br>
+                    <input type="date" class="newDailyExpData" placeholder=" تاريخ الصرف " name="ExpenseDate">
+                    <br>
+                    <label>طريقة الدفع</label>
+                    <br>
+                    <select class="newDailyExpData" placeholder=" دائن " name="PaymentMethod">
+                      <option selected hidden value="">طريقة الدفع</option>
+                      <option value="نقدي">نقدي</option>
+                      <option value="شبكة">شبكة</option>
+                      <option value="تحويل">تحويل</option>
+                    </select>
+                    <br>
+                    <label>القيمة</label>
+                    <br>
+                    <input class="newDailyExpData" placeholder=" القيمة " name="ExpenseCost">
+                    <br>
+                    <br>
+                    <button type="submit">حفظ</button>
+                  </form>
                 
-              
-              <tbody id="DailyExpInfo" ondblclick="editable(event)">
+              </dialog>
+
+              <table class="table_Expenses">
+                
+                <thead>
+
                   <th>رقم</th>
                   <th>رقم اللوحة</th>
                   <th>مصدر الصرف</th>
                   <th>تاريخ الصرف</th>
-                  <th id="debtorPaymentType">مدين</th>
-                  <th id="debtorAmountColumn">القيمة</th>
+                  <th>دائن</th>
+                  <th>القيمة</th>
                   <th>حذف</th>
 
+                </thead>
                 
+                <tbody id="DailyExpInfo" ondblclick="editable(event)">
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          
+
+
+
+            
+          <table style="padding-inline: 5px; margin-top: 6rem;">
+            <thead>
+              <tr>
+                <th colspan="2">مدين</th>
+                <th colspan="2">دائن</th>
+                <th colspan="2">الخزنة</th>
+              </tr>
+              <tr>
+                <th>نقدي</th>
+                <th>شبكة</th>
+                <th>نقدي</th>
+                <th>شبكة</th>
+                <th>نقدي</th>
+                <th>شبكة</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="dailyTotal">
+                
+            </tbody>
+          </table>
+        </div>
+
+        <div id="daily-second-tab" class="tabContent">
+          <div class="table-Car">
+            <table>
+              
+              <thead>
+
+                <th>رقم</th>
+                <th> اسم المستأجر </th>
+                <th> رقم الهوية </th>
+                <th> صورة الهوية </th>
+                <th> جوال التواصل </th>
+                <th> جوال ابشر </th>
+                <th> هوية السائق </th>
+                <th> صورة هوية السائق </th>
+                <th> صورة للتفويض </th>
+                <th> حذف </th>
+
+              </thead>
+              
+              <tbody id="RentInfo" ondblclick="editable(event)">
+
               </tbody>
             </table>
           </div>
         </div>
-
-        
-
-
-
-          
-        <table style="padding-inline: 5px; margin-top: 6rem;">
-          <thead>
-            <tr>
-              <th colspan="2">دائن</th>
-              <th colspan="2">مدين</th>
-              <th colspan="2">الخزنة</th>
-            </tr>
-            <tr>
-              <th>نقدي</th>
-              <th>شبكة</th>
-
-              <th>نقدي</th>
-              <th>شبكة</th>
-
-              <th>نقدي</th>
-              <th>شبكة</th>
-
-            </tr>
-          </thead>
-          <tbody id="dailyTotal">
-              
-          </tbody>
-        </table>
-      
+      </div>
     </section>
       
     

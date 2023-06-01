@@ -1,3 +1,5 @@
+window.onload = document.getElementById("defaultCont").click();
+
 fetch('/dailyJ')
 .then((response) => {
   // Check if the request was successful
@@ -51,7 +53,6 @@ function filter(startDateID, endDateID){
 
 function setDailyData(newData){
   let dailyTotalTable = document.getElementById("dailyTotal")
-  dailyTotalTable.innerHTML = ""
   let expCash = 0
   let expPOS = 0
   let rentCash = 0
@@ -63,8 +64,8 @@ function setDailyData(newData){
         let colName = `${dataKey}`
         let table = document.getElementById(colName)
         let length = table.rows.length
-        for(i = length - 1; i>0; i--){
-          table.deleteRow(i)
+        for(i = length; i>0; i--){
+          table.deleteRow(i-1)
         }
         let id 
         
@@ -152,10 +153,10 @@ function setDailyData(newData){
       if(data == "MonthRentInfo"){
         for(let keyCol of newData[data]){
           if(keyCol.PaymentMethod =="نقدي"){
-            rentCash += Number(keyCol.RentPrice)
+            rentCash += Number(keyCol.RentPaid)
           }
           else if (["شبكة", "تحويل"].includes(keyCol.PaymentMethod)){
-            rentPOS += Number(keyCol.RentPrice)
+            rentPOS += Number(keyCol.RentPaid)
           }
         }
       }
@@ -177,7 +178,7 @@ function setDailyData(newData){
     newCell.textContent = totalTableArray[key]
     newCell.id = key
     dailyTotalRow.appendChild(newCell)
-    dailyTotalTable.appendChild(dailyTotalRow)
+    
   }
 
   let subTotalRow = document.createElement('tr')
@@ -189,8 +190,10 @@ function setDailyData(newData){
     newCell.id = key
     newCell.colSpan = 2
     subTotalRow.appendChild(newCell)
-    dailyTotalTable.appendChild(subTotalRow)
+    
   }
+  dailyTotalTable.replaceChildren(dailyTotalRow)
+  dailyTotalTable.appendChild(subTotalRow)
 }
 
 function moneyTable(newData){
@@ -213,17 +216,17 @@ function moneyTable(newData){
   let totalRent = IDtotalRent.innerText
   let totalExp = IDtotalExp.innerText    
 
-  if(newData.RentPrice){
+  if(newData.RentPaid){
     if(newData.PaymentMethod == 'نقدي'){
-      rentCash = Number(rentCash) + Number(newData.RentPrice)
+      rentCash = Number(rentCash) + Number(newData.RentPaid)
       IDrentCash.textContent = rentCash
-      totalCash = Number(totalCash) + Number(newData.RentPrice)
+      totalCash = Number(totalCash) + Number(newData.RentPaid)
       IDtotalCash.textContent = totalCash
     }
     else if(['شبكة', 'تحويل'].includes(newData.PaymentMethod)){
-      rentPOS = Number(rentPOS) + Number(newData.RentPrice)
+      rentPOS = Number(rentPOS) + Number(newData.RentPaid)
       IDrentPOS.textContent = rentPOS
-      totalPOS = Number(totalPOS) + Number(newData.RentPrice)
+      totalPOS = Number(totalPOS) + Number(newData.RentPaid)
       IDtotalPOS.textContent = totalPOS
     }
   }

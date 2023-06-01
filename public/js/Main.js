@@ -81,7 +81,7 @@ async function submitForm(event, colName, tableID){
     
     console.log(newData);
     let table = document.getElementById(tableID)
-    let i = table.rows.length
+    let i = table.rows.length+1
     let newRow = document.createElement('tr')
 
     let newCellNumber = document.createElement('td')
@@ -141,7 +141,7 @@ async function submitForm(event, colName, tableID){
     newCell.appendChild(button)
     newRow.appendChild(newCell)
     table.appendChild(newRow)
-    if(newData.rentPrice || newData.expenseCost){
+    if(newData.RentPaid || newData.ExpenseCost){
       moneyTable(newData)
     }
     
@@ -334,38 +334,42 @@ function editable(e){
     
     
     // replace the original element with the new select element
-    s.innerHTML = ""
-    s.appendChild(newSel)
+    s.replaceChildren(newSel)
     newSel.id = cellCurID
     newSel.addEventListener ('change', function(){
       console.log(this.value)
       let newValue = this.value
+      s.addEventListener("focusout", function(e){
+        let cellIDSplit = e.target.id.split("_")
+        let cellNewValue = e.target.textContent
+        const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:cellNewValue}
+        let cell = document.getElementById(e.target.id)
+        cell.contentEditable = "false"
+    
+        sendNewData(newData)
+      })
       
-      const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:newValue}
-      sendNewData(newData)
-
-      s.innerHTML = ''
-      s.innerText = newValue
+      s.replaceChildren(newValue)
+      
     })
 
   }
-
-  else if (cellIDSplit[1] !== 'InvName'){
+  
+  else if (cellIDSplit[0] + cellIDSplit[1] != 'CarsInfoInvName'){
     s.contentEditable = "true"
     let checkIcon = document.createElement("button")
     checkIcon.className = "bx bx-check check"
     
-    s.insertAdjacentElement("afterbegin", checkIcon)
-    checkIcon.addEventListener("click", function(e){
-      let cellIDSplit = e.target.parentElement.id.split("_")
-      let cellNewValue = e.target.parentElement.textContent
+    s.addEventListener("focusout", function(e){
+      let cellIDSplit = e.target.id.split("_")
+      let cellNewValue = e.target.textContent
       const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:cellNewValue}
-      let cell = document.getElementById(e.target.parentElement.id)
+      let cell = document.getElementById(e.target.id)
       cell.contentEditable = "false"
-      cell.removeChild(checkIcon)
   
       sendNewData(newData)
     })
+    
     s.focus()
     s.addEventListener("keypress", enterKey)
   }
