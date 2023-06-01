@@ -85,8 +85,9 @@ async function submitForm(event, colName, tableID){
     let newRow = document.createElement('tr')
 
     let newCellNumber = document.createElement('td')
-    newCellNumber.id = colName + ': Index: ' + (Number(i) + 1)
-    newCellNumber.textContent = Number(i) + 1
+    newCellNumber.id = colName + ': Index: ' + i
+    
+    newCellNumber.textContent = i
     newRow.appendChild(newCellNumber)
     
     for (var key in formObject){
@@ -216,28 +217,6 @@ function indexSel(dataName, selID){
     console.error(error + '/indexSel catch Error');
   });
   
-}
-
-function dailySel(dataName, selID){
-  fetch('/dailySel')
-  .then((response) => {
-    // Check if the request was successful
-    if (response.ok) {
-      // Parse the response body as JSON
-      return response.json();
-    } else {
-      // Throw an error with the status text
-      throw new Error(response.statusText + '/dailySel response Error');
-    }
-  })
-  .then((newData) => {
-    selectorData(newData, dataName, selID)
-    
-  })
-  .catch((error) => {
-    // Handle any errors
-    console.error(error + '/dailySel catch Error');
-  });
 }
 
 function selectorData(newData, dataName, selID) {

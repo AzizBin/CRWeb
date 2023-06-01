@@ -1,4 +1,4 @@
-window.onload = document.getElementById("dailyDefaultCont").click();
+window.onload = document.getElementById("defaultCont").click();
 
 fetch('/dailyJ')
 .then((response) => {
@@ -20,6 +20,30 @@ fetch('/dailyJ')
   // Handle any errors
   console.error(error + '/dailyJ catch Error');
 });
+
+
+function dailySel(dataName, selID){
+  fetch('/dailySel')
+  .then((response) => {
+    // Check if the request was successful
+    if (response.ok) {
+      // Parse the response body as JSON
+      return response.json();
+    } else {
+      // Throw an error with the status text
+      throw new Error(response.statusText + '/dailySel response Error');
+    }
+  })
+  .then((newData) => {
+    selectorData(newData, dataName, selID)
+    
+  })
+  .catch((error) => {
+    // Handle any errors
+    console.error(error + '/dailySel catch Error');
+  });
+}
+
 
 function filter(startDateID, endDateID){
   let startDate = document.getElementById(startDateID).value
@@ -74,7 +98,7 @@ function setDailyData(newData){
           let newRow = document.createElement('tr')
 
           let newCellNumber = document.createElement('td')
-          newCellNumber.id = colName + ': Index: ' + (i+1)
+          newCellNumber.id = colName + ': Index: ' + (i + 1)
           newCellNumber.textContent = (i + 1)
           newRow.appendChild(newCellNumber)
           
