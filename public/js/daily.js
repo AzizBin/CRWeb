@@ -1,4 +1,4 @@
-window.onload = document.getElementById("defaultCont").click();
+window.onload = document.getElementById("dailyDefaultCont").click();
 
 fetch('/dailyJ')
 .then((response) => {
