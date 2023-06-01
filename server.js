@@ -114,11 +114,9 @@ function daily (){
 		let startDate = new Date(localToday.slice(0, 10))
 		let endDate = new Date(startDate)
 		endDate.setDate(endDate.getDate() + 1)
-		console.log(startDate);
 		
 		const startMonth = new Date(localToday.slice(0,8))
 		const endMonth = new Date(localToday.slice(0,6) + (Number(localToday.slice(6,7)) + 1))
-
 		const data = await getDailyData(startDate, endDate, startMonth, endMonth)
 		res.json(data)
 	})
@@ -152,20 +150,19 @@ app.post('/dailyFilter', async (req, res) => {
 	let endString = end.toLocaleString("en-US", {timeZone: "UTC"})
 	let endDate = new Date(endString)
 
-	let data = await getDailyData(startDate, endDate)
+	let data = await getDailyData(startDate, endDate, startDate, endDate)
 
 	res.json(data)
 })
 
 async function getDailyData(startDate, endDate, startMonth, endMonth){
-
 	const colDailyRent = await run('CRWebDB','DailyRentInfo')
 	const dailyRentTable = await colDailyRent.find({_id: {$gte: new ObjectId(startDate / 1000), $lte: new ObjectId(endDate / 1000) } }).project({}).toArray()
 
 	const colDailyExp = await run('CRWebDB','DailyExpInfo')
 	const dailyExpTable = await colDailyExp.find({_id: {$gte: new ObjectId(startDate / 1000), $lte: new ObjectId(endDate / 1000) } }).project({}).toArray()
 	
-	const monthRentTable = await colDailyRent.find({_id:{$gte: new ObjectId(startMonth / 1000), $lte: new ObjectId(endMonth / 1000)} }).project({_id: 0, PaymentMethod: 1, RentPrice: 1}).toArray()
+	const monthRentTable = await colDailyRent.find({_id:{$gte: new ObjectId(startMonth / 1000), $lte: new ObjectId(endMonth / 1000)} }).project({_id: 0, PaymentMethod: 1, RentPaid: 1}).toArray()
 	const monthExpTable = await colDailyExp.find({_id:{$gte: new ObjectId(startMonth / 1000), $lte: new ObjectId(endMonth / 1000)} }).project({_id:0, PaymentMethod:1, ExpenseCost:1}).toArray()
 	return({ 
 		DailyRentInfo: dailyRentTable,
@@ -233,10 +230,10 @@ app.post('/upload/:colName', upload.any(), async (req, res) => {
 				console.log(last[0])
 				
 
-				if(Object.hasOwn(combinedData, 'RentPrice')){
+				if(Object.hasOwn(combinedData, 'RentPaid')){
 
 					let VATDB = combinedData['VAT']
-					let paidPrice = combinedData['RentPrice']
+					let paidPrice = combinedData['RentPaid']
 					let finalWithout = 0
 					let finalVAT = 0
 					
