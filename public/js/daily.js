@@ -74,8 +74,8 @@ function setDailyData(newData){
           let newRow = document.createElement('tr')
 
           let newCellNumber = document.createElement('td')
-          newCellNumber.id = colName + ': Index: ' + i + 1
-          newCellNumber.textContent = i + 1
+          newCellNumber.id = colName + ': Index: ' + (i+1)
+          newCellNumber.textContent = (i + 1)
           newRow.appendChild(newCellNumber)
           
           for ( let key in newData[dataKey][i]){
