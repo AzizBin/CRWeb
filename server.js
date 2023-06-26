@@ -10,11 +10,20 @@ const pg = require("pg");
 const app = express();
 const ejs = require("ejs");
 require("dotenv").config();
-const bcrypt = require("bcrypt")
+
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const uri = process.env.MONGODB_URI;
+
+const store = new MongoDBStore({
+  uri: uri,
+  collection: "mySessions",
+});
+
+const bcrypt = require("bcrypt");
+const { error } = require("console");
 const saltRounds = 10;
 
-
-const uri = process.env.MONGODB_URI;
 const client = new mongo.MongoClient(uri);
 const blobConnectionString = process.env.BLOB_CONNECTION_STRING;
 const blobServiceClient =
@@ -26,9 +35,9 @@ async function run(dbName, collection) {
     client.connect;
     const db = client.db(dbName);
     db.admin()
-      .serverInfo()
-      .then((info) => {
-        console.log("db version: " + info.version); // prints the MongoDB server version
+    .serverInfo()
+    .then((info) => {
+      console.log("db version: " + info.version); // prints the MongoDB server version
       });
     return db.collection(collection);
   } catch (err) {
@@ -36,70 +45,97 @@ async function run(dbName, collection) {
   }
 }
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use(express.static(__dirname));
-//app.use(express.static('public'))
-app.set("view engine", "ejs" );
-
-// ======== || start Login || ========
+app.use(
+  session({
+    secret: "key that will sign cookie",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
+  );
+  
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  
+  app.use(express.static(__dirname));
+  //app.use(express.static('public'))
+  app.set("view engine", "ejs");
+  
+  // ======== ||  middleware || ========
+  const isLoggedIn = (req, res, next) => {
+    if (req.session.isLoggedIn) {
+      next();
+    } else {
+      res.redirect("/");
+    }
+  };
+  
+// ======== ||  Login models || ========
 async function login() {
   const colUser = await run("CRWebDB", "Users");
-  const password= "norKhalid"
-  bcrypt.hash(password,saltRounds) .then((cryptPassword)=>{   
+  res.locals.user = "userAdmin"; // localStorage
+  const password = "norKhalid";
+  bcrypt.hash(password, saltRounds).then((cryptPassword) => {
+    const user = {
+      username: "Admin",
+      password: cryptPassword,
+    };
 
-	  const user = {
-		username: "Admin" ,
-		password: cryptPassword,
-  }
-
-   colUser.insertOne(user) 
-  })
+    colUser.insertOne(user);
+  });
 }
 
-app.post("/login", async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-	const colUser = await run("CRWebDB", "Users");
-    colUser.findOne({ username })
-
-      .then((foundUsername) => {
-        if (!foundUsername) {
-          res.send("user not found");
-          return;
-        }
-        const encryptPassword = foundUsername.password;
-
-        bcrypt
-          .compare(password, encryptPassword)
-          .then((response) => {
-            if (response == true) {
-              res.redirect(`/index/${foundUsername._id}`);
-            } else res.send("password is not ");
-          })
-          .catch((err) => {
-            res.send("comper:"+err);
-          });
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  }),
-
-
+// ======== ||  Login page || ========
 
 app.get("/", async (req, res) => {
   res.render("login");
   index();
 });
 
-
-
-app.get("/index/:id", async (req, res) => {
+app.post("/login", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const colUser = await run("CRWebDB", "Users");
+  
+  colUser
+  .findOne({ username })
+  .then((user) => {
+    if (!user) {
+      // res.send("user not found");
+      return res.redirect("/");
+    }
+    
+    const encryptPassword = user.password;
+    
+    bcrypt
+    .compare(password, encryptPassword)
+    .then((response) => {
+      if (response == true) {
+        res.redirect(`/index/${user._id}`);
+      } else res.send("كلمة المرور خاطئة");
+        })
+        .catch((err) => {
+          res.send("comper:" + err);
+        });
+        req.session.isLoggedIn = true;
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+}),
+app.get("/index", isLoggedIn, (req, res) => {
   res.render("index");
-  index();
-});
+    index();
+  });
+  
+app.get("/logout" , (req,res) => {
+  req.session.destroy((removeSession) =>{
+    if (removeSession) throw removeSession
+    res.redirect("/")
+  })
+})
+
+// ==========================================================
 
 function index() {
   console.log("index Function is called");
@@ -110,12 +146,12 @@ function index() {
   });
 }
 
-app.get("/indexSel", async (req, res) => {
+app.get("/indexSel",isLoggedIn, async (req, res) => {
   const colInv = await run("CRWebDB", "InvInfo");
   const invNameTable = await colInv
-    .find({})
-    .project({ _id: 0, InvName: 1 })
-    .toArray();
+  .find({})
+  .project({ _id: 0, InvName: 1 })
+  .toArray();
 
   res.json({ InvName: invNameTable });
 });
@@ -123,25 +159,25 @@ app.get("/indexSel", async (req, res) => {
 async function getCarData() {
   // Call run() method and set the collection to "CarsInfo"
   const colCar = await run("CRWebDB", "CarsInfo");
-
+  
   // find the desired doc and project without id
   const carsTable = await colCar.find({}).project({}).toArray();
-
+  
   const colInv = await run("CRWebDB", "InvInfo");
   const invTable = await colInv.find({}).project({}).toArray();
-
+  
   const colRent = await run("CRWebDB", "RentInfo");
   const rentTable = await colRent.find({}).project({}).toArray();
-
+  
   const colOwner = await run("CRWebDB", "OwnerInfo");
   const ownerTable = await colOwner.find({}).project({}).toArray();
-
+  
   const colEmp = await run("CRWebDB", "EmpInfo");
   const empTable = await colEmp.find({}).project({}).toArray();
-
+  
   const colExpenses = await run("CRWebDB", "ExpensesInfo");
   const expensesTable = await colExpenses.find({}).project({}).toArray();
-
+  
   return {
     CarsInfo: carsTable,
     InvInfo: invTable,
@@ -152,7 +188,7 @@ async function getCarData() {
   };
 }
 
-app.get("/daily", async (req, res) => {
+app.get("/daily",isLoggedIn, async (req, res) => {
   res.render("daily");
   daily();
 });
@@ -163,80 +199,80 @@ function daily() {
     let startDate = new Date(localToday.slice(0, 10));
     let endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() + 1);
-
+    
     const startMonth = new Date(localToday.slice(0, 8));
     const endMonth = new Date(
       localToday.slice(0, 6) + (Number(localToday.slice(6, 7)) + 1)
-    );
-    const data = await getDailyData(startDate, endDate, startMonth, endMonth);
-    res.json(data);
-  });
-}
-
-app.get("/dailySel", async (req, res) => {
-  const colCar = await run("CRWebDB", "CarsInfo");
-  const carPlateTable = await colCar
+      );
+      const data = await getDailyData(startDate, endDate, startMonth, endMonth);
+      res.json(data);
+    });
+  }
+  
+  app.get("/dailySel",isLoggedIn, async (req, res) => {
+    const colCar = await run("CRWebDB", "CarsInfo");
+    const carPlateTable = await colCar
     .find({})
     .project({ _id: 0, CarPlate: 1 })
     .toArray();
-
-  const colRent = await run("CRWebDB", "RentInfo");
-  const renterNameTable = await colRent
+    
+    const colRent = await run("CRWebDB", "RentInfo");
+    const renterNameTable = await colRent
     .find({})
     .project({ _id: 0, RenterName: 1 })
     .toArray();
 
-  const colExpenses = await run("CRWebDB", "ExpensesInfo");
-  const expNameTable = await colExpenses
+    const colExpenses = await run("CRWebDB", "ExpensesInfo");
+    const expNameTable = await colExpenses
     .find({})
     .project({ _id: 0, ExpenseName: 1 })
     .toArray();
-
-  res.json({
-    CarPlate: carPlateTable,
-    RenterName: renterNameTable,
+    
+    res.json({
+      CarPlate: carPlateTable,
+      RenterName: renterNameTable,
     ExpenseName: expNameTable,
   });
 });
 
-app.post("/dailyFilter", async (req, res) => {
+app.post("/dailyFilter",isLoggedIn, async (req, res) => {
   let start = new Date(req.body.startDate);
   let startString = start.toLocaleString("en-US", { timeZone: "UTC" });
   let startDate = new Date(startString);
-
+  
   let end = new Date(req.body.endDate + "T24:00:00.000Z");
   let endString = end.toLocaleString("en-US", { timeZone: "UTC" });
   let endDate = new Date(endString);
-
+  
   let data = await getDailyData(startDate, endDate, startDate, endDate);
-
+  
   res.json(data);
 });
 
 async function getDailyData(startDate, endDate, startMonth, endMonth) {
   const colDailyRent = await run("CRWebDB", "DailyRentInfo");
   const dailyRentTable = await colDailyRent
-    .find({
-      _id: {
-        $gte: new ObjectId(startDate / 1000),
-        $lte: new ObjectId(endDate / 1000),
-      },
-    })
-    .project({})
-    .toArray();
-
+  .find({
+    _id: {
+      $gte: new ObjectId(startDate / 1000),
+      $lte: new ObjectId(endDate / 1000),
+    },
+  })
+  .project({})
+  .toArray();
+  
   const colDailyExp = await run("CRWebDB", "DailyExpInfo");
   const dailyExpTable = await colDailyExp
-    .find({
-      _id: {
-        $gte: new ObjectId(startDate / 1000),
-        $lte: new ObjectId(endDate / 1000),
-      },
+  .find({
+    _id: {
+      $gte: new ObjectId(startDate / 1000),
+      $lte: new ObjectId(endDate / 1000),
+    },
     })
     .project({})
     .toArray();
-
-  const monthRentTable = await colDailyRent
+    
+    const monthRentTable = await colDailyRent
     .find({
       _id: {
         $gte: new ObjectId(startMonth / 1000),
@@ -245,7 +281,7 @@ async function getDailyData(startDate, endDate, startMonth, endMonth) {
     })
     .project({ _id: 0, PaymentMethod: 1, RentPaid: 1 })
     .toArray();
-  const monthExpTable = await colDailyExp
+    const monthExpTable = await colDailyExp
     .find({
       _id: {
         $gte: new ObjectId(startMonth / 1000),
@@ -254,21 +290,20 @@ async function getDailyData(startDate, endDate, startMonth, endMonth) {
     })
     .project({ _id: 0, PaymentMethod: 1, ExpenseCost: 1 })
     .toArray();
-  return {
-    DailyRentInfo: dailyRentTable,
+    return {
+      DailyRentInfo: dailyRentTable,
     DailyExpInfo: dailyExpTable,
     MonthRentInfo: monthRentTable,
     MonthExpInfo: monthExpTable,
   };
 }
 
-app.get("/reports", async (req, res) => {
+app.get("/reports",isLoggedIn, async (req, res) => {
   res.render("reports");
 });
 
-app.listen(port);
 
-app.post("/upload/:colName", upload.any(), async (req, res) => {
+app.post("/upload/:colName",isLoggedIn, upload.any(), async (req, res) => {
   let data = {};
   for (const file in req.files) {
     const blockBlobClient = containerClient.getBlockBlobClient(
@@ -277,17 +312,17 @@ app.post("/upload/:colName", upload.any(), async (req, res) => {
     await blockBlobClient.upload(
       req.files[file].buffer,
       req.files[file].buffer.length
-    );
-    let fieldName = [req.files[file].fieldname];
-    data[fieldName] = blockBlobClient.url;
-  }
-
+      );
+      let fieldName = [req.files[file].fieldname];
+      data[fieldName] = blockBlobClient.url;
+    }
+    
   let order = JSON.parse(req.body.order);
   let combinedData = {};
   for (let i = 0; i < order.length; i++) {
     // get the current property name from the array
     let propertyName = order[i];
-
+    
     // check if the property exists in data or req.body
     if (Object.hasOwn(data, propertyName)) {
       // assign the property and value from data to the new object
@@ -300,17 +335,17 @@ app.post("/upload/:colName", upload.any(), async (req, res) => {
       combinedData[propertyName] = "";
     }
   }
-
+  
   async function insertNewData() {
     const colName = req.params.colName;
     try {
       // Use the collection in colName
       const col = await run("CRWebDB", colName);
-
+      
       // Insert a single document, wait for promise so we can read it back
-
+      
       await col.insertOne(combinedData);
-
+      
       const last = await col.find().sort({ _id: -1 }).limit(1).toArray();
       console.log(last[0]);
 
@@ -319,7 +354,7 @@ app.post("/upload/:colName", upload.any(), async (req, res) => {
         let paidPrice = combinedData["RentPaid"];
         let finalWithout = 0;
         let finalVAT = 0;
-
+        
         if (VATDB == 0) {
           finalWithout = Number.paidPrice;
           finalVAT = 0;
@@ -327,62 +362,62 @@ app.post("/upload/:colName", upload.any(), async (req, res) => {
           let VAT = 1 + VATDB / 100;
           let withoutVAT = paidPrice / VAT;
           let paidPriceVAT = paidPrice - paidPrice / VAT;
-
+          
           let withoutVATFloor =
-            Math.floor((withoutVAT + Number.EPSILON) * 100) / 100;
+          Math.floor((withoutVAT + Number.EPSILON) * 100) / 100;
           let paidPriceVATCeil =
             Math.ceil((paidPriceVAT + Number.EPSILON) * 100) / 100;
-
-          finalWithout = withoutVATFloor;
-          finalVAT = paidPriceVATCeil;
+            
+            finalWithout = withoutVATFloor;
+            finalVAT = paidPriceVATCeil;
+          }
+          const coll = await run("CRWebDB", "Accounts");
+          
+          await coll.insertOne({
+            transactionID: last[0]._id,
+            total: paidPrice,
+            VATPercentage: finalVAT,
+            totalBeforeVAT: finalWithout,
+            VAT: VATDB,
+          });
         }
-        const coll = await run("CRWebDB", "Accounts");
-
-        await coll.insertOne({
-          transactionID: last[0]._id,
-          total: paidPrice,
-          VATPercentage: finalVAT,
-          totalBeforeVAT: finalWithout,
-          VAT: VATDB,
-        });
+        
+        res.send(last[0]);
+      } catch (err) {
+        console.log(err.stack);
       }
-
-      res.send(last[0]);
-    } catch (err) {
-      console.log(err.stack);
     }
-  }
   insertNewData();
 });
 
-app.post("/updateImage", upload.single("file"), async (req, res) => {
+app.post("/updateImage",isLoggedIn, upload.single("file"), async (req, res) => {
   let data;
   try {
     const blockBlobClient = containerClient.getBlockBlobClient(
       req.body.fieldName + "_" + req.file.originalname
-    );
-    await blockBlobClient.upload(req.file.buffer, req.file.buffer.length);
-    data = blockBlobClient.url;
-    console.log(req.file);
-
-    // Use the collection "CarInfo"
-    const colCar = await run("CRWebDB", req.body.colName);
-    const fieldName = { [req.body.fieldName]: data };
-    const id = new mongo.ObjectId(req.body._id);
-    console.log(id);
-
-    // Insert a single document, wait for promise so we can read it back
-    colCar.updateOne({ _id: id }, { $set: fieldName }, function (err, result) {
-      if (err) throw err;
-      console.log(result.modifiedCount + " document(s) updated");
-    });
-  } catch (err) {
-    console.log(err.stack);
+      );
+      await blockBlobClient.upload(req.file.buffer, req.file.buffer.length);
+      data = blockBlobClient.url;
+      console.log(req.file);
+      
+      // Use the collection "CarInfo"
+      const colCar = await run("CRWebDB", req.body.colName);
+      const fieldName = { [req.body.fieldName]: data };
+      const id = new mongo.ObjectId(req.body._id);
+      console.log(id);
+      
+      // Insert a single document, wait for promise so we can read it back
+      colCar.updateOne({ _id: id }, { $set: fieldName }, function (err, result) {
+        if (err) throw err;
+        console.log(result.modifiedCount + " document(s) updated");
+      });
+    } catch (err) {
+      console.log(err.stack);
   }
   res.json({ url: data });
 });
 
-app.post("/updateData", (req, res) => {
+app.post("/updateData",isLoggedIn, (req, res) => {
   async function update() {
     try {
       // Use the collection "CarInfo"
@@ -390,7 +425,7 @@ app.post("/updateData", (req, res) => {
       const fieldName = { [req.body.fieldName]: req.body.newValue };
       const id = new mongo.ObjectId(req.body._id);
       console.log(id);
-
+      
       // Insert a single document, wait for promise so we can read it back
       colCar.updateOne(
         { _id: id },
@@ -399,34 +434,36 @@ app.post("/updateData", (req, res) => {
           if (err) throw err;
           console.log(result.modifiedCount + " document(s) updated");
         }
-      );
-    } catch (err) {
+        );
+      } catch (err) {
+        console.log(err.stack);
+      }
+    }
+    update();
+    
+    res.send(req.body.cellNewData);
+  });
+  
+  app.post("/deleteRow",isLoggedIn, (req, res) => {
+    async function update() {
+      try {
+        // Use the collection "CarInfo"
+        const colCar = await run("CRWebDB", req.body.colName);
+        const id = new mongo.ObjectId(req.body._id);
+        console.log(id);
+        
+        // Insert a single document, wait for promise so we can read it back
+        colCar.deleteOne({ _id: id }, function (err, result) {
+          if (err) throw err;
+          console.log(result.modifiedCount + " document(s) updated");
+        });
+      } catch (err) {
       console.log(err.stack);
     }
   }
   update();
-
+  
   res.send(req.body.cellNewData);
 });
 
-app.post("/deleteRow", (req, res) => {
-  async function update() {
-    try {
-      // Use the collection "CarInfo"
-      const colCar = await run("CRWebDB", req.body.colName);
-      const id = new mongo.ObjectId(req.body._id);
-      console.log(id);
-
-      // Insert a single document, wait for promise so we can read it back
-      colCar.deleteOne({ _id: id }, function (err, result) {
-        if (err) throw err;
-        console.log(result.modifiedCount + " document(s) updated");
-      });
-    } catch (err) {
-      console.log(err.stack);
-    }
-  }
-  update();
-
-  res.send(req.body.cellNewData);
-});
+app.listen(port);
