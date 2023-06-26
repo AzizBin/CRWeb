@@ -1,461 +1,528 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8">
-    <title> Rental </title>
-    <link rel="stylesheet" href="/public/css/Style.css" />   
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
+
+<head>
+  <meta charset="UTF-8">
+  <title> Rental </title>
+  <link rel="stylesheet" href="/public/css/Style.css" />
+  <!-- Boxicons CDN Link -->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
 
 
-  <body>
-    <!--sidebar-->
-    <div class="sidebar">
-      <div class="logo-details">
-        <i class='bx bxl-redux icon'></i> 
-        <div class="logo_name">Rental</div>
-        <i class='bx bx-menu' id="btn" ></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <i class='bx bx-search' ></i>
-          <input type="text" placeholder="البحث...">
-          <span class="tooltip">البحث</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-grid-alt'></i>
-            <span class="links_name" id="liNameTest" > لوحة التحكم </span>
-          </a>
-          <span class="tooltip">لوحة التحكم</span>
-        </li>
-        <li>
-          <a href="/daily">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">اليومية</span>
-          </a>
-          <span class="tooltip">اليومية</span>
-        </li>
-        <li>
+<body>
+  <!--sidebar-->
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-redux icon'></i>
+      <div class="logo_name">Rental</div>
+      <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li class="side-search">
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="البحث...">
+        <span class="tooltip">البحث</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" id="liNameTest"> لوحة التحكم </span>
+        </a>
+        <span class="tooltip">لوحة التحكم</span>
+
+      </li>
+      <li>
+        <a href="/daily">
+          <i class='bx bx-user'></i>
+          <span class="links_name">اليومية</span>
+        </a>
+        <span class="tooltip">اليومية</span>
+
+      </li>
+      <li>
         <a href="/index">
-          <i class='bx bx-add-to-queue' ></i>
+          <i class='bx bx-add-to-queue'></i>
           <span class="links_name">التسجيل</span>
         </a>
         <span class="tooltip">التسجيل</span>
-        </li>
-        <li>
-          <a href="/Reports">
-            <i class='bx bxs-report' ></i>
-            <span class="links_name">التقارير</span>
-          </a>
-          <span class="tooltip">التقارير</span>
-        </li>
 
-        <li>
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">الإعدادات</span>
-          </a>
-          <span class="tooltip">الإعدادات</span>
-        </li>
-        <li class="profile">
-            <div class="profile-details">
-              <img src="image/User.png" alt="profileImg">
-              <div class="name_job">
-                <div class="name">أبو اسامة</div>
-                <div class="job">Admin</div>
-              </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
-      </ul>
-    </div>
-    
-    <section class="home-section">
-      <div class="text">التسجيل 
-        
+      </li>
+      <li>
+        <a href="/Reports">
+          <i class='bx bxs-report'></i>
+          <span class="links_name">التقارير</span>
+        </a>
+        <span class="tooltip">التقارير</span>
 
-        <!--Botten-->
-        <div class="Registration_buttons">
-          <button class="tabLink" onclick="content(event, 'carsContent');" id="defaultCont">السيارات</button>
-          <button class="tabLink" onclick="content(event, 'investorsContent')">المستثمرين</button>
-          <button class="tabLink" onclick="content(event, 'rentersContent')">المستأجرين</button>
-          <button class="tabLink" onclick="content(event, 'ownersContent')">الملاك</button>
-          <button class="tabLink" onclick="content(event, 'employeesContent')">الموظفين</button>
-          <button class="tabLink" onclick="content(event, 'officeExpensesContent')">مصروفات المكتب</button>
+      </li>
+
+      <li>
+        <a href="#">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">الإعدادات</span>
+        </a>
+        <span class="tooltip">الإعدادات</span>
+
+      </li>
+
+    </ul>
+    <li class="profile">
+      <div class="profile-details">
+        <img src="image/User.png" alt="profileImg">
+        <div class="name_job">
+          <div class="name">أبو اسامة</div>
+          <div class="job">Admin</div>
         </div>
+      </div>
+      <a href="/logout">
+        <i  class='bx bx-log-out' id="log_out"></i>
+      </a>
+    </li>
+  </div>
+
+  <section class="home-section">
+    <div class="text">التسجيل
+
+      <!--Botten-->
+      <div class="Registration_buttons">
+        <button class="tabLink" onclick="content(event, 'carsContent');" id="defaultCont">السيارات</button>
+        <button class="tabLink" onclick="content(event, 'investorsContent')">المستثمرين</button>
+        <button class="tabLink" onclick="content(event, 'rentersContent')">المستأجرين</button>
+        <button class="tabLink" onclick="content(event, 'ownersContent')">الملاك</button>
+        <button class="tabLink" onclick="content(event, 'employeesContent')">الموظفين</button>
+        <button class="tabLink" onclick="content(event, 'officeExpensesContent')">مصروفات المكتب</button>
+      </div>
+
+      <!-- زر السيارات-->
+      <div id="carsContent" class="tabContent">
+        <button class="button_action" onclick="openPop('carPopForm') + indexSel('InvName', 'InvName')">أضافة</button>
+        <button class="button_action" onclick="allEditable(event, 'car_table')" id="editBTN">تعديل</button>
+
+        <!-- window for adding data-->
+        <dialog id="carPopForm">
+          <button onclick="closePop('carPopForm')">إلغاء</button>
+          <form id="carForm" onsubmit="submitForm(event, 'CarsInfo','CarsInfo') + closePop('carPopForm')">
+            <label for="InvName">اسم المستثمر</label>
+            <br>
+            <select class="newCarData" id="InvName" name="InvName">
+              <option selected hidden value="">اسم المستثمر</option>
+
+            </select>
+            <br>
+            <label>اسم السيارة</label>
+            <br>
+            <input class="newCarData" placeholder=" اسم السيارة " value="" name="CarName">
+            <br>
+            <label>لوحة السيارة</label>
+            <br>
+            <input class="newCarData" placeholder=" لوحة السيارة " value="" name="CarPlate">
+            <br>
+            <label for="dateOfPurchase"> تاريخ الشراء </label>
+            <br>
+            <input class="newCarData" type="date" id="dateOfPurchase" name="CarDateOfPurchase">
+            <br>
+            <label>سعر الشراء</label>
+            <br>
+            <input class="newCarData" placeholder=" سعر الشراء " name="CarPurchasePrice">
+            <br>
+            <label for="vehicleRegExpiry"> انتهاء الاستمارة </label>
+            <br>
+            <input class="newCarData" type="date" id="vehicleRegExpiry" name="CarRegExpDate">
+            <br>
+            <label for="vehicleCheck"> انتهاء الفحص </label>
+            <br>
+            <input class="newCarData" type="date" id="vehicleCheck" name="CarCheckExpDate">
+            <br>
+            <label for="insuranceExpiry"> انتهاء التأمين </label>
+            <br>
+            <input class="newCarData" type="date" id="insuranceExpiry" name="CarInsurExpDate">
+            <br>
+            <label for="trackingExpiry"> انتهاء التتبع </label>
+            <br>
+            <input class="newCarData" type="date" id="trackingExpiry" name="CarTrackExpDate">
+            <br>
+            <label>مفتاح الاسبير</label>
+            <br>
+            <label for="extraKeyYes"> موجود </label>
+            <input checked class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyYes" value="موجود">
+            <label for="extraKeyNo"> غير موجود </label>
+            <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyNo" value=" غير موجود ">
+            <br>
+            <button type="submit">حفظ</button>
+          </form>
+
+        </dialog>
 
 
-        <!-- Tab content -->
+        <!--table-->
 
+        <table>
 
+          <thead>
 
-                  <!-- زر السيارات-->
-        <div id="carsContent" class="tabContent">
-          <button class="button_action" onclick="openPop('carPopForm') + indexSel('InvName', 'InvName')">أضافة</button>
-          <button class="button_action" onclick="allEditable(event, 'car_table')" id="editBTN">تعديل</button>
-          <box-icon type='solid' name='edit-alt'></box-icon>
+            <th>رقم</th>
+            <th>اسم المستثمر</th>
+            <th>اسم السيارة</th>
+            <th>لوحة السيارة</th>
+            <th>تاريخ الشراء</th>
+            <th> مبلغ الشراء </th>
+            <th>انتهاء الاستمارة</th>
+            <th> انتهاء الفحص </th>
+            <th>انتهاء التأمين</th>
+            <th> انتهاء التتبع </th>
+            <th> مفتاح الاسبير </th>
+            <th>حذف</th>
 
-          <!-- window for adding data-->
-          <div class="popupForm" id="carPopForm">           
-            <button onclick="closePop('carPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
-              
-              <form id="carForm">
-                <label for="InvName">اسم المستثمر</label>
-                <br>
-                <select class="newCarData" id="InvName"  name="InvName">
-                  
-                  
-                </select>
-                <br>
-                <input class="newCarData" placeholder=" اسم السيارة " value="" name="CarName">
-                <br>
-                <input class="newCarData" placeholder=" لوحة السيارة " value="" name="CarPlate">
-                <br>
-                <label for="dateOfPurchase"> تاريخ الشراء </label>
-                <br>
-                <input class="newCarData" type="date" id="dateOfPurchase" name="CarDateOfPurchase" >
-                <br>
-                <input class="newCarData" placeholder=" سعر الشراء " name="CarPurchasePrice">
-                <br>
-                <label for="vehicleRegExpiry"> انتهاء الاستمارة </label>
-                <br>
-                <input class="newCarData" type="date" id="vehicleRegExpiry" name="CarRegExpDate">
-                <br>
-                <label for="vehicleCheck"> انتهاء الفحص </label>
-                <br>
-                <input class="newCarData" type="date" id="vehicleCheck" name="CarCheckExpDate">
-                <br>
-                <label for="insuranceExpiry"> انتهاء التأمين </label>
-                <br>
-                <input class="newCarData" type="date" id="insuranceExpiry" name="CarInsurExpDate">
-                <br>
-                <label for="trackingExpiry"> انتهاء التتبع </label>
-                <br>
-                <input class="newCarData" type="date" id="trackingExpiry" name="CarTrackExpDate">
-                <br>
-                <p> مفتاح الاسبير </p>
-                <label for="extraKeyYes"> موجود </label>
-                <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyYes" value="موجود">
-                <label for="extraKeyNo"> غير موجود </label>
-                <input class="newCarData" type="radio" name="CarExtraKeyStatus" id="extraKeyNo" value=" غير موجود ">
-                <button type="submit" onclick="closePop('carPopForm') + submitForm(event, 'CarsInfo','CarsInfo')">حفظ</button>
-              </form>
-            </div>
-          </div>
+          </thead>
 
+          <tbody id="CarsInfo" ondblclick="editable(event)">
 
-          <!--table-->
-          <div class="table-Car">
-            <table >
-              
-                
-              
-              <tbody id="CarsInfo" ondblclick="editable(event)">
-                <th>رقم</th>
-                <th>اسم المستثمر</th>
-                <th>اسم السيارة</th>
-                <th>لوحة السيارة</th>
-                <th>تاريخ الشراء</th>
-                <th> مبلغ الشراء </th>
-                <th>انتهاء الاستمارة</th>
-                <th> انتهاء الفحص </th>
-                <th>انتهاء التأمين</th>
-                <th> انتهاء التتبع </th>
-                <th> مفتاح الاسبير </th>
-                <th>حذف</th>
-                  
-                
-              </tbody>
-            </table>
-          </div>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="show-image" id="show-image">
+        <div class="blur"></div>
+        <button onclick="closeImage()">close</button>
+        <img id="img">
+      </div>
+
+      <!--  زر المستثمرين -->
+      <div id="investorsContent" class="tabContent">
+        <button class="button_action" onclick="openPop('invPopForm')">أضافة</button>
+        <button class="button_action" onclick="allEditable(event, 'inv_table')" id="editBTN">تعديل</button>
+
+        <!-- window for adding data-->
+        <dialog id="invPopForm">
+          <button onclick="closePop('invPopForm')">إلغاء</button>
+          <br>
+
+          <form id="invForm" onsubmit="submitForm(event, 'InvInfo','InvInfo') + closePop('invPopForm')">
+            <label for="InvName">اسم المستثمر</label>
+            <br>
+            <input class="newInvData" placeholder="اسم المستثمر" value="" name="InvName">
+            <br>
+            <label for="InvIDNumber">رقم الهوية</label>
+            <br>
+            <input class="newInvData" placeholder=" رقم الهوية " value="" name="InvIDNumber">
+            <br>
+            <label> ارفاق صورة الهوية </label>
+            <br>
+            <input class="newInvData" type="file" placeholder="ارفاق صورة الهوية" name="InvIDPic">
+            <br>
+            <label for="InvInterestRate">نسبة الفائدة</label>
+            <br>
+            <input class="newInvData" title="text" placeholder="نسبة الفائدة" name="InvInterestRate">
+            <br>
+            <label for="InvPhoneNumber">رقم الجوال</label>
+            <br>
+            <input class="newInvData" placeholder=" رقم الجوال " name="InvPhoneNumber">
+            <br>
+            <label for="InvContractPic">صورة العقد</label>
+            <br>
+            <input class="newInvData" type="file" placeholder="صورة العقد" name="InvContractPic">
+            <br>
+            <button type="submit">حفظ</button>
+          </form>
+
+        </dialog>
+
+        <!--table-->
+        <div class="table-Car">
+
+          <table>
+
+            <thead>
+
+              <th>رقم</th>
+              <th>اسم المستثمر</th>
+              <th> رقم الهوية </th>
+              <th> صورة الهوية </th>
+              <th> نسبة الفائدة </th>
+              <th> رقم الجوال </th>
+              <th> صورة العقد </th>
+              <th> حذف </th>
+
+            </thead>
+
+            <tbody id="InvInfo" ondblclick="editable(event)">
+
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        <div class="show-image" id="show-image">
-          <div class="blur"></div>
-          <button onclick="closeImage()">close</button>
-          <img id="img">
+
+      <!--  زر المستأجرين -->
+      <div id="rentersContent" class="tabContent">
+        <button class="button_action" onclick="openPop('rentPopForm')">أضافة</button>
+        <button class="button_action" onclick="allEditable(event, 'rent_table')" id="editBTN">تعديل</button>
+
+        <!-- window for adding data-->
+        <dialog id="rentPopForm">
+          <button onclick="closePop('rentPopForm')">إلغاء</button>
+          <br>
+          <form id="rentForm" onsubmit="submitForm(event, 'RentInfo','RentInfo') + closePop('rentPopForm')">
+            <label for="RentName">اسم المستأجر</label>
+            <br>
+            <input class="newRentData" placeholder="اسم المستأجر" value="" name="RenterName">
+            <br>
+            <label for="RentIDNumber">رقم الهوية</label>
+            <br>
+            <input class="newRentData" placeholder="رقم الهوية" value="" name="RentIDNumber">
+            <br>
+            <label> ارفاق صورة الهوية </label>
+            <br>
+            <input class="newRentData" type="file" placeholder="ارفاق صورة الهوية" name="RentIDPic">
+            <br>
+            <label for="RentContactNumber">جوال التواصل</label>
+            <br>
+            <input class="newRentData" title="text" placeholder="جوال التواصل" name="RentContactNumber">
+            <br>
+            <label for="RentAbsherNumber">جوال ابشر</label>
+            <br>
+            <input class="newRentData" placeholder="جوال ابشر" name="RentAbsherNumber">
+            <br>
+            <label for="DriverIDNumber">هوية السائق</label>
+            <br>
+            <input class="newRentData" placeholder="هوية السائق" name="DriverIDNumber">
+            <br>
+            <label> صورة هوية السائق </label>
+            <br>
+            <input class="newRentData" type="file" placeholder="صورة هوية السائق" name="DriverIDPic">
+            <br>
+            <label> صورة للتفويض </label>
+            <br>
+            <input class="newRentData" type="file" placeholder="صورة للتفويض" name="RentAuthPic">
+            <br>
+            <button type="submit">حفظ</button>
+          </form>
+
+        </dialog>
+
+        <!--table-->
+        <div class="table-Car">
+          <table>
+
+            <thead>
+
+              <th>رقم</th>
+              <th> اسم المستأجر </th>
+              <th> رقم الهوية </th>
+              <th> صورة الهوية </th>
+              <th> جوال التواصل </th>
+              <th> جوال ابشر </th>
+              <th> هوية السائق </th>
+              <th> صورة هوية السائق </th>
+              <th> صورة للتفويض </th>
+              <th> حذف </th>
+
+            </thead>
+
+            <tbody id="RentInfo" ondblclick="editable(event)">
+
+            </tbody>
+          </table>
         </div>
+      </div>
 
-          <!--  زر المستثمرين -->
-        <div id="investorsContent" class="tabContent">
-          <button class="button_action" onclick="openPop('invPopForm')">أضافة</button>
-          <button class="button_action"  onclick="allEditable(event, 'inv_table')" id="editBTN">تعديل</button>
 
-          <!-- window for adding data-->
-          <div class="popupForm" id="invPopForm">
-            <button onclick="closePop('invPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
-              <form id="invForm">
-                <input class="newInvData" placeholder="اسم المستثمر " value="" name="InvName">
-                <br>
-                <input class="newInvData" placeholder=" رقم الهوية " value="" name="InvIDNumber">
-                <br>
-                <label> ارفاق صورة الهوية </label>
-                <br>
-                <input class="newInvData" type="file" placeholder="ارفاق صورة الهوية" name="InvIDPic">
-                <br>
-                <input class="newInvData" title="text" placeholder="نسبة الفائدة" name="InvInterestRate">
-                <br>
-                <input class="newInvData" placeholder=" رقم الجوال " name="InvPhoneNumber">
-                <br> 
-                <input class="newInvData" type="file" placeholder="صورة العقد" name="InvContractPic">
-                <button type="submit" onclick="submitForm(event, 'InvInfo','InvInfo') + closePop('invPopForm')">حفظ</button>
-              </form>
-            </div>
-          </div>
+      <!--  زر الملاك -->
+      <div id="ownersContent" class="tabContent">
+        <button class="button_action" onclick="openPop('ownPopForm')">أضافة</button>
+        <button class="button_action" onclick="allEditable(event, 'owner_table')" id="editBTN">تعديل</button>
 
-          <!--table-->
-          <div class="table-Car">
-            
-            <table >
-              
-                
-              
-              <tbody id="InvInfo" ondblclick="editable(event)">
-                <th>رقم</th>
-                <th>اسم المستثمر</th>
-                <th> رقم الهوية </th>
-                <th> صورة الهوية </th>
-                <th> نسبة الفائدة </th>
-                <th> رقم الجوال </th>
-                <th> صورة العقد </th>
-                <th> حذف </th>
-                  
-              </tbody>
-            </table>
-          </div>
+        <!-- window for adding data-->
+        <dialog id="ownPopForm">
+          <button onclick="closePop('ownPopForm')">إلغاء</button>
+          <br>
+          <form id="ownForm" onsubmit="submitForm(event, 'OwnerInfo','OwnerInfo') + closePop('ownPopForm')">
+            <label for="OwnerName">اسم المالك</label>
+            <br>
+            <input class="newOwnData" placeholder=" اسم المالك " value="" name="OwnerName">
+            <br>
+            <label for="OwnerIDNumber">رقم الهوية</label>
+            <br>
+            <input class="newOwnData" placeholder=" رقم الهوية " value="" name="OwnerIDNumber">
+            <br>
+            <label> صورة الهوية </label>
+            <br>
+            <input class="newOwnData" type="file" placeholder="صورة الهوية" name="OwnerIDPic">
+            <br>
+            <label for="OwnerPercent">نسبة الأرباح من المكتب</label>
+            <br>
+            <input class="newOwnData" placeholder=" نسبة الأرباح من المكتب " value="" name="OwnerPercent">
+            <br>
+            <button type="submit">حفظ</button>
+          </form>
+        </dialog>
+
+        <!--table-->
+        <div class="table-Car">
+          <table>
+            <thead>
+
+              <th>رقم</th>
+              <th>اسم المالك</th>
+              <th>رقم الهوية</th>
+              <th>صورة الهوية </th>
+              <th>نسبة الأرباح من المكتب</th>
+              <th>حذف</th>
+
+            </thead>
+            <tbody id="OwnerInfo" ondblclick="editable(event)">
+
+            </tbody>
+          </table>
         </div>
-
-
-          <!--  زر المستأجرين -->
-        <div id="rentersContent" class="tabContent">
-          <button class="button_action" onclick="openPop('rentPopForm')">أضافة</button>
-          <button class="button_action" onclick="allEditable(event, 'rent_table')" id="editBTN">تعديل</button>
-
-          <!-- window for adding data-->
-          <div class="popupForm" id="rentPopForm">
-            <button onclick="closePop('rentPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
-              <form id="rentForm">
-                <input class="newRentData" placeholder="اسم المستأجر" value="" name="RenterName">
-                <br>
-                <input class="newRentData" placeholder="رقم الهوية" value="" name="RentIDNumber">
-                <br>
-                <label> ارفاق صورة الهوية </label>
-                <br>
-                <input class="newRentData" type="file" placeholder="ارفاق صورة الهوية" name="RentIDPic">
-                <br>
-                <input class="newRentData" title="text" placeholder="جوال التواصل" name="RentContactNumber">
-                <br>
-                <input class="newRentData" placeholder="جوال ابشر" name="RentAbsherNumber">
-                <br>
-                <input class="newRentData" placeholder="هوية السائق" name="DriverIDNumber">
-                <br>
-                <label> صورة هوية السائق </label>
-                <br>
-                <input class="newRentData" type="file" placeholder="صورة هوية السائق" name="DriverIDPic">
-                <br>
-                <input class="newRentData" placeholder="عقد الإيجار" name="RentContractPic">
-                <br>
-                <label> صورة للتفويض </label>
-                <br>
-                <input class="newRentData" type="file" placeholder="صورة للتفويض" name="RentAuthPic">
-                <button type="submit" onclick="submitForm(event, 'RentInfo','RentInfo') + closePop('rentPopForm')">حفظ</button>
-              </form>
-            </div>
-          </div>
-
-          <!--table-->
-          <div class="table-Car">
-            <table>
-              
-                
-              
-              <tbody id="RentInfo" ondblclick="editable(event)">
-                <th>رقم</th>
-                <th> اسم المستأجر </th>
-                <th> رقم الهوية </th>
-                <th> صورة الهوية </th>
-                <th> جوال التواصل </th>
-                <th> جوال ابشر </th>
-                <th> هوية السائق </th>
-                <th> صورة هوية السائق </th>
-                <th> عقد الإيجار </th>
-                <th> صورة للتفويض </th>
-                <th> حذف </th>
-
-
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-
-          <!--  زر الملاك -->
-        <div id="ownersContent" class="tabContent">
-          <button class="button_action" onclick="openPop('ownPopForm')">أضافة</button>
-          <button class="button_action" onclick="allEditable(event, 'owner_table')" id="editBTN">تعديل</button>
-
-          <!-- window for adding data-->
-          <div class="popupForm" id="ownPopForm">
-            <button onclick="closePop('ownPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
-              <form id="ownForm">
-                <input class="newOwnData" placeholder=" اسم المالك " value="" name="OwnerName">
-                <br>
-                <input class="newOwnData" placeholder=" رقم الهوية " value="" name="OwnerIDNumber">
-                <br>
-                <label> صورة الهوية </label>
-                <br>
-                <input class="newOwnData" type="file" placeholder="صورة الهوية" name="OwnerIDPic">
-                <br>
-                <input class="newOwnData" placeholder=" نسبة الأرباح من المكتب " value="" name="OwnerPercent">
-                <button type="submit" onclick="submitForm(event, 'OwnerInfo','OwnerInfo') + closePop('ownPopForm')">حفظ</button>
-              </form>
-            </div>
-          </div>
-          
-          <!--table-->
-          <div class="table-Car">
-            <table>
-                
-              <tbody id="OwnerInfo" ondblclick="editable(event)">
-                <th>رقم</th>
-                <th>اسم المالك</th>
-                <th>رقم الهوية</th>
-                <th>صورة الهوية </th>
-                <th>نسبة الأرباح من المكتب</th>
-                <th>حذف</th>
-
-
-              </tbody>
-            </table>
-          </div>
-          
-
-        </div>
-
-        
-          <!--  زر الموظفين -->
-        <div id="employeesContent" class="tabContent">
-          <button class="button_action" onclick="openPop('empPopForm')">أضافة</button>
-          <button class="button_action" onclick="allEditable(event, 'emp_table')" id="editBTN">تعديل</button>
-
-
-
-          <!-- window for adding data-->
-          <div class="popupForm" id="empPopForm">
-            <button onclick="closePop('empPopForm')">إلغاء</button>
-            <div class="inputs_Cars" >
-              <form id="empForm">
-                <input class="newEmpData" placeholder=" اسم الموظف " value="" name="EmpName">
-                <br>
-                <input class="newEmpData" placeholder=" رقم الهوية " value="" name="EmpIDNumber">
-                <br>
-                <label> صورة الهوية </label>
-                <br>
-                <input class="newEmpData" type="file" placeholder=" صورة الهوية " name="EmpIDPic">
-                <br>
-                <input class="newEmpData" placeholder=" نسبة الأرباح من المكتب " value="" name="EmpPercent">
-                <br>
-                <input class="newEmpData" placeholder=" نسبة العمولة من الإيرادات " value="" name="EmpComRate">
-                <br>
-                <input class="newEmpData" placeholder=" عمولة البيع " value="" name="EmpSaleCom">
-                <br>
-                <input class="newEmpData" placeholder=" عمولة الشراء " value="" name="EmpBuyCom">
-                <br>
-                <input class="newEmpData" placeholder=" عمولة التأجير " value="" name="EmpRentCom">
-                <br>
-                <input class="newEmpData" placeholder="  الراتب " value="" name="EmpSalary">
-                <button type="submit" onclick="submitForm(event, 'EmpInfo','EmpInfo') + closePop('empPopForm')">حفظ</button>
-              </form>
-            </div>
-          </div>
-          
-
-          
-          <!--table-->
-          <div class="table-Car">
-            <table>
-                
-              <tbody id="EmpInfo" ondblclick="editable(event)">
-                <th>رقم</th>
-                <th>اسم الموظف</th>
-                <th>رقم الهوية</th>
-                <th>صورة الهوية </th>
-                <th>نسبة الأرباح من المكتب</th>
-                <th>نسبة العمولة من الإيرادات</th>
-                <th>عمولة البيع</th>
-                <th>عمولة الشراء</th>
-                <th>عمولة التأجير</th>
-                <th>الراتب </th>
-                <th>حذف</th>
-
-
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-
-
-
-
-          <!--  زر مصروفات المكتب -->
-          <div id="officeExpensesContent" class="tabContent">
-            <button class="button_action" onclick="openPop('officePopForm')">أضافة</button>
-            <button class="button_action" onclick="allEditable(event, 'office_table')" id="editBTN">تعديل</button>
-  
-  
-  
-            <!-- window for adding data-->
-            <div class="popupForm" id="officePopForm">
-              <button onclick="closePop('officePopForm')">إلغاء</button>
-              <div class="inputs_Cars" >
-                
-                <form id="officeForm">
-                  <br>
-                  <input class="newOfficeData" placeholder=" اسم المصروف " value="" name="ExpenseName">
-                  <br>
-                  <label for="Price"> القيمة </label>
-                  <input class="newOfficeData" type="checkbox" id="Price" value="false" name="ExpensePriceReq">
-                  <label for="Picture"> صورة </label>
-                  <input class="newOfficeData" type="checkbox" id="Picture" name="ExpensePicReq">
-                  <button type="submit" onclick="submitForm(event, 'ExpensesInfo','ExpensesInfo') + closePop('officePopForm')">حفظ</button>
-                </form>
-              </div>
-            </div>
-            
-  
-            
-            <!--table-->
-            <div class="table-Car">
-              <table>
-                  
-                <tbody id="ExpensesInfo" ondblclick="editable(event)">
-                  <th>رقم</th>
-                  <th> اسم المصروف </th>
-                  <th> القيمة </th>
-                  <th> صورة </th>
-                  <th> حذف </th>
-
-
-                </tbody>
-              </table>
-            </div>
-  
-          </div>
-
 
 
       </div>
-    </section>
-    <script src="/public/js/Main.js" defer></script>
-    <script src="/public/js/index.js" defer></script>
-  </body>
+
+
+      <!--  زر الموظفين -->
+      <div id="employeesContent" class="tabContent">
+        <button class="button_action" onclick="openPop('empPopForm')">أضافة</button>
+        <button class="button_action" onclick="allEditable(event, 'emp_table')" id="editBTN">تعديل</button>
+
+
+
+        <!-- window for adding data-->
+        <dialog id="empPopForm">
+          <button onclick="closePop('empPopForm')">إلغاء</button>
+          <br>
+          <form id="empForm" onsubmit="submitForm(event, 'EmpInfo','EmpInfo') + closePop('empPopForm')">
+            <label for="EmpName">اسم الموظف</label>
+            <br>
+            <input class="newEmpData" placeholder=" اسم الموظف " value="" name="EmpName">
+            <br>
+            <label for="EmpIDNumber">رقم الهوية</label>
+            <br>
+            <input class="newEmpData" placeholder=" رقم الهوية " value="" name="EmpIDNumber">
+            <br>
+            <label> صورة الهوية </label>
+            <br>
+            <input class="newEmpData" type="file" placeholder=" صورة الهوية " name="EmpIDPic">
+            <br>
+            <label for="EmpPercent">نسبة الأرباح من المكتب</label>
+            <br>
+            <input class="newEmpData" placeholder=" نسبة الأرباح من المكتب " value="" name="EmpPercent">
+            <br>
+            <label for="EmpComRate">نسبة العمولة من الإيرادات</label>
+            <br>
+            <input class="newEmpData" placeholder=" نسبة العمولة من الإيرادات " value="" name="EmpComRate">
+            <br>
+            <label for="EmpSaleCom">عمولة البيع</label>
+            <br>
+            <input class="newEmpData" placeholder=" عمولة البيع " value="" name="EmpSaleCom">
+            <br>
+            <label for="EmpBuyCom">عمولة الشراء</label>
+            <br>
+            <input class="newEmpData" placeholder=" عمولة الشراء " value="" name="EmpBuyCom">
+            <br>
+            <label for="EmpRentCom">عمولة التأجير</label>
+            <br>
+            <input class="newEmpData" placeholder=" عمولة التأجير " value="" name="EmpRentCom">
+            <br>
+            <label for="EmpSalary">الراتب</label>
+            <br>
+            <input class="newEmpData" placeholder="  الراتب " value="" name="EmpSalary">
+            <br>
+            <button type="submit">حفظ</button>
+          </form>
+        </dialog>
+
+
+
+        <!--table-->
+        <div class="table-Car">
+          <table>
+
+            <thead>
+
+              <th>رقم</th>
+              <th>اسم الموظف</th>
+              <th>رقم الهوية</th>
+              <th>صورة الهوية </th>
+              <th>نسبة الأرباح من المكتب</th>
+              <th>نسبة العمولة من الإيرادات</th>
+              <th>عمولة البيع</th>
+              <th>عمولة الشراء</th>
+              <th>عمولة التأجير</th>
+              <th>الراتب </th>
+              <th>حذف</th>
+
+            </thead>
+            <tbody id="EmpInfo" ondblclick="editable(event)">
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+      <!--  زر مصروفات المكتب -->
+      <div id="officeExpensesContent" class="tabContent">
+        <button class="button_action" onclick="openPop('officePopForm')">أضافة</button>
+        <button class="button_action" onclick="allEditable(event, 'office_table')" id="editBTN">تعديل</button>
+
+
+
+        <!-- window for adding data-->
+        <dialog id="officePopForm">
+          <button onclick="closePop('officePopForm')">إلغاء</button>
+          <br>
+          <form id="officeForm" onsubmit="submitForm(event, 'ExpensesInfo','ExpensesInfo') + closePop('officePopForm')">
+            <label for="ExpenseName">اسم المصروف</label>
+            <br>
+            <input class="newOfficeData" placeholder=" اسم المصروف " value="" name="ExpenseName">
+            <br>
+            <label for="Price"> القيمة </label>
+            <br>
+            <input class="newOfficeData" type="checkbox" id="Price" value="false" name="ExpensePriceReq">
+            <label for="Picture"> صورة </label>
+            <input class="newOfficeData" type="checkbox" id="Picture" name="ExpensePicReq">
+            <br>
+            <button type="submit">حفظ</button>
+          </form>
+        </dialog>
+
+
+
+        <!--table-->
+        <div class="table-Car">
+          <table>
+
+            <thead>
+
+              <th>رقم</th>
+              <th> اسم المصروف </th>
+              <th> القيمة </th>
+              <th> صورة </th>
+              <th> حذف </th>
+
+            </thead>
+
+            <tbody id="ExpensesInfo" ondblclick="editable(event)">
+
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </section>
+  <script src="/public/js/Main.js" defer></script>
+  <script src="/public/js/index.js" defer></script>
+</body>
+
 </html>

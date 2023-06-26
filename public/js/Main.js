@@ -1,4 +1,3 @@
-
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
   let searchBtn = document.querySelector(".bx-search");
@@ -33,7 +32,7 @@ function content(evt, selectedTab){
   for(i = 0; i < tabContent.length; i++){
     tabContent[i].style.display = "none"
   }
-/* I think this one is useless */
+/* Remove active Class Name from all tabs */
   tabLink = document.getElementsByClassName("tabLink")
   for(i = 0; i< tabLink.length; i++){
     tabLink[i].className = tabLink[i].className.replace(" active", "")
@@ -45,67 +44,30 @@ function content(evt, selectedTab){
 /* Display a window on top to add new data */
 function openPop(popID){
 
-  document.getElementById(popID).style.display = "block";
+  document.getElementById(popID).showModal()
   
 }
 
 /* remove the add new data window */
 function closePop(popID){
 
-  document.getElementById(popID).style.display = "none";
+  document.getElementById(popID).close()
 }
 
-
-const invArray = []
-let invArrayLength = 0
-
-const officeArray = []
-let officeArrayLength = 0
-
-
-// function testRecData(colName,tableID){
-//   console.log("testRec called")
-//   fetch(`/jsFormData/${colName}`)
-//   .then(response => response.json())
-//   .then(newData => {
-//   console.log(newData)
-
-//   let table = document.getElementById(tableID)
-//   let newRow = document.createElement('tr')
-//   for (var key in newData){
-    
-//     if (newData.hasOwnProperty(key) && key !== '_id') {
-//       var newCell = document.createElement('td')
-//       newCell.id = colName + '_' + key + '_' + newData._id
-//       newCell.textContent = newData[key]
-//       newRow.appendChild(newCell)
-//     }
-    
-//   }
-//   var newCell = document.createElement('td')
-//     const button = document.createElement('button')
-//     button.id = colName + '_' + newData._id
-//     button.textContent = 'حذف'
-//     button.className = 'delButton'
-//     button.onclick = delButtonFun
-//     newCell.appendChild(button)
-//     newRow.appendChild(newCell)
-//     table.appendChild(newRow)
-
-//   })
-//   .catch(error => console.error(error))
-
-  
-// }
 
 async function submitForm(event, colName, tableID){
   event.preventDefault()
   
-  let formID = event.target.form.id
-  let formData = new FormData(document.getElementById(formID))
+  let formData = new FormData(event.target)
   var formObject = {};
-  formData.forEach((value, key) => formObject[key] = value);
-  console.log(formObject);
+  for (const key of formData.keys()) {
+    console.log(key);
+  }
+  formData.forEach((value, key) => {
+    console.log(value);
+    formObject[key] = value
+  });
+  
 
   let order = Object.keys(formObject)
   formData.append('order', JSON.stringify(order))
@@ -117,13 +79,14 @@ async function submitForm(event, colName, tableID){
   .then(response => response.json())
 	.then(newData => {
     
-  
+    console.log(newData);
     let table = document.getElementById(tableID)
-    let i = table.rows.length
+    let i = table.rows.length+1
     let newRow = document.createElement('tr')
 
     let newCellNumber = document.createElement('td')
     newCellNumber.id = colName + ': Index: ' + i
+    
     newCellNumber.textContent = i
     newRow.appendChild(newCellNumber)
     
@@ -159,7 +122,10 @@ async function submitForm(event, colName, tableID){
         newShowCell.appendChild(showImage)
         newRow.appendChild(newShowCell)
       }
-      if (key !== '_id' && !key.endsWith('Pic')) {
+      else if(key == 'VAT'){
+
+      }
+      else if (key !== '_id') {
         var newCell = document.createElement('td')
         newCell.id = colName + '_' + key + '_' + newData._id
         newCell.textContent = newData[key]
@@ -167,22 +133,26 @@ async function submitForm(event, colName, tableID){
       }
       
     }
-      var newCell = document.createElement('td')
-      const button = document.createElement('button')
-      button.id = colName + '_' + newData._id
-      button.textContent = 'حذف'
-      button.className = 'delButton'
-      button.onclick = delButtonFun
-      newCell.appendChild(button)
-      newRow.appendChild(newCell)
-      table.appendChild(newRow)
-  
-    })
+    var newCell = document.createElement('td')
+    const button = document.createElement('button')
+    button.id = colName + '_' + newData._id
+    button.textContent = 'حذف'
+    button.className = 'delButton'
+    button.onclick = delButtonFun
+    newCell.appendChild(button)
+    newRow.appendChild(newCell)
+    table.appendChild(newRow)
+    if(newData.RentPaid || newData.ExpenseCost){
+      moneyTable(newData)
+    }
+    
+  })
 	.catch(error => console.error(error + '/upload/${colName} catch Error'))
   
   
     
 }
+
 let isClicked = false
 function showImagePopup(imageUrl, id, clicked = false){
   const imagePopup = document.getElementById('show-image');
@@ -249,38 +219,18 @@ function indexSel(dataName, selID){
   
 }
 
-function dailySel(dataName, selID){
-  fetch('/dailySel')
-  .then((response) => {
-    // Check if the request was successful
-    if (response.ok) {
-      // Parse the response body as JSON
-      return response.json();
-    } else {
-      // Throw an error with the status text
-      throw new Error(response.statusText + '/dailySel response Error');
-    }
-  })
-  .then((newData) => {
-    selectorData(newData, dataName, selID)
-    
-  })
-  .catch((error) => {
-    // Handle any errors
-    console.error(error + '/dailySel catch Error');
-  });
-}
-
 function selectorData(newData, dataName, selID) {
   let dataNameSplit = dataName.split('_');
   let selIDSplit = selID.split('_');
   for (let i = 0; i < selIDSplit.length; i++) {
     let sel = document.getElementById(selIDSplit[i]);
+    
+    let selectedOption = sel.options[0]
     sel.innerHTML = ""
+    sel.appendChild(selectedOption)
     let dataSplit = dataNameSplit[i];
     for (let ii = 0; ii < newData[dataSplit].length; ii++) { 
       for (let key in newData[dataSplit][ii]) {
-        console.log(newData[dataSplit][ii]);
         let selOpt = document.createElement("option");
         selOpt.value = newData[dataSplit][ii][key];
         selOpt.innerText = newData[dataSplit][ii][key];
@@ -301,14 +251,44 @@ function delButtonFun (evt){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(docID)
+  }).then((response) =>{
+    if(response.ok){
+
+      if(splitID[0].startsWith('Daily')){
+
+        fetch('/dailyJ')
+        .then((response) => {
+          // Check if the request was successful
+          if (response.ok) {
+            // Parse the response body as JSON
+            return response.json();
+          } else {
+            // Throw an error with the status text
+            throw new Error(response.statusText);
+          }
+        })
+        .then((newData) => {
+          
+          setDailyData(newData)
+  
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error(error);
+        });
+      }
+
+      else{
+        evt.target.parentElement.parentElement.remove()
+      }
+      
+    }
+
   })
-    .then(response => response.text())
-    .then(data => console.log(data))
-    .catch(err => console.error(err + '/deleteRow catch Error'));
+    .catch(err => console.error(err));
 
   
-  evt.target.parentElement.parentElement.remove()
-  console.log("Yes?")
+    
 }
 
 
@@ -333,29 +313,42 @@ function editable(e){
     
     
     // replace the original element with the new select element
-    s.innerHTML = ""
-    s.appendChild(newSel)
+    s.replaceChildren(newSel)
     newSel.id = cellCurID
     newSel.addEventListener ('change', function(){
       console.log(this.value)
       let newValue = this.value
+      s.addEventListener("focusout", function(e){
+        let cellIDSplit = e.target.id.split("_")
+        let cellNewValue = e.target.textContent
+        const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:cellNewValue}
+        let cell = document.getElementById(e.target.id)
+        cell.contentEditable = "false"
+    
+        sendNewData(newData)
+      })
       
-      const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:newValue}
-      sendNewData(newData)
-
-      s.innerHTML = ''
-      s.innerText = newValue
+      s.replaceChildren(newValue)
+      
     })
-  }
 
-  else if (cellIDSplit == 'CarsInfo' && cellIDSplit[1] !== 'InvName'){
-    s.contentEditable = "true"
-    s.focus()
-    s.addEventListener("keypress", enterKey)
   }
-
-  else{
+  
+  else if (cellIDSplit[0] + cellIDSplit[1] != 'CarsInfoInvName'){
     s.contentEditable = "true"
+    let checkIcon = document.createElement("button")
+    checkIcon.className = "bx bx-check check"
+    
+    s.addEventListener("focusout", function(e){
+      let cellIDSplit = e.target.id.split("_")
+      let cellNewValue = e.target.textContent
+      const newData = {colName:cellIDSplit[0], fieldName: cellIDSplit[1],_id:cellIDSplit[2], newValue:cellNewValue}
+      let cell = document.getElementById(e.target.id)
+      cell.contentEditable = "false"
+  
+      sendNewData(newData)
+    })
+    
     s.focus()
     s.addEventListener("keypress", enterKey)
   }

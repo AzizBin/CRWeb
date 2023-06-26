@@ -1,138 +1,181 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8">
-    <title> Rental </title>
-    <link rel="stylesheet" href="/public/css/Style.css" />   
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
+
+<head>
+  <meta charset="UTF-8">
+  <title> Rental </title>
+  <link rel="stylesheet" href="/public/css/Style.css" />
+  <link rel="stylesheet" href="/public/css/reports.css" />
+  <!-- Boxicons CDN Link -->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
 
 
-  <body>
-    <!--sidebar-->
-    <div class="sidebar">
-      <div class="logo-details">
-        <i class='bx bxl-redux icon'></i> 
-        <div class="logo_name">Rental</div>
-        <i class='bx bx-menu' id="btn" ></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <i class='bx bx-search' ></i>
-          <input type="text" placeholder="البحث...">
-          <span class="tooltip">البحث</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-grid-alt'></i>
-            <span class="links_name" id="liNameTest" > لوحة التحكم </span>
-          </a>
-          <span class="tooltip">لوحة التحكم</span>
-        </li>
-        <li>
-          <a href="/daily">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">اليومية</span>
-          </a>
-          <span class="tooltip">اليومية</span>
-        </li>
-        <li>
+<body>
+  <!--sidebar-->
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-redux icon'></i>
+      <div class="logo_name">Rental</div>
+      <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li class="side-search">
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="البحث...">
+        <span class="tooltip">البحث</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" id="liNameTest"> لوحة التحكم </span>
+        </a>
+        <span class="tooltip">لوحة التحكم</span>
+        
+      </li>
+      <li>
+        <a href="/daily">
+          <i class='bx bx-user'></i>
+          <span class="links_name">اليومية</span>
+        </a>
+        <span class="tooltip">اليومية</span>
+        
+      </li>
+      <li>
         <a href="/index">
-          <i class='bx bx-add-to-queue' ></i>
+          <i class='bx bx-add-to-queue'></i>
           <span class="links_name">التسجيل</span>
         </a>
         <span class="tooltip">التسجيل</span>
-        </li>
-        <li>
-          <a href="/Reports">
-            <i class='bx bxs-report' ></i>
-            <span class="links_name">التقارير</span>
-          </a>
-          <span class="tooltip">التقارير</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">الإعدادات</span>
-          </a>
-          <span class="tooltip">الإعدادات</span>
-        </li>
-        <li class="profile">
-            <div class="profile-details">
-              <img src="image/User.png" alt="profileImg">
-              <div class="name_job">
-                <div class="name">أبو اسامة</div>
-                <div class="job">Admin</div>
-              </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
-      </ul>
-    </div>
-    
-    <section class="home-section">
-      <div class="text">التقارير 
         
+      </li>
+      <li>
+        <a href="/Reports">
+          <i class='bx bxs-report'></i>
+          <span class="links_name">التقارير</span>
+        </a>
+        <span class="tooltip">التقارير</span>
+        
+      </li>
 
-                  
-                  <!--table-->
-          <div class="table-Car">
-            <table>
-              <label>من</label>
-              <input type="date" id="start" name="trip-start"
-              value="2023-04-16"
-              min="2022-01-01" max="2025-12-31">
-              <label>إلى</label>
-              <input type="date" id="start" name="trip-start"
-              value="2023-04-16"
-              min="2022-01-01" max="2025-12-31">
-              
-
-              <!-- <input type="number" id="month" placeholder="الشهر">
-              <input type="year" min="2022" max="2024" placeholder="السنة">
-              
-            <select style="width: 150px;" id="month">
-                <Option>الشهر</Option>
-            </select>
-
-            <select style="width: 150px;" id="year">
-              <Option>السنة</Option>
-            </select>
-              <button id="date-btn">عرض</button> -->
-
-
-
-
-              
-              <tbody id="emp_table" ondblclick="editable(event)">
-                <th>التاريخ</th>
-                <th>رقم اللوحة</th>
-                <th>اسم المستثمر</th>
-                <th>الأرباح</th>
-                <th>المتبقي من رأس المال </th>
-                <th>عمولة البيع</th>
-                <th>عمولة الشراء</th>
-                <th>عمولة التأجير</th>
-                <th>الراتب </th>
-                <th>حذف</th>
-                  
-              </tbody>
-            </table>
-          </div>
-
-
-
+      <li>
+        <a href="#">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">الإعدادات</span>
+        </a>
+        <span class="tooltip">الإعدادات</span>
+        
+      </li>
       
+    </ul>
+    <li class="profile">
+        <div class="profile-details">
+          <img src="image/User.png" alt="profileImg">
+          <div class="name_job">
+            <div class="name">أبو اسامة</div>
+            <div class="job">Admin</div>
+          </div>
+        </div>
+        <a href="/logout">
+          <i  class='bx bx-log-out' id="log_out"></i>
+        </a>
+      </li>
+  </div>
+
+    <!--table-->
+    <section class="home-section">
+      <!--Botten-->
+      <div class="Registration_buttons">
+        <button class="tabLink" onclick="content(event, 'reports-daily');" id="defaultCont">التقارير اليومية</button>
+        <button class="tabLink" onclick="content(event, 'reports-investors')">تقارير المستثمرين</button>
+        <button class="tabLink" onclick="content(event, 'reports-all')">التقارير الإجمالية</button>
       </div>
-    </section>
 
 
-    <script src="/public/js/daily.js" defer></script>
-    <script src="/public/js/Main.js" defer></script>
-    <script src="/public/js/Reports.js" defer></script>
-  </body>
+      <div id="reports-daily" class="tabContent">
+
+        <select class="reports-daily-selector" name="reports-daily-first" id="reports_daily_first">
+          <option disabled selected hidden value="">اختر</option>
+          <option value="reports_daily_second">اليومية</option>
+          <option value="">القيمة المضافة</option>
+        </select>
+
+        <select class="reports-daily-selector" name="reports-daily-second" id="reports_daily_second">
+          <option disabled selected hidden value="">اختر</option>
+        </select>
+
+        <table>
+          <tbody id="emp_table" ondblclick="editable(event)">
+            <th>التاريخ</th>
+            <th>رقم اللوحة</th>
+            <th>اسم المستثمر</th>
+            <th>الأرباح</th>
+            <th>المتبقي من رأس المال </th>
+            <th>عمولة البيع</th>
+            <th>عمولة الشراء</th>
+            <th>عمولة التأجير</th>
+            <th>الراتب </th>
+            <th>حذف</th>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div id="reports-investors" class="tabContent">
+        <label>من</label>
+        <input type="date" id="start" name="trip-start" min="2022-01-01" max="2025-12-31">
+        <label>إلى</label>
+        <input type="date" id="start" name="trip-start" value="2023-04-16" min="2022-01-01" max="2025-12-31">
+
+        <table>
+          <tbody id="emp_table" ondblclick="editable(event)">
+            <th>التاريخ</th>
+            <th>رقم اللوحة</th>
+            <th>اسم المستثمر</th>
+            <th>الأرباح</th>
+            <th>المتبقي من رأس المال </th>
+            <th>عمولة البيع</th>
+            <th>عمولة الشراء</th>
+            <th>عمولة التأجير</th>
+            <th>الراتب </th>
+            <th>حذف</th>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div id="reports-all" class="tabContent">
+        <label>من</label>
+        <input type="date" id="start" name="trip-start" min="2022-01-01" max="2025-12-31">
+        <label>إلى</label>
+        <input type="date" id="start" name="trip-start" value="2023-04-16" min="2022-01-01" max="2025-12-31">
+
+        <table>
+          <tbody id="emp_table" ondblclick="editable(event)">
+            <th>التاريخ</th>
+            <th>رقم اللوحة</th>
+            <th>اسم المستثمر</th>
+            <th>الأرباح</th>
+            <th>المتبقي من رأس المال </th>
+            <th>عمولة البيع</th>
+            <th>عمولة الشراء</th>
+            <th>عمولة التأجير</th>
+            <th>الراتب </th>
+            <th>حذف</th>
+
+          </tbody>
+        </table>
+      </div>
+    
+  </section>
+
+
+
+  
+  <script src="/public/js/Main.js" defer></script>
+  <script src="/public/js/Reports.js" defer></script>
+</body>
+
 </html>
